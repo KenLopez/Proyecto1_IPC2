@@ -1,0 +1,51 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: "Comic Sans MS";
+}
+
+body{
+    background-color: #B6D7A8;
+}
+
+header {
+    position: relative;
+    margin: auto;
+    height: auto;
+    width: 100%;
+    text-align: center;
+    padding-top: 10em;
+}
+
+article{
+    position: relative;
+    margin: auto;
+    height: auto;
+    width: 100%;
+    text-align: center;
+    padding-top: 50px;
+}
+
+article button{
+    font-size: 20px;
+    background-color: #9FC5F8;
+    border-color: #000000;
+    border-width: 5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 350px;
+    cursor:pointer;
+}
+
+article button:hover{
+    background-color: #2f43d6;
+    color: #ffffff;
+    border-color: #ffffff;
+    border-style: solid;
+}
+
+
+#inicio{
+    margin-bottom: 30px;
+}

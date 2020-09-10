@@ -1,0 +1,106 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: "Comic Sans MS";
+}
+
+body {
+    background-color: #B6D7A8;
+}
+
+header {
+    position: relative;
+    margin: auto;
+    height: auto;
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+}
+
+article {
+    position: relative;
+    margin: auto;
+    height: auto;
+    width: 600px;
+    padding-top: 25px;
+}
+
+fieldset {
+    margin-left: -5px;
+    text-align: left;
+    width: 600px;
+    height: auto;
+    background-color: #6AA84F;
+    border: 5px;
+    border-color: #000000;
+    border-style: solid;
+    padding-bottom: 20px;
+}
+
+fieldset legend {
+    text-align: left;
+    margin-left: 30px;
+    background-color: #6AA84F;
+    color: #ffffff;
+    font-size: 25px;
+    border: 2px;
+    padding: 5px;
+    border-color: #000000;
+    border-style: solid;
+    font-weight: bold;
+}
+
+form {
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+fieldset label {
+    text-align: left;
+    font-size: 20px;
+    line-height: 80px;
+    margin-top: 10px;
+    padding-left: 40px;
+    color: #ffffff;
+}
+
+.input {
+    width: 400px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    margin-left: 90px;
+    padding-left: 20px;
+    line-height: 40px;
+    font-size: 20px;
+}
+
+input[type="submit"] {
+    font-family: "Comic Sans MS";
+    font-size: 20px;
+    background-color: #9FC5F8;
+    border-color: #000000;
+    border-width: 5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 350px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+input[type="submit"]:hover {
+    background-color: #2f43d6;
+    color: #ffffff;
+    border-color: #ffffff;
+    border-style: solid;
+}
+
+#fecha {
+    width: 175px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    margin-left: 90px;
+    padding-left: 20px;
+    line-height: 40px;
+    font-size: 20px;
+}
