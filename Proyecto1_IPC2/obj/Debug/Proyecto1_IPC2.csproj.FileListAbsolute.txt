@@ -93,3 +93,7 @@ D:\Usuarios\Kenneth\Documentos\Kenneth\USAC 2020\IPC2\Laboratorio\Proyecto 1\App
 D:\Usuarios\Kenneth\Documentos\Kenneth\USAC 2020\IPC2\Laboratorio\Proyecto 1\App\Proyecto1_IPC2\Proyecto1_IPC2\bin\es\System.Net.Http.Formatting.resources.dll
 D:\Usuarios\Kenneth\Documentos\Kenneth\USAC 2020\IPC2\Laboratorio\Proyecto 1\App\Proyecto1_IPC2\Proyecto1_IPC2\bin\es\System.Web.Http.resources.dll
 D:\Usuarios\Kenneth\Documentos\Kenneth\USAC 2020\IPC2\Laboratorio\Proyecto 1\App\Proyecto1_IPC2\Proyecto1_IPC2\bin\es\System.Web.Http.WebHost.resources.dll
+D:\Usuarios\Kenneth\Documentos\Kenneth\USAC 2020\IPC2\Laboratorio\Proyecto 1\App\Proyecto1_IPC2\Proyecto1_IPC2\bin\EntityFramework.dll
+D:\Usuarios\Kenneth\Documentos\Kenneth\USAC 2020\IPC2\Laboratorio\Proyecto 1\App\Proyecto1_IPC2\Proyecto1_IPC2\bin\EntityFramework.SqlServer.dll
+D:\Usuarios\Kenneth\Documentos\Kenneth\USAC 2020\IPC2\Laboratorio\Proyecto 1\App\Proyecto1_IPC2\Proyecto1_IPC2\bin\EntityFramework.xml
+D:\Usuarios\Kenneth\Documentos\Kenneth\USAC 2020\IPC2\Laboratorio\Proyecto 1\App\Proyecto1_IPC2\Proyecto1_IPC2\bin\EntityFramework.SqlServer.xml
