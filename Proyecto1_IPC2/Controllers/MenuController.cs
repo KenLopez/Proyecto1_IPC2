@@ -6,9 +6,10 @@ using System.Web.Mvc;
 
 namespace Proyecto1_IPC2.Controllers
 {
-    public class HomeController : Controller
+    public class MenuController : Controller
     {
-        public ActionResult Index()
+        // GET: Menu
+        public ActionResult Principal()
         {
             return View();
         }

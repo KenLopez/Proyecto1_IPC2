@@ -17,10 +17,20 @@ namespace Proyecto1_IPC2.Models.ViewModels
         [Required]
         public string contraseña { get; set; }
         [Required]
-        public string fecha { get; set; }
+        public string confirmar { get; set; }
+        [Required]
+        public DateTime fecha { get; set; }
         [Required]
         public string pais { get; set; }
         [Required]
         public string correo { get; set; }
+    }
+
+    public enum pais
+    {
+        GUA,
+        USA,
+        SLV,
+
     }
 }

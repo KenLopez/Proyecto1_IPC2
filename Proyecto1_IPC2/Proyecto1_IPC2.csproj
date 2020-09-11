@@ -139,6 +139,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngresoController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -171,11 +172,13 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="css\inicio_sesion.css" />
     <Content Include="css\index.css" />
+    <Content Include="css\Principal.css" />
     <Content Include="css\registro.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\tabla.jpg" />
     <Content Include="img\flecha-derecha.png" />
     <Content Include="img\Logo Othello.jpg" />
     <Content Include="Models\Model1.Context.tt">
@@ -222,6 +225,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Menu\Principal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

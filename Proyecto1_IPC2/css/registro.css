@@ -56,17 +56,8 @@ form {
     text-align: center;
 }
 
-fieldset label {
-    text-align: left;
-    font-size: 20px;
-    line-height: 80px;
-    margin-top: 10px;
-    padding-left: 40px;
-    color: #ffffff;
-}
-
 .select {
-    width: 250px;
+    width: 150px;
     margin-top: -10px;
     margin-bottom: 10px;
     margin-left: 90px;
@@ -74,6 +65,7 @@ fieldset label {
     height: 40px;
     font-size: 20px;
 }
+
 
 .input {
     width: 400px;
@@ -113,5 +105,19 @@ input[type="submit"]:hover {
     padding-left: 20px;
     line-height: 40px;
     font-size: 20px;
+}
+
+.label {
+    text-align: left;
+    font-size: 20px;
+    line-height: 80px;
+    margin-top: 10px;
+    padding-left: 40px;
+    color: #ffffff;
+}
+
+.alert {
+    color: #ffffff;
+    font-size: 25px;
 }
 

@@ -3,7 +3,9 @@
     ViewBag.Title = "Inicio de Sesión";
     ViewBag.Style = "~/css/inicio_sesion.css";
 }
-
+<header>
+    <p><img id="logo" src="~/img/Logo Othello.jpg" onclick="location.href='@Url.Action("Index", "Home")'" /></p>
+</header>
 <article>
     <form id="form1" runat="server">
         <fieldset>
