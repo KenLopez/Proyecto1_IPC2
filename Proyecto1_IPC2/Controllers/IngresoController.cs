@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
+using System.Web.Http.Results;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using Proyecto1_IPC2.Models;
 using Proyecto1_IPC2.Models.ViewModels;
 
@@ -20,7 +23,7 @@ namespace Proyecto1_IPC2.Controllers
             return View();
         }
 
-        public ActionResult getUsuarios()
+        public List<getUsuarioViewModel> getUsuarios()
         {
             List<getUsuarioViewModel> listaUsuarios;
             using (OTHELLOEntities db = new OTHELLOEntities())
@@ -32,15 +35,26 @@ namespace Proyecto1_IPC2.Controllers
                                       contraseña = d.contraseña
                                   }).ToList();
             }
-
-            return View(listaUsuarios);
+            return listaUsuarios;
         }
 
         [HttpPost]
-        public ActionResult AddUsuario(addUsuarioViewModel modelo)
+        public ActionResult Registro(addUsuarioViewModel modelo)
         {
             try
             {
+                List<getUsuarioViewModel> listaUsuarios = getUsuarios();
+                foreach(var user in listaUsuarios)
+                {
+                    if (modelo.nombreUsuario == user.nombreUsuario)
+                    {
+                        return View(modelo);
+                    }
+                    else if(modelo.correo == user.correo)
+                    {
+                        return View(modelo);
+                    }
+                }
                 if (ModelState.IsValid && modelo.contraseña == modelo.confirmar)
                 {
                     using (OTHELLOEntities db = new OTHELLOEntities())
@@ -53,6 +67,7 @@ namespace Proyecto1_IPC2.Controllers
                         usuario.fechaNacimiento = modelo.fecha;
                         usuario.pais = modelo.pais;
                         usuario.correo = modelo.correo;
+                        
                         db.Usuario.Add(usuario);
                         db.SaveChanges();
                     }

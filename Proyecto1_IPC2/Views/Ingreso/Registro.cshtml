@@ -7,33 +7,44 @@
 <header>
     <p><img id="logo" src="~/img/Logo Othello.jpg" onclick="location.href='@Url.Action("Index", "Home")'" /></p>
 </header>
-<article>
-    <form id="form1" runat="server">
+@using (Html.BeginForm("Registro", "Ingreso", FormMethod.Post))
+{
+    <article>
         <fieldset>
             <legend>Registro</legend>
-            @Html.LabelFor(d => d.nombre, "Nombres:", new { @class = "label", required = "required" })<br />
-            @Html.TextBoxFor(d => d.nombre, "", new { @class = "input" })
-            @Html.ValidationMessageFor(d => d.nombre, "", new { @class = "alert" })<br />
+
+            @Html.LabelFor(d => d.nombre, "Nombres:", new { @class = "label" })<br />
+            @Html.TextBoxFor(d => d.nombre, "", new { @class = "input" })<br />
+            @Html.ValidationMessageFor(d => d.nombre, "", new { @class = "error" })<br />
 
             @Html.LabelFor(d => d.apellido, "Apellidos:", new { @class = "label" })<br />
-            @Html.TextBoxFor(d => d.apellido, "", new { @class = "input" })
-            @Html.ValidationMessageFor(d => d.apellido, "", new { @class = "alert" })<br />
+            @Html.TextBoxFor(d => d.apellido, "", new { @class = "input" })<br />
+            @Html.ValidationMessageFor(d => d.apellido, "", new { @class = "error" })<br />
 
             @Html.LabelFor(d => d.nombreUsuario, "Nombre de Usuario:", new { @class = "label" })<br />
             @Html.TextBoxFor(d => d.nombreUsuario, "", new { @class = "input" })<br />
+            @Html.ValidationMessageFor(d => d.nombreUsuario, "", new { @class = "error" })<br />
 
             @Html.LabelFor(d => d.contraseña, "Contraseña:", new { @class = "label" })<br />
             @Html.PasswordFor(d => d.contraseña, new { @class = "input" })<br />
+            @Html.ValidationMessageFor(d => d.contraseña, "", new { @class = "error" })<br />
 
             @Html.LabelFor(d => d.confirmar, "Confirmar contraseña:", new { @class = "label" })<br />
             @Html.PasswordFor(d => d.confirmar, new { @class = "input" })<br />
+            @Html.ValidationMessageFor(d => d.confirmar, "", new { @class = "error" })<br />
+
+            @Html.LabelFor(d => d.fecha, "Fecha de nacimiento:", new { @class = "label" })<br />
+            @Html.TextBoxFor(d => d.fecha, new { @class = "fecha", @type = "date" })<br />
+            @Html.ValidationMessageFor(d => d.fecha, "", new { @class = "error" })<br />
 
             @Html.LabelFor(d => d.pais, "País:", new { @class = "label" })<br />
             @Html.DropDownListFor(d => d.pais, new SelectList(Enum.GetValues(typeof(Proyecto1_IPC2.Models.ViewModels.pais))), new { @class = "select" })<br />
+            @Html.ValidationMessageFor(d => d.pais, "", new { @class = "error" })<br />
 
             @Html.LabelFor(d => d.correo, "Correo Electrónico:", new { @class = "label" })<br />
-            @Html.TextBoxFor(d => d.correo, "", new { @class = "input", type = "email" })
+            @Html.TextBoxFor(d => d.correo, "", new { @class = "input", @type = "email" })<br />
+            @Html.ValidationMessageFor(d => d.correo, "", new { @class = "error" })<br />
         </fieldset>
         <input type="submit" value="Ingresar" />
-    </form>
-</article>
+    </article>
+}

@@ -9,5 +9,6 @@ namespace Proyecto1_IPC2.Models.ViewModels
     {
         public string nombreUsuario { get; set; }
         public string contraseña { get; set; }
+        public string correo { get; set; }
     }
 }

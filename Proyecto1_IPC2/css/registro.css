@@ -56,6 +56,12 @@ form {
     text-align: center;
 }
 
+.error {
+    color: #ed0000;
+    font-size: 15px;
+    padding-left: 100px;
+}
+
 .select {
     width: 150px;
     margin-top: -10px;
@@ -97,7 +103,7 @@ input[type="submit"]:hover {
     border-style: solid;
 }
 
-#fecha {
+.fecha {
     width: 175px;
     margin-top: -10px;
     margin-bottom: 10px;
@@ -116,8 +122,5 @@ input[type="submit"]:hover {
     color: #ffffff;
 }
 
-.alert {
-    color: #ffffff;
-    font-size: 25px;
-}
+
 
