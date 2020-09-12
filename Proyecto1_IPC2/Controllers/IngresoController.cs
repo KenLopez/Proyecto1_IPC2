@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Http;
-using System.Web.Http.Results;
 using System.Web.Mvc;
-using Microsoft.Ajax.Utilities;
 using Proyecto1_IPC2.Models;
 using Proyecto1_IPC2.Models.ViewModels;
 
@@ -32,10 +28,26 @@ namespace Proyecto1_IPC2.Controllers
                                   select new getUsuarioViewModel
                                   {
                                       nombreUsuario = d.nombreUsuario,
-                                      contraseña = d.contraseña
+                                      contraseña = d.contraseña,
+                                      correo = d.correo
                                   }).ToList();
             }
             return listaUsuarios;
+        }
+
+        [HttpPost]
+        public ActionResult Inicio_sesion(getUsuarioViewModel modelo)
+        {
+            List<getUsuarioViewModel> listaUsuarios = getUsuarios();
+            foreach (var user in listaUsuarios)
+            {
+                if (modelo.nombreUsuario == user.nombreUsuario && modelo.contraseña == user.contraseña)
+                {
+                    return Redirect("~/Menu/Principal");
+                }
+                
+            }
+            return View();
         }
 
         [HttpPost]
@@ -59,20 +71,22 @@ namespace Proyecto1_IPC2.Controllers
                 {
                     using (OTHELLOEntities db = new OTHELLOEntities())
                     {
-                        var usuario = new Usuario();
-                        usuario.nombre = modelo.nombre;
-                        usuario.apellido = modelo.apellido;
-                        usuario.nombreUsuario = modelo.nombreUsuario;
-                        usuario.contraseña = modelo.contraseña;
-                        usuario.fechaNacimiento = modelo.fecha;
-                        usuario.pais = modelo.pais;
-                        usuario.correo = modelo.correo;
-                        
+                        var usuario = new Usuario
+                        {
+                            nombre = modelo.nombre,
+                            apellido = modelo.apellido,
+                            nombreUsuario = modelo.nombreUsuario,
+                            contraseña = modelo.contraseña,
+                            fechaNacimiento = modelo.fecha,
+                            pais = modelo.pais,
+                            correo = modelo.correo
+                        };
+
                         db.Usuario.Add(usuario);
                         db.SaveChanges();
                     }
                 }
-                return View(modelo);
+                return View();
             }
             catch (Exception ex)
             {

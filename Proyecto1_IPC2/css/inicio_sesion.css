@@ -26,6 +26,21 @@ article{
     padding-top: 25px;
 }
 
+.label{
+    text-align: left;
+    font-size: 20px;
+    line-height: 80px;
+    margin-top: 10px;
+    padding-left: 40px;
+    color: #ffffff;
+}
+
+.error {
+    color: #ed0000;
+    font-size: 15px;
+    padding-left: 100px;
+}
+
 fieldset{
     margin-left: -5px;
     text-align: left;
@@ -48,20 +63,6 @@ fieldset legend{
     border-color: #000000;
     border-style: solid;
     font-weight: bold;
-}
-
-form{
-    padding-bottom: 20px;
-    text-align: center;
-}
-
-fieldset label{
-    text-align: left;
-    font-size: 20px;
-    line-height: 80px;
-    margin-top: 10px;
-    padding-left: 40px;
-    color: #ffffff;
 }
 
 .input{
@@ -93,4 +94,6 @@ input[type="submit"]:hover{
     border-color: #ffffff;
     border-style: solid;
 }
+
+
 
