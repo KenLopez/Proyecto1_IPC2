@@ -140,6 +140,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngresoController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\PartidaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -174,10 +175,15 @@
     <Content Include="css\Inicio_sesion.css" />
     <Content Include="css\principal.css" />
     <Content Include="css\registro.css" />
+    <Content Include="css\UnJugador.css" />
+    <Content Include="css\upload.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\Coin.png" />
+    <Content Include="img\coin_wh.png" />
+    <Content Include="img\othello-board.png" />
     <Content Include="img\tabla.jpg" />
     <Content Include="img\flecha-derecha.png" />
     <Content Include="img\Logo Othello.jpg" />
@@ -226,9 +232,11 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Menu\Principal.cshtml" />
+    <Content Include="Views\Partida\UnJugador.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadedFiles\" />
     <Folder Include="Views\Registro\" />
   </ItemGroup>
   <ItemGroup>

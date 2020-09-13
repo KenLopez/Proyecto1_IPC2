@@ -9,7 +9,7 @@ body{
     background-color: #B6D7A8;
 }
 
-header {
+#header {
     position: relative;
     margin: auto;
     height: auto;
@@ -18,7 +18,7 @@ header {
     padding-top: 10em;
 }
 
-article{
+#article{
     position: relative;
     margin: auto;
     height: auto;
@@ -27,7 +27,7 @@ article{
     padding-top: 50px;
 }
 
-article button{
+#article button{
     font-size: 20px;
     background-color: #9FC5F8;
     border-color: #000000;
@@ -38,7 +38,7 @@ article button{
     cursor:pointer;
 }
 
-article button:hover{
+#article button:hover{
     background-color: #2f43d6;
     color: #ffffff;
     border-color: #ffffff;

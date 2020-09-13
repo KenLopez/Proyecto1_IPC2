@@ -1,14 +1,16 @@
 ﻿@{
     ViewBag.Title = "Home Page - Othello";
     ViewBag.Style = "~/css/index.css";
+    ViewBag.Bootstrap = false;
 }
 
 
-<header>
+<header id="header">
     <p><img id="logo" src="~/img/Logo Othello.jpg" /></p>
 </header>
-<article>
+<article id="article">
     <button id="inicio" onclick="location.href='@Url.Action("Inicio_sesion", "Ingreso")'"><i class="fas fa-address-book fa-lg"></i> Inicio de Sesión</button>
     <br>
     <button id="Registro" onclick="location.href='@Url.Action("Registro", "Ingreso")'"><i class="fas fa-user-plus fa-lg"></i> Registrarse</button>
+
 </article>

@@ -1,0 +1,106 @@
+﻿@using Proyecto1_IPC2.Models.ViewModels
+@{
+    ViewBag.Title = "Partida Un Jugador";
+    ViewBag.Style = "~/css/UnJugador.css";
+    ViewBag.Bootstrap = true;
+    ViewBag.Color = "blanco";
+}
+
+<header id="encabezado">
+    <img id="othelloLogo" src="~/img/Logo Othello-mini.jpg" />
+    <div class="tabla">
+        <p id="usuario">@TempData["user"]</p>
+    </div>
+    <div class="separador">
+
+    </div>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="tablero" col-6>
+            <div class="fila" id="primero">
+                <button class="casilla" id="1A" onclick="location.href='@Url.Action("ponerFicha", "Partida")'">@TempData["1A"]</button>
+                <button class="casilla" id="1B"></button>
+                <button class="casilla" id="1C"></button>
+                <button class="casilla" id="1D"></button>
+                <button class="casilla" id="1E"></button>
+                <button class="casilla" id="1F"></button>
+                <button class="casilla" id="1G"></button>
+                <button class="casilla" id="1H"></button>
+            </div>
+            <div class="fila" id="segunda">
+                <button class="casilla" id="2A"></button>
+                <button class="casilla" id="2B"></button>
+                <button class="casilla" id="2C"></button>
+                <button class="casilla" id="2D"></button>
+                <button class="casilla" id="2E"></button>
+                <button class="casilla" id="2F"></button>
+                <button class="casilla" id="2G"></button>
+                <button class="casilla" id="2H"></button>
+            </div>
+            <div class="fila" id="tercero">
+                <button class="casilla" id="3A"></button>
+                <button class="casilla" id="3B"></button>
+                <button class="casilla" id="3C"></button>
+                <button class="casilla" id="3D"></button>
+                <button class="casilla" id="3E"></button>
+                <button class="casilla" id="3F"></button>
+                <button class="casilla" id="3G"></button>
+                <button class="casilla" id="3H"></button>
+            </div>
+            <div class="fila" id="cuarto">
+                <button class="casilla" id="4A"></button>
+                <button class="casilla" id="4B"></button>
+                <button class="casilla" id="4C"></button>
+                <button class="casilla" id="4D"></button>
+                <button class="casilla" id="4E"></button>
+                <button class="casilla" id="4F"></button>
+                <button class="casilla" id="4G"></button>
+                <button class="casilla" id="4H"></button>
+            </div>
+            <div class="fila" id="quinta">
+                <button class="casilla" id="5A"></button>
+                <button class="casilla" id="5B"></button>
+                <button class="casilla" id="5C"></button>
+                <button class="casilla" id="5D"></button>
+                <button class="casilla" id="5E"></button>
+                <button class="casilla" id="5F"></button>
+                <button class="casilla" id="5G"></button>
+                <button class="casilla" id="5H"></button>
+            </div>
+            <div class="fila" id="sexta">
+                <button class="casilla" id="6A"></button>
+                <button class="casilla" id="6B"></button>
+                <button class="casilla" id="6C"></button>
+                <button class="casilla" id="6D"></button>
+                <button class="casilla" id="6E"></button>
+                <button class="casilla" id="6F"></button>
+                <button class="casilla" id="6G"></button>
+                <button class="casilla" id="6H"></button>
+            </div>
+            <div class="fila" id="septima">
+                <button class="casilla" id="7A"></button>
+                <button class="casilla" id="7B"></button>
+                <button class="casilla" id="7C"></button>
+                <button class="casilla" id="7D"></button>
+                <button class="casilla" id="7E"></button>
+                <button class="casilla" id="7F"></button>
+                <button class="casilla" id="7G"></button>
+                <button class="casilla" id="7H"></button>
+            </div>
+            <div class="fila" id="octavo">
+                <button class="casilla" id="8A"></button>
+                <button class="casilla" id="8B"></button>
+                <button class="casilla" id="8C"></button>
+                <button class="casilla" id="8D"></button>
+                <button class="casilla" id="8E"></button>
+                <button class="casilla" id="8F"></button>
+                <button class="casilla" id="8G"></button>
+                <button class="casilla" id="8H"></button>
+            </div>
+        </div>
+        <div col-6>
+            <button class="opcion" id="Reportes" data-target="#uploadModal" data-toggle="modal"><i class="fas fa-cloud-download-alt"></i> Descargar Partida</button>
+        </div>
+    </div>
+</div>

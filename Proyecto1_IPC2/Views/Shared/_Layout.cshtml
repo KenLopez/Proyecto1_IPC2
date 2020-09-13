@@ -1,10 +1,16 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+    @if (ViewBag.bootstrap)
+    {
+        @Styles.Render("~/Content/bootstrap.min.css");
+        @Scripts.Render("~/Scripts/jquery-3.4.1.min.js")
+        @Scripts.Render("~/Scripts/bootstrap.min.js")
+    }
     @Styles.Render(@ViewBag.Style)
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("https://kit.fontawesome.com/67710f970d.js")

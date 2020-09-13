@@ -18,7 +18,7 @@ body {
     padding-top: 20px;
 }
 
-#othelloLogo{
+#othelloLogo {
     float: left;
     padding-left: 135px;
     padding-right: 50px;
@@ -46,37 +46,55 @@ body {
 }
 
 .opcion {
-    font-size: 30px;
+    font-size: 20px;
     background-color: #9FC5F8;
     border-color: #000000;
     border-width: 5px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    width: 350px;
-    height: 150px;
+    margin-top: 80px;
+    width: 250px;
+    height: 100px;
+    line-height: 100px;
     cursor: pointer;
     margin-left: 50px;
 }
 
 .opcion:hover {
-    background-color: #2f43d6;
-    color: #ffffff;
-    border-color: #ffffff;
-    border-style: solid;
-}
+        background-color: #2f43d6;
+        color: #ffffff;
+        border-color: #ffffff;
+        border-style: solid;
+    }
 
-.separador{
+.separador {
     float: none;
 }
 
-.botones1{
+.tablero {
+    float: left;
+    margin-top: 50px;
+    height: 500px;
+    width: 500px;
+    background-image: url('../img/othello-board.png');
+    background-size:contain;
+}
+
+
+
+.fila {
+    width: auto;
+    margin-left: 40px;
+    margin-right: 40px;
+    padding-left: 10px;
+    height: 50px;
+}
+
+#primero {
     padding-top: 50px;
-    padding-left: 120px;
-    float: none;
 }
 
-.botones2 {
-    padding-top: 50px;
-    padding-left: 330px;
-    float: none;
+.casilla{
+    float: left;
+    width: 50px;
+    height: 50px;
 }
+

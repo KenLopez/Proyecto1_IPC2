@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web.Mvc;
 using Proyecto1_IPC2.Models;
 using Proyecto1_IPC2.Models.ViewModels;
+using Proyecto1_IPC2.Controllers;
+using System.Web.UI.WebControls;
 
 namespace Proyecto1_IPC2.Controllers
 {
@@ -80,6 +82,7 @@ namespace Proyecto1_IPC2.Controllers
                         db.Usuario.Add(usuario);
                         db.SaveChanges();
                     }
+                    TempData["user"] = modelo.nombreUsuario;
                     return Redirect("~/Menu/Principal");
                 }
                 return View();
@@ -93,12 +96,13 @@ namespace Proyecto1_IPC2.Controllers
     [HttpPost]
         public ActionResult Inicio_sesion(getUsuarioViewModel modelo)
         {
-            return Redirect("~/Menu/Principal");
+            //return Redirect("~/Menu/Principal");
             List<getUsuarioViewModel> listaUsuarios = getUsuarios();
             foreach (var user in listaUsuarios)
             {
                 if (modelo.nombreUsuario == user.nombreUsuario && modelo.contraseña == user.contraseña)
                 {
+                    TempData["user"] = modelo.nombreUsuario;
                     return Redirect("~/Menu/Principal");
                 }
 
