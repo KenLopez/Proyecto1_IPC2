@@ -25,29 +25,36 @@ namespace Proyecto1_IPC2.Controllers
             using (OTHELLOEntities db = new OTHELLOEntities())
             {
                 listaUsuarios = (from d in db.Usuario
-                                  select new getUsuarioViewModel
-                                  {
-                                      nombreUsuario = d.nombreUsuario,
-                                      contraseña = d.contraseña,
-                                      correo = d.correo
-                                  }).ToList();
+                                 select new getUsuarioViewModel
+                                 {
+                                     nombreUsuario = d.nombreUsuario,
+                                     contraseña = d.contraseña,
+                                     correo = d.correo
+                                 }).ToList();
             }
             return listaUsuarios;
         }
 
         [HttpPost]
-        public ActionResult Inicio_sesion(getUsuarioViewModel modelo)
+        public JsonResult usuarioRegistrado(string nombreUsuario)
         {
-            List<getUsuarioViewModel> listaUsuarios = getUsuarios();
-            foreach (var user in listaUsuarios)
+
+            return Json(usuarioDisponible(nombreUsuario), JsonRequestBehavior.AllowGet);
+
+        }
+
+        public bool usuarioDisponible(string nombreUsuario)
+        { 
+            List<getUsuarioViewModel> users = getUsuarios();
+
+            foreach (var user in users)
             {
-                if (modelo.nombreUsuario == user.nombreUsuario && modelo.contraseña == user.contraseña)
+                if (user.nombreUsuario == nombreUsuario)
                 {
-                    return Redirect("~/Menu/Principal");
+                    return false;
                 }
-                
             }
-            return View();
+            return true;
         }
 
         [HttpPost]
@@ -55,19 +62,7 @@ namespace Proyecto1_IPC2.Controllers
         {
             try
             {
-                List<getUsuarioViewModel> listaUsuarios = getUsuarios();
-                foreach(var user in listaUsuarios)
-                {
-                    if (modelo.nombreUsuario == user.nombreUsuario)
-                    {
-                        return View(modelo);
-                    }
-                    else if(modelo.correo == user.correo)
-                    {
-                        return View(modelo);
-                    }
-                }
-                if (ModelState.IsValid && modelo.contraseña == modelo.confirmar)
+                if (ModelState.IsValid && usuarioDisponible(modelo.nombreUsuario) && modelo.confirmar == modelo.contraseña)
                 {
                     using (OTHELLOEntities db = new OTHELLOEntities())
                     {
@@ -85,6 +80,7 @@ namespace Proyecto1_IPC2.Controllers
                         db.Usuario.Add(usuario);
                         db.SaveChanges();
                     }
+                    return Redirect("~/Menu/Principal");
                 }
                 return View();
             }
@@ -92,6 +88,23 @@ namespace Proyecto1_IPC2.Controllers
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+    [HttpPost]
+        public ActionResult Inicio_sesion(getUsuarioViewModel modelo)
+        {
+            return Redirect("~/Menu/Principal");
+            List<getUsuarioViewModel> listaUsuarios = getUsuarios();
+            foreach (var user in listaUsuarios)
+            {
+                if (modelo.nombreUsuario == user.nombreUsuario && modelo.contraseña == user.contraseña)
+                {
+                    return Redirect("~/Menu/Principal");
+                }
+
+            }
+
+            return View();
         }
     }
 }

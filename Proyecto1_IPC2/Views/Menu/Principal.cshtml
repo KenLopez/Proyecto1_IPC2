@@ -1,13 +1,31 @@
-﻿
+﻿@using Proyecto1_IPC2.Models.ViewModels
 @{
     ViewBag.Title = "Menu";
-    ViewBag.Style = "~/css/Principal.css";
+    ViewBag.Style = "~/css/principal.css";
 }
 
 <header>
-    <img id="logo" src="~/img/Logo Othello.jpg" />
-    <div id="tabla">
-        <p></p>
+    <img id="logo" src="~/img/Logo Othello-mini.jpg" />
+    <div class="tabla">
+        <p>KenLopez</p>
+    </div>
+    <div class="separador">
+
     </div>
 </header>
+<br />
+<article>
+    <div class="botones1">
+        <button id="Un jugador" onclick=""><i class="fas fa-gamepad fa-lg"></i></i> Un jugador</button>
 
+        <button id="Multijugador" onclick=""><i class="fas fa-wifi fa-lg"></i></i> Multijugador</button>
+
+        <button id="Un jugador" onclick=""><i class="fas fa-trophy fa-lg"></i></i> Torneos</button>
+    </div>
+    <div class="botones2">
+        <button id="Reportes" onclick=""><i class="fas fa-chart-bar fa-lg"></i></i> Reportes</button>
+
+        <button id="Cargar Partida" onclick=""><i class="fas fa-cloud-upload-alt fa-lg"></i></i> Cargar Partida</button>
+    </div>
+
+</article>

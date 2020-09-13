@@ -3,7 +3,9 @@
     ViewBag.Title = "Registro";
     ViewBag.Style = "~/css/registro.css";
 }
-
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <header>
     <p><img id="logo" src="~/img/Logo Othello.jpg" onclick="location.href='@Url.Action("Index", "Home")'" /></p>
 </header>
@@ -12,6 +14,8 @@
     <article>
         <fieldset>
             <legend>Registro</legend>
+
+            @Html.ValidationSummary(true, "", new { @class = "error" })
 
             @Html.LabelFor(d => d.nombre, "Nombres:", new { @class = "label" })<br />
             @Html.TextBoxFor(d => d.nombre, "", new { @class = "input" })<br />
@@ -26,11 +30,11 @@
             @Html.ValidationMessageFor(d => d.nombreUsuario, "", new { @class = "error" })<br />
 
             @Html.LabelFor(d => d.contraseña, "Contraseña:", new { @class = "label" })<br />
-            @Html.PasswordFor(d => d.contraseña, new { @class = "input" })<br />
+            @Html.PasswordFor(d => d.contraseña, new { @class = "input", @type = "password"})<br />
             @Html.ValidationMessageFor(d => d.contraseña, "", new { @class = "error" })<br />
 
             @Html.LabelFor(d => d.confirmar, "Confirmar contraseña:", new { @class = "label" })<br />
-            @Html.PasswordFor(d => d.confirmar, new { @class = "input" })<br />
+            @Html.PasswordFor(d => d.confirmar, new { @class = "input", @type = "password" })<br />
             @Html.ValidationMessageFor(d => d.confirmar, "", new { @class = "error" })<br />
 
             @Html.LabelFor(d => d.fecha, "Fecha de nacimiento:", new { @class = "label" })<br />
