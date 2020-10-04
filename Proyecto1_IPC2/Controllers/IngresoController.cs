@@ -6,11 +6,13 @@ using Proyecto1_IPC2.Models;
 using Proyecto1_IPC2.Models.ViewModels;
 using Proyecto1_IPC2.Controllers;
 using System.Web.UI.WebControls;
+using System.Security.Permissions;
 
 namespace Proyecto1_IPC2.Controllers
 {
     public class IngresoController : Controller
     {
+
         public ActionResult Inicio_sesion()
         {
             return View();
@@ -21,37 +23,42 @@ namespace Proyecto1_IPC2.Controllers
             return View();
         }
 
-        public List<getUsuarioViewModel> getUsuarios()
+        public List<Jugador> getUsuarios()
         {
-            List<getUsuarioViewModel> listaUsuarios;
+            List<Jugador> listaUsuarios;
             using (OTHELLOEntities db = new OTHELLOEntities())
             {
                 listaUsuarios = (from d in db.Usuario
-                                 select new getUsuarioViewModel
+                                 select new Jugador
                                  {
-                                     nombreUsuario = d.nombreUsuario,
-                                     contraseña = d.contraseña,
-                                     correo = d.correo
+                                     Id = d.idUsuario,
+                                     Nombre = d.nombre,
+                                     Apellido = d.apellido,
+                                     NombreUsuario = d.nombreUsuario,
+                                     Contraseña = d.contraseña,
+                                     Fecha = d.fechaNacimiento,
+                                     Pais = d.pais,
+                                     Correo = d.correo
                                  }).ToList();
             }
             return listaUsuarios;
         }
 
         [HttpPost]
-        public JsonResult usuarioRegistrado(string nombreUsuario)
+        public JsonResult usuarioRegistrado(string nombreUsuario, string correo)
         {
 
-            return Json(usuarioDisponible(nombreUsuario), JsonRequestBehavior.AllowGet);
+            return Json(disponible(nombreUsuario, correo), JsonRequestBehavior.AllowGet);
 
         }
 
-        public bool usuarioDisponible(string nombreUsuario)
+        public bool disponible(string nombreUsuario, string correo)
         { 
-            List<getUsuarioViewModel> users = getUsuarios();
+            List<Jugador> users = getUsuarios();
 
             foreach (var user in users)
             {
-                if (user.nombreUsuario == nombreUsuario)
+                if (user.NombreUsuario == nombreUsuario | user.Correo == correo)
                 {
                     return false;
                 }
@@ -64,26 +71,25 @@ namespace Proyecto1_IPC2.Controllers
         {
             try
             {
-                if (ModelState.IsValid && usuarioDisponible(modelo.nombreUsuario) && modelo.confirmar == modelo.contraseña)
+                if (ModelState.IsValid & disponible(modelo.Nombre, modelo.Correo) & modelo.Confirmar == modelo.Contraseña)
                 {
                     using (OTHELLOEntities db = new OTHELLOEntities())
                     {
                         var usuario = new Usuario
                         {
-                            nombre = modelo.nombre,
-                            apellido = modelo.apellido,
-                            nombreUsuario = modelo.nombreUsuario,
-                            contraseña = modelo.contraseña,
-                            fechaNacimiento = modelo.fecha,
-                            pais = modelo.pais,
-                            correo = modelo.correo
+                            nombre = modelo.Nombre,
+                            apellido = modelo.Apellido,
+                            nombreUsuario = modelo.NombreUsuario,
+                            contraseña = modelo.Contraseña,
+                            fechaNacimiento = modelo.Fecha,
+                            pais = modelo.Pais,
+                            correo = modelo.Correo
                         };
 
                         db.Usuario.Add(usuario);
                         db.SaveChanges();
                     }
-                    TempData["user"] = modelo.nombreUsuario;
-                    return Redirect("~/Menu/Principal");
+                    return RedirectToAction("Principal", "Menu");
                 }
                 return View();
             }
@@ -94,16 +100,15 @@ namespace Proyecto1_IPC2.Controllers
         }
 
     [HttpPost]
-        public ActionResult Inicio_sesion(getUsuarioViewModel modelo)
+        public ActionResult Inicio_sesion(inicioSesionViewModel modelo)
         {
             //return Redirect("~/Menu/Principal");
-            List<getUsuarioViewModel> listaUsuarios = getUsuarios();
+            List<Jugador> listaUsuarios = getUsuarios();
             foreach (var user in listaUsuarios)
             {
-                if (modelo.nombreUsuario == user.nombreUsuario && modelo.contraseña == user.contraseña)
+                if (modelo.NombreUsuario == user.NombreUsuario & modelo.Contraseña == user.Contraseña)
                 {
-                    TempData["user"] = modelo.nombreUsuario;
-                    return Redirect("~/Menu/Principal");
+                    return RedirectToAction("Principal", "Menu", user);
                 }
 
             }

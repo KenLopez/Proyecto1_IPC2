@@ -5,15 +5,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("https://kit.fontawesome.com/67710f970d.js")
     @if (ViewBag.bootstrap)
     {
         @Styles.Render("~/Content/bootstrap.min.css");
-        @Scripts.Render("~/Scripts/jquery-3.4.1.min.js")
+        @Scripts.Render("~/Scripts/jquery-3.4.1.min.js");
         @Scripts.Render("~/Scripts/bootstrap.min.js")
     }
     @Styles.Render(@ViewBag.Style)
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("https://kit.fontawesome.com/67710f970d.js")
 </head>
 <body>
     @RenderBody()

@@ -1,4 +1,5 @@
-﻿@using Proyecto1_IPC2.Models.ViewModels
+﻿@using Proyecto1_IPC2.Models.ViewModels;
+@model Jugador
 @{
     ViewBag.Title = "Menu";
     ViewBag.Style = "~/css/principal.css";
@@ -8,7 +9,7 @@
 <header id="encabezado">
     <img id="othelloLogo" src="~/img/Logo Othello-mini.jpg" />
     <div class="tabla">
-        <p id="usuario">@TempData["user"]</p>
+        <p id="usuario">@Model.NombreUsuario</p>
     </div>
     <div class="separador">
 
@@ -17,51 +18,65 @@
 <br />
 <article id="articulo">
     <div class="botones1">
-        <button class="opcion" id="Un jugador" onclick=""><i class="fas fa-gamepad fa-lg"></i>Un jugador</button>
+        <button type="submit" class="opcion" id="Un jugador" data-target="#1PModal" data-toggle="modal"}><i class="fas fa-gamepad fa-lg"></i>Un jugador</button>
 
-        <button class="opcion" id="Multijugador" onclick=""><i class="fas fa-wifi fa-lg"></i> Multijugador</button>
+        <button type="submit" class="opcion" id="Multijugador" onclick=""><i class="fas fa-wifi fa-lg"></i> Multijugador</button>
 
-        <button class="opcion" id="Un jugador" onclick=""><i class="fas fa-trophy fa-lg"></i> Torneos</button>
+        <button type="submit" class="opcion" id="Un jugador" onclick=""><i class="fas fa-trophy fa-lg"></i> Torneos</button>
     </div>
     <div class="botones2">
-        <button class="opcion" id="Reportes" onclick=""><i class="fas fa-chart-bar fa-lg"></i> Reportes</button>
+        <button type="submit" class="opcion" id="Reportes" onclick=""><i class="fas fa-chart-bar fa-lg"></i> Reportes</button>
 
-        <button class="opcion" id="Reportes" data-target="#uploadModal" data-toggle="modal"><i class="fas fa-cloud-upload-alt"></i> Cargar Partida</button>
+        <button type="submit" class="opcion" id="Reportes" data-target="#uploadModal" data-toggle="modal"><i class="fas fa-cloud-upload-alt"></i> Cargar Partida</button>
     </div>
 </article>
-<div class="container">
-    <div class="modal" id="uploadModal" tabindex="-1" data-backdrop="static">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal">X</button>
-                    <h2>Subir Partida XML</h2>
-                </div>
-                @using (Html.BeginForm("UploadFile", "Menu", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
-                    <div class="modal-body">
-
-
-
-                        <div>
-                            <p class="alert">@Html.TextBox("file", "", new { type = "file" })</p> <br />
-
-                            
-
-                            @ViewBag.Message
-
-
-                        </div>
-
-
-                       
+<div class="modal fade" tabindex="-1" id="uploadModal" data-backdrop="static" data-show="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">X</button>
+                <h2>Subir Partida XML</h2>
+            </div>
+            @using (Html.BeginForm("UploadFile", "Menu", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="modal-body">
+                    <div>
+                        <p class="alert">@Html.TextBox("file", "", new { @class = "custom-file-input", @type = "file"})</p> <br />
+                        @ViewBag.Message
                     </div>
-                    <div class="modal-footer">
-                        <input class="btn btn-success btn-lg" type="submit" value="Upload" />
-                        <button class="btn btn-danger btn-lg" data-dismiss="modal">Cancelar</button>
-                    </div>
-                }
                 </div>
+                <div class="modal-footer">
+                    <input class="btn btn-success btn-lg" type="submit" value="Upload" />
+                    <button class="btn btn-danger btn-lg" data-dismiss="modal">Cancelar</button>
+                </div>
+            }
+            </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" id="1PModal" data-backdrop="static" data-show="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">X</button>
+                <h2>Selecciona el Modo de Juego</h2>
+            </div>
+
+            <div class="modal-body">
+                <div>
+                    @using (Html.BeginForm("PVM", "Partida", FormMethod.Post, new { @class="float-left"}))
+                    {
+                        <button class="btn btn-success btn-lg center-block" type="submit" value="Upload"><i class="fas fa-gamepad fa-lg"></i> Vs. Máquina</button>
+                    }
+                    <br>
+                    @using (Html.BeginForm("PVP", "Partida", FormMethod.Post))
+                    {
+                        <button class="btn btn-success btn-lg center-block" type="submit" value="Upload"><i class="fas fa-gamepad fa-lg"></i> Vs. Jugador</button>
+                    }
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger btn-lg" data-dismiss="modal">Cancelar</button>
+            </div>
         </div>
     </div>
 </div>

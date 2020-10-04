@@ -3,23 +3,22 @@
     ViewBag.Title = "Partida Un Jugador";
     ViewBag.Style = "~/css/UnJugador.css";
     ViewBag.Bootstrap = true;
-    ViewBag.Color = "blanco";
 }
 
 <header id="encabezado">
     <img id="othelloLogo" src="~/img/Logo Othello-mini.jpg" />
     <div class="tabla">
-        <p id="usuario">@TempData["user"]</p>
+        <p id="usuario"></p>
     </div>
     <div class="separador">
 
     </div>
 </header>
-<div class="container">
+<div class="container col-6">
     <div class="row">
-        <div class="tablero" col-6>
+        <div class="tablero">
             <div class="fila" id="primero">
-                <button class="casilla" id="1A" onclick="location.href='@Url.Action("ponerFicha", "Partida")'">@TempData["1A"]</button>
+                <button class="casilla" id="1A"></button>
                 <button class="casilla" id="1B"></button>
                 <button class="casilla" id="1C"></button>
                 <button class="casilla" id="1D"></button>
@@ -99,8 +98,8 @@
                 <button class="casilla" id="8H"></button>
             </div>
         </div>
-        <div col-6>
-            <button class="opcion" id="Reportes" data-target="#uploadModal" data-toggle="modal"><i class="fas fa-cloud-download-alt"></i> Descargar Partida</button>
-        </div>
     </div>
+</div>
+<div class="col-6">
+    <button class="opcion" data-toggle="modal"><i class="fas fa-cloud-download-alt"></i> Descargar Partida</button>
 </div>

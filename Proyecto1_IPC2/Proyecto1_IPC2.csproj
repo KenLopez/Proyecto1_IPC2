@@ -163,7 +163,8 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModels\addUsuarioViewModel.cs" />
-    <Compile Include="Models\ViewModels\getUsuarioViewModel.cs" />
+    <Compile Include="Models\Jugador.cs" />
+    <Compile Include="Models\ViewModels\inicioSesionViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

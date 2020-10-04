@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml;
+using Proyecto1_IPC2.Models;
 using Proyecto1_IPC2.Models.ViewModels;
 
 
@@ -12,17 +13,22 @@ namespace Proyecto1_IPC2.Controllers
 {
     public class MenuController : Controller
     {
-        // GET: Menu
-        public ActionResult Principal()
-        { 
-            return View();
-        }
+        static Jugador usuario = new Jugador();
+        static Boolean displayUpload = false;
+        // GET: Menu/Principal
+        public ActionResult Principal(Jugador model)
+        {
+            usuario = model;
+            var viewResult = new ViewResult();
+            viewResult.ViewData.Model = model;
 
+            return View(model);
+        }
 
         [HttpGet]
         public ActionResult UploadFile()
         {
-            return View("Principal");
+            return View("Principal", usuario);
         }
 
         [HttpPost]
@@ -30,26 +36,31 @@ namespace Proyecto1_IPC2.Controllers
         {
             try
             {
-                if (file.ContentLength > 0)
+                if (file != null)
                 {
-                    string _FileName = Path.GetFileName(file.FileName);
-                    string _path = Path.Combine(Server.MapPath("~/UploadedFiles"), _FileName);
-                    file.SaveAs(_path);
-                    XmlTextReader reader = new XmlTextReader(_path);
-                    string etiquetaFinal = "";
-                    while (reader.Read())
+                    if (file.ContentLength > 0)
                     {
+                        string _FileName = Path.GetFileName(file.FileName);
+                        string _path = Path.Combine(Server.MapPath("~/UploadedFiles"), _FileName);
+                        file.SaveAs(_path);
+                        XmlTextReader reader = new XmlTextReader(_path);
+                        string etiquetaFinal = "";
+                        while (reader.Read())
+                        {
 
+                        }
                     }
+                    ViewBag.Message = "File Uploaded Successfully!!";
+                    return Redirect("~/Partida/UnJugador");
                 }
-                ViewBag.Message = "File Uploaded Successfully!!";
-                return Redirect("~/Partida/UnJugador");
+                return View("Principal", usuario);
             }
             catch
             {
                 ViewBag.Message = "File upload failed!!";
-                return View("Principal");
+                return View("Principal", usuario);
             }
         }
+                
     }
 }

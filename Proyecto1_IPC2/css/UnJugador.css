@@ -46,7 +46,7 @@ body {
 }
 
 .opcion {
-    font-size: 20px;
+    font-size: 50px;
     background-color: #9FC5F8;
     border-color: #000000;
     border-width: 5px;
@@ -58,7 +58,7 @@ body {
     margin-left: 50px;
 }
 
-.opcion:hover {
+    .opcion:hover {
         background-color: #2f43d6;
         color: #ffffff;
         border-color: #ffffff;
@@ -75,10 +75,19 @@ body {
     height: 500px;
     width: 500px;
     background-image: url('../img/othello-board.png');
-    background-size:contain;
+    background-size: contain;
 }
 
-
+.casilla {
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    float: left;
+    width: 500px;
+    height: 50px;
+}
 
 .fila {
     width: auto;
@@ -91,10 +100,3 @@ body {
 #primero {
     padding-top: 50px;
 }
-
-.casilla{
-    float: left;
-    width: 50px;
-    height: 50px;
-}
-
