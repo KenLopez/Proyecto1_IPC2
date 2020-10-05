@@ -46,7 +46,7 @@ body {
 }
 
 .opcion {
-    font-size: 50px;
+    font-size: 25px;
     background-color: #9FC5F8;
     border-color: #000000;
     border-width: 5px;
@@ -58,12 +58,12 @@ body {
     margin-left: 50px;
 }
 
-    .opcion:hover {
-        background-color: #2f43d6;
-        color: #ffffff;
-        border-color: #ffffff;
-        border-style: solid;
-    }
+.opcion:hover {
+    background-color: #2f43d6;
+    color: #ffffff;
+    border-color: #ffffff;
+    border-style: solid;
+}
 
 .separador {
     float: none;
@@ -80,13 +80,37 @@ body {
 
 .casilla {
     background-color: Transparent;
-    background-repeat: no-repeat;
-    border: none;
-    cursor: pointer;
-    overflow: hidden;
     float: left;
-    width: 500px;
+    width: 50px;
     height: 50px;
+}
+
+.negro {
+    background-image: url('../img/Coin.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+
+.blanco {
+    background-image: url('../img/coin_wh.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+
+.casilla:focus, .blanco:focus, .negro:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.activo:hover{
+    background-color: #ffffff;
+    opacity: 0.3;
 }
 
 .fila {

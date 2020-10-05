@@ -1,4 +1,4 @@
-﻿@using Proyecto1_IPC2.Models.ViewModels;
+﻿@using Proyecto1_IPC2.Models;
 @model Jugador
 @{
     ViewBag.Title = "Menu";
@@ -63,7 +63,7 @@
 
             <div class="modal-body">
                 <div>
-                    @using (Html.BeginForm("PVM", "Partida", FormMethod.Post, new { @class="float-left"}))
+                    @using (Html.BeginForm("PVM", "Menu", FormMethod.Post, @Model))
                     {
                         <button class="btn btn-success btn-lg center-block" type="submit" value="Upload"><i class="fas fa-gamepad fa-lg"></i> Vs. Máquina</button>
                     }

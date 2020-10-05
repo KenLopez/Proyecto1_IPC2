@@ -2,8 +2,12 @@
 using System.Collections.Generic;  
 using System.IO;  
 using System.Linq;
+using System.Threading;
+using System.Timers;
 using System.Web;
+using System.Web.Http.Routing;
 using System.Web.Mvc;
+using System.Web.UI;
 using System.Xml;
 using Proyecto1_IPC2.Models;
 using Proyecto1_IPC2.Models.ViewModels;
@@ -14,7 +18,6 @@ namespace Proyecto1_IPC2.Controllers
     public class MenuController : Controller
     {
         static Jugador usuario = new Jugador();
-        static Boolean displayUpload = false;
         // GET: Menu/Principal
         public ActionResult Principal(Jugador model)
         {
@@ -61,6 +64,12 @@ namespace Proyecto1_IPC2.Controllers
                 return View("Principal", usuario);
             }
         }
-                
+
+        [HttpPost]
+        public ActionResult PVM()
+        {
+            return RedirectToAction("UnJugador", "Partida", usuario);
+        }
     }
+
 }

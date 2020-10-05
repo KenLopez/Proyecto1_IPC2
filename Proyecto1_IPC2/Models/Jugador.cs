@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Proyecto1_IPC2.Models.ViewModels
+namespace Proyecto1_IPC2.Models
 {
     public class Jugador
     {
@@ -16,6 +16,11 @@ namespace Proyecto1_IPC2.Models.ViewModels
         private DateTime fecha;
         private string pais;
         private string correo;
+
+        public Jugador()
+        {
+
+        }
 
         public int Id { get { return id; } set { id = value; } }
         public string Nombre { get { return nombre; } set { nombre = value; } }
