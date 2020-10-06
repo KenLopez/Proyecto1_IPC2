@@ -1,5 +1,5 @@
 ﻿@using Proyecto1_IPC2.Models.ViewModels;
-@model partidaViewModel
+@model Partida
 @{
     ViewBag.Title = "Partida Un Jugador";
     ViewBag.Style = "~/css/UnJugador.css";
@@ -9,7 +9,7 @@
 <header id="encabezado">
     <img id="othelloLogo" src="~/img/Logo Othello-mini.jpg" />
     <div class="tabla">
-        <p id="usuario">@Model.P1.Jugador.NombreUsuario</p>
+        <p id="usuario">@Model.P1.NombreUsuario</p>
     </div>
     <div class="separador">
 
@@ -18,111 +18,114 @@
 <div class="container col-6">
     <div class="row">
         <div class="tablero">
-            <div class="fila" id="primero">
-                @for (int i = 0; i < 8; i++)
-                {
-                    if (!Model.Mesa.Cuadricula[0, i].Estado)
+            @using (Html.BeginForm("PonerFicha", "Partida", FormMethod.Post))
+            {
+                <div class="fila" id="primero">
+                    @for (int i = 0; i < 8; i++)
                     {
-                        <button type="submit" class="@Model.Mesa.Cuadricula[0,i].getColor() @Model.Mesa.Cuadricula[0,i].getState()" disabled></button>
+                        if (!Model.Mesa.Cuadricula[0, i].Estado)
+                        {
+                            <button name="boton" value=@i type="submit" class="@Model.Mesa.Cuadricula[0,i].getColor() @Model.Mesa.Cuadricula[0,i].getState()" disabled></button>
+                        }
+                        else
+                        {
+                            <button name="boton" value=@i type="submit" class="@Model.Mesa.Cuadricula[0,i].getColor() @Model.Mesa.Cuadricula[0,i].getState()"></button>
+                        }
+
                     }
-                    else
+                </div>
+                <div class="fila" id="segunda">
+                    @for (int i = 0; i < 8; i++)
                     {
-                        <button type="submit" class="@Model.Mesa.Cuadricula[0,i].getColor() @Model.Mesa.Cuadricula[0,i].getState()"></button>
+                        if (!Model.Mesa.Cuadricula[1, i].Estado)
+                        {
+                            <button name="boton" value=@(8+i) type="submit" class="@Model.Mesa.Cuadricula[1,i].getColor() @Model.Mesa.Cuadricula[1,i].getState()" disabled></button>
+                        }
+                        else
+                        {
+                            <button name="boton" value=@(8+i) type="submit" class="@Model.Mesa.Cuadricula[1,i].getColor() @Model.Mesa.Cuadricula[1,i].getState()"></button>
+                        }
                     }
-                    
-                }
-            </div>
-            <div class="fila" id="segunda">
-                @for (int i = 0; i < 8; i++)
-                {
-                    if (!Model.Mesa.Cuadricula[1, i].Estado)
+                </div>
+                <div class="fila" id="tercero">
+                    @for (int i = 0; i < 8; i++)
                     {
-                        <button type="submit" class="@Model.Mesa.Cuadricula[1,i].getColor() @Model.Mesa.Cuadricula[1,i].getState()" disabled></button>
+                        if (!Model.Mesa.Cuadricula[2, i].Estado)
+                        {
+                            <button name="boton" value=@(16+i) type="submit" class="@Model.Mesa.Cuadricula[2,i].getColor() @Model.Mesa.Cuadricula[2,i].getState()" disabled></button>
+                        }
+                        else
+                        {
+                            <button name="boton" value=@(16+i) type="submit" class="@Model.Mesa.Cuadricula[2,i].getColor() @Model.Mesa.Cuadricula[2,i].getState()"></button>
+                        }
                     }
-                    else
+                </div>
+                <div class="fila" id="cuarto">
+                    @for (int i = 0; i < 8; i++)
                     {
-                        <button type="submit" class="@Model.Mesa.Cuadricula[1,i].getColor() @Model.Mesa.Cuadricula[1,i].getState()"></button>
+                        if (!Model.Mesa.Cuadricula[3, i].Estado)
+                        {
+                            <button name="boton" value=@(24+i) type="submit" class="@Model.Mesa.Cuadricula[3,i].getColor() @Model.Mesa.Cuadricula[3,i].getState()" disabled></button>
+                        }
+                        else
+                        {
+                            <button name="boton" value=@(24+i) type="submit" class="@Model.Mesa.Cuadricula[3,i].getColor() @Model.Mesa.Cuadricula[3,i].getState()"></button>
+                        }
                     }
-                }
-            </div>
-            <div class="fila" id="tercero">
-                @for (int i = 0; i < 8; i++)
-                {
-                    if (!Model.Mesa.Cuadricula[2, i].Estado)
+                </div>
+                <div class="fila" id="quinta">
+                    @for (int i = 0; i < 8; i++)
                     {
-                        <button type="submit" class="@Model.Mesa.Cuadricula[2,i].getColor() @Model.Mesa.Cuadricula[2,i].getState()" disabled></button>
+                        if (!Model.Mesa.Cuadricula[4, i].Estado)
+                        {
+                            <button name="boton" value=@(32+i) type="submit" class="@Model.Mesa.Cuadricula[4,i].getColor() @Model.Mesa.Cuadricula[4,i].getState()" disabled></button>
+                        }
+                        else
+                        {
+                            <button name="boton" value=@(32+i) type="submit" class="@Model.Mesa.Cuadricula[4,i].getColor() @Model.Mesa.Cuadricula[4,i].getState()"></button>
+                        }
                     }
-                    else
+                </div>
+                <div class="fila" id="sexta">
+                    @for (int i = 0; i < 8; i++)
                     {
-                        <button type="submit" class="@Model.Mesa.Cuadricula[2,i].getColor() @Model.Mesa.Cuadricula[2,i].getState()"></button>
+                        if (!Model.Mesa.Cuadricula[5, i].Estado)
+                        {
+                            <button name="boton" value=@(40+i) type="submit" class="@Model.Mesa.Cuadricula[5,i].getColor() @Model.Mesa.Cuadricula[5,i].getState()" disabled></button>
+                        }
+                        else
+                        {
+                            <button name="boton" value=@(40+i) type="submit" class="@Model.Mesa.Cuadricula[5,i].getColor() @Model.Mesa.Cuadricula[5,i].getState()"></button>
+                        }
                     }
-                }
-            </div>
-            <div class="fila" id="cuarto">
-                @for (int i = 0; i < 8; i++)
-                {
-                    if (!Model.Mesa.Cuadricula[3, i].Estado)
+                </div>
+                <div class="fila" id="septima">
+                    @for (int i = 0; i < 8; i++)
                     {
-                        <button type="submit" class="@Model.Mesa.Cuadricula[3,i].getColor() @Model.Mesa.Cuadricula[3,i].getState()" disabled></button>
+                        if (!Model.Mesa.Cuadricula[6, i].Estado)
+                        {
+                            <button name="boton" value=@(48+i) type="submit" class="@Model.Mesa.Cuadricula[6,i].getColor() @Model.Mesa.Cuadricula[6,i].getState()" disabled></button>
+                        }
+                        else
+                        {
+                            <button name="boton" value=@(48+i) type="submit" class="@Model.Mesa.Cuadricula[6,i].getColor() @Model.Mesa.Cuadricula[6,i].getState()"></button>
+                        }
                     }
-                    else
+                </div>
+                <div class="fila" id="octavo">
+                    @for (int i = 0; i < 8; i++)
                     {
-                        <button type="submit" class="@Model.Mesa.Cuadricula[3,i].getColor() @Model.Mesa.Cuadricula[3,i].getState()"></button>
+                        if (!Model.Mesa.Cuadricula[7, i].Estado)
+                        {
+                            <button name="boton" value=@(56+i) type="submit" class="@Model.Mesa.Cuadricula[7,i].getColor() @Model.Mesa.Cuadricula[7,i].getState()" disabled></button>
+                        }
+                        else
+                        {
+                            <button name="boton" value=@(56+i) type="submit" class="@Model.Mesa.Cuadricula[7,i].getColor() @Model.Mesa.Cuadricula[7,i].getState()"></button>
+                        }
                     }
-                }
-            </div>
-            <div class="fila" id="quinta">
-                @for (int i = 0; i < 8; i++)
-                {
-                    if (!Model.Mesa.Cuadricula[4, i].Estado)
-                    {
-                        <button type="submit" class="@Model.Mesa.Cuadricula[4,i].getColor() @Model.Mesa.Cuadricula[4,i].getState()" disabled></button>
-                    }
-                    else
-                    {
-                        <button type="submit" class="@Model.Mesa.Cuadricula[4,i].getColor() @Model.Mesa.Cuadricula[4,i].getState()"></button>
-                    }
-                }
-            </div>
-            <div class="fila" id="sexta">
-                @for (int i = 0; i < 8; i++)
-                {
-                    if (!Model.Mesa.Cuadricula[5, i].Estado)
-                    {
-                        <button type="submit" class="@Model.Mesa.Cuadricula[5,i].getColor() @Model.Mesa.Cuadricula[5,i].getState()" disabled></button>
-                    }
-                    else
-                    {
-                        <button type="submit" class="@Model.Mesa.Cuadricula[5,i].getColor() @Model.Mesa.Cuadricula[5,i].getState()"></button>
-                    }
-                }
-            </div>
-            <div class="fila" id="septima">
-                @for (int i = 0; i < 8; i++)
-                {
-                    if (!Model.Mesa.Cuadricula[6, i].Estado)
-                    {
-                        <button type="submit" class="@Model.Mesa.Cuadricula[6,i].getColor() @Model.Mesa.Cuadricula[6,i].getState()" disabled></button>
-                    }
-                    else
-                    {
-                        <button type="submit" class="@Model.Mesa.Cuadricula[6,i].getColor() @Model.Mesa.Cuadricula[6,i].getState()"></button>
-                    }
-                }
-            </div>
-            <div class="fila" id="octavo">
-                @for (int i = 0; i < 8; i++)
-                {
-                    if (!Model.Mesa.Cuadricula[7, i].Estado)
-                    {
-                        <button type="submit" class="@Model.Mesa.Cuadricula[7,i].getColor() @Model.Mesa.Cuadricula[7,i].getState()" disabled></button>
-                    }
-                    else
-                    {
-                        <button type="submit" class="@Model.Mesa.Cuadricula[7,i].getColor() @Model.Mesa.Cuadricula[7,i].getState()"></button>
-                    }
-                }
-            </div>
+                </div>
+            }
         </div>
     </div>
 </div>

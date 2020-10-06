@@ -1,5 +1,5 @@
-﻿@using Proyecto1_IPC2.Models;
-@model Jugador
+﻿@using Proyecto1_IPC2.Models.ViewModels;
+@model usuarioViewModel
 @{
     ViewBag.Title = "Menu";
     ViewBag.Style = "~/css/principal.css";
@@ -18,7 +18,7 @@
 <br />
 <article id="articulo">
     <div class="botones1">
-        <button type="submit" class="opcion" id="Un jugador" data-target="#1PModal" data-toggle="modal"}><i class="fas fa-gamepad fa-lg"></i>Un jugador</button>
+        <button type="submit" class="opcion" id="Un jugador" data-target="#1PModal" data-toggle="modal" }><i class="fas fa-gamepad fa-lg"></i>Un jugador</button>
 
         <button type="submit" class="opcion" id="Multijugador" onclick=""><i class="fas fa-wifi fa-lg"></i> Multijugador</button>
 
@@ -41,7 +41,7 @@
             {
                 <div class="modal-body">
                     <div>
-                        <p class="alert">@Html.TextBox("file", "", new { @class = "custom-file-input", @type = "file"})</p> <br />
+                        <p class="alert">@Html.TextBox("file", "", new { @class = "custom-file-input", @type = "file" })</p> <br />
                         @ViewBag.Message
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                     <button class="btn btn-danger btn-lg" data-dismiss="modal">Cancelar</button>
                 </div>
             }
-            </div>
+        </div>
     </div>
 </div>
 <div class="modal fade" tabindex="-1" id="1PModal" data-backdrop="static" data-show="true">

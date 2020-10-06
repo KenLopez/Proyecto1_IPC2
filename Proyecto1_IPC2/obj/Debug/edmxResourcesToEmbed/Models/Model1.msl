@@ -15,5 +15,39 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Sala">
+      <EntityTypeMapping TypeName="OTHELLOModel.Sala">
+        <MappingFragment StoreEntitySet="Sala">
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="numeroSala" ColumnName="numeroSala" />
+          <ScalarProperty Name="idSala" ColumnName="idSala" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Torneo">
+      <EntityTypeMapping TypeName="OTHELLOModel.Torneo">
+        <MappingFragment StoreEntitySet="Torneo">
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="rondas" ColumnName="rondas" />
+          <ScalarProperty Name="numero_jugadores" ColumnName="numero_jugadores" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Partida">
+      <EntityTypeMapping TypeName="OTHELLOModel.Partida">
+        <MappingFragment StoreEntitySet="Partida">
+          <ScalarProperty Name="turnos" ColumnName="turnos" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="tipoPartida" ColumnName="tipoPartida" />
+          <ScalarProperty Name="horaFecha" ColumnName="horaFecha" />
+          <ScalarProperty Name="idAdversario" ColumnName="idAdversario" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="idPartida" ColumnName="idPartida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -109,8 +109,13 @@ body {
 }
 
 .activo:hover{
-    background-color: #ffffff;
+    background-color: #000000;
     opacity: 0.3;
+}
+
+.activo{
+    background-color: #ffffff;
+    opacity: 0.4;
 }
 
 .fila {

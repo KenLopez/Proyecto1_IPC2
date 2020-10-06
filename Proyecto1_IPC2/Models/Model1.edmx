@@ -5,6 +5,45 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="OTHELLOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'OTHELLO.dbo.Partida' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Partida">
+          <Key>
+            <PropertyRef Name="idPartida" />
+            <PropertyRef Name="idUsuario" />
+            <PropertyRef Name="horaFecha" />
+            <PropertyRef Name="tipoPartida" />
+            <PropertyRef Name="estado" />
+            <PropertyRef Name="turnos" />
+          </Key>
+          <Property Name="idPartida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="idAdversario" Type="int" />
+          <Property Name="horaFecha" Type="date" Nullable="false" />
+          <Property Name="tipoPartida" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="turnos" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sala">
+          <Key>
+            <PropertyRef Name="idSala" />
+          </Key>
+          <Property Name="idSala" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="numeroSala" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Torneo">
+          <Key>
+            <PropertyRef Name="idTorneo" />
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idTorneo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="numero_jugadores" Type="int" Nullable="false" />
+          <Property Name="rondas" Type="int" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="idUsuario" />
@@ -18,8 +57,85 @@
           <Property Name="pais" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="correo" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Partida__idAdver__5CD6CB2B">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Partida" Type="Self.Partida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Partida">
+              <PropertyRef Name="idAdversario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Partida__idUsuar__5BE2A6F2">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Partida" Type="Self.Partida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Partida">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sala__idUsuario__5FB337D6">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Sala" Type="Self.Sala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Sala">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Torneo__idUsuari__49C3F6B7">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Torneo" Type="Self.Torneo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Torneo">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="OTHELLOModelStoreContainer">
+          <EntitySet Name="Sala" EntityType="Self.Sala" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Torneo" EntityType="Self.Torneo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Partida" EntityType="Self.Partida" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Partida].[idPartida] AS [idPartida], 
+    [Partida].[idUsuario] AS [idUsuario], 
+    [Partida].[idAdversario] AS [idAdversario], 
+    [Partida].[horaFecha] AS [horaFecha], 
+    [Partida].[tipoPartida] AS [tipoPartida], 
+    [Partida].[estado] AS [estado], 
+    [Partida].[turnos] AS [turnos]
+    FROM [dbo].[Partida] AS [Partida]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Partida__idAdver__5CD6CB2B" Association="Self.FK__Partida__idAdver__5CD6CB2B">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Partida" EntitySet="Partida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Partida__idUsuar__5BE2A6F2" Association="Self.FK__Partida__idUsuar__5BE2A6F2">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Partida" EntitySet="Partida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sala__idUsuario__5FB337D6" Association="Self.FK__Sala__idUsuario__5FB337D6">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Sala" EntitySet="Sala" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Torneo__idUsuari__49C3F6B7" Association="Self.FK__Torneo__idUsuari__49C3F6B7">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Torneo" EntitySet="Torneo" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -37,10 +153,122 @@
           <Property Name="fechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Sala" Relationship="OTHELLOModel.FK__Sala__idUsuario__5FB337D6" FromRole="Usuario" ToRole="Sala" />
+          <NavigationProperty Name="Torneo" Relationship="OTHELLOModel.FK__Torneo__idUsuari__49C3F6B7" FromRole="Usuario" ToRole="Torneo" />
+          <NavigationProperty Name="Partida" Relationship="OTHELLOModel.FK__Partida__idAdver__5CD6CB2B" FromRole="Usuario" ToRole="Partida" />
+          <NavigationProperty Name="Partida1" Relationship="OTHELLOModel.FK__Partida__idUsuar__5BE2A6F2" FromRole="Usuario" ToRole="Partida" />
         </EntityType>
         <EntityContainer Name="OTHELLOEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="Sala" EntityType="OTHELLOModel.Sala" />
+          <EntitySet Name="Torneo" EntityType="OTHELLOModel.Torneo" />
+          <EntitySet Name="Partida" EntityType="OTHELLOModel.Partida" />
+          <AssociationSet Name="FK__Sala__idUsuario__5FB337D6" Association="OTHELLOModel.FK__Sala__idUsuario__5FB337D6">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Sala" EntitySet="Sala" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Torneo__idUsuari__49C3F6B7" Association="OTHELLOModel.FK__Torneo__idUsuari__49C3F6B7">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Torneo" EntitySet="Torneo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Partida__idAdver__5CD6CB2B" Association="OTHELLOModel.FK__Partida__idAdver__5CD6CB2B">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Partida" EntitySet="Partida" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Partida__idUsuar__5BE2A6F2" Association="OTHELLOModel.FK__Partida__idUsuar__5BE2A6F2">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Partida" EntitySet="Partida" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Sala">
+          <Key>
+            <PropertyRef Name="idSala" />
+          </Key>
+          <Property Name="idSala" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numeroSala" Type="Int32" Nullable="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario" Relationship="OTHELLOModel.FK__Sala__idUsuario__5FB337D6" FromRole="Sala" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Torneo">
+          <Key>
+            <PropertyRef Name="idTorneo" />
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idTorneo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="numero_jugadores" Type="Int32" Nullable="false" />
+          <Property Name="rondas" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario" Relationship="OTHELLOModel.FK__Torneo__idUsuari__49C3F6B7" FromRole="Torneo" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Partida">
+          <Key>
+            <PropertyRef Name="idPartida" />
+            <PropertyRef Name="idUsuario" />
+            <PropertyRef Name="horaFecha" />
+            <PropertyRef Name="tipoPartida" />
+            <PropertyRef Name="estado" />
+            <PropertyRef Name="turnos" />
+          </Key>
+          <Property Name="idPartida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="idAdversario" Type="Int32" />
+          <Property Name="horaFecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="tipoPartida" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="turnos" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="OTHELLOModel.FK__Partida__idAdver__5CD6CB2B" FromRole="Partida" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="OTHELLOModel.FK__Partida__idUsuar__5BE2A6F2" FromRole="Partida" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK__Sala__idUsuario__5FB337D6">
+          <End Type="OTHELLOModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="OTHELLOModel.Sala" Role="Sala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Sala">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Torneo__idUsuari__49C3F6B7">
+          <End Type="OTHELLOModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="OTHELLOModel.Torneo" Role="Torneo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Torneo">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Partida__idAdver__5CD6CB2B">
+          <End Type="OTHELLOModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="OTHELLOModel.Partida" Role="Partida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Partida">
+              <PropertyRef Name="idAdversario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Partida__idUsuar__5BE2A6F2">
+          <End Type="OTHELLOModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="OTHELLOModel.Partida" Role="Partida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Partida">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -58,6 +286,40 @@
                 <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
                 <ScalarProperty Name="pais" ColumnName="pais" />
                 <ScalarProperty Name="correo" ColumnName="correo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sala">
+            <EntityTypeMapping TypeName="OTHELLOModel.Sala">
+              <MappingFragment StoreEntitySet="Sala">
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="numeroSala" ColumnName="numeroSala" />
+                <ScalarProperty Name="idSala" ColumnName="idSala" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Torneo">
+            <EntityTypeMapping TypeName="OTHELLOModel.Torneo">
+              <MappingFragment StoreEntitySet="Torneo">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="rondas" ColumnName="rondas" />
+                <ScalarProperty Name="numero_jugadores" ColumnName="numero_jugadores" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Partida">
+            <EntityTypeMapping TypeName="OTHELLOModel.Partida">
+              <MappingFragment StoreEntitySet="Partida">
+                <ScalarProperty Name="turnos" ColumnName="turnos" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="tipoPartida" ColumnName="tipoPartida" />
+                <ScalarProperty Name="horaFecha" ColumnName="horaFecha" />
+                <ScalarProperty Name="idAdversario" ColumnName="idAdversario" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idPartida" ColumnName="idPartida" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

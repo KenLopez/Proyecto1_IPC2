@@ -14,6 +14,15 @@ namespace Proyecto1_IPC2.Models
     
     public partial class Usuario
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Usuario()
+        {
+            this.Sala = new HashSet<Sala>();
+            this.Torneo = new HashSet<Torneo>();
+            this.Partida = new HashSet<Partida>();
+            this.Partida1 = new HashSet<Partida>();
+        }
+    
         public int idUsuario { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
@@ -22,5 +31,14 @@ namespace Proyecto1_IPC2.Models
         public System.DateTime fechaNacimiento { get; set; }
         public string pais { get; set; }
         public string correo { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sala> Sala { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Torneo> Torneo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Partida> Partida { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Partida> Partida1 { get; set; }
     }
 }

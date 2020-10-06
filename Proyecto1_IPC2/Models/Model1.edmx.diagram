@@ -6,6 +6,13 @@
     <edmx:Diagrams>
       <Diagram DiagramId="c5dfc587ae3844dd8a4c95e081990725" Name="Diagram1">
         <EntityTypeShape EntityType="OTHELLOModel.Usuario" Width="2.875" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OTHELLOModel.Sala" Width="1.5" PointX="4.375" PointY="9.375" />
+        <EntityTypeShape EntityType="OTHELLOModel.Torneo" Width="1.5" PointX="4.375" PointY="12.125" />
+        <EntityTypeShape EntityType="OTHELLOModel.Partida" Width="1.5" PointX="4.375" PointY="5.875" />
+        <AssociationConnector Association="OTHELLOModel.FK__Sala__idUsuario__5FB337D6" />
+        <AssociationConnector Association="OTHELLOModel.FK__Torneo__idUsuari__49C3F6B7" />
+        <AssociationConnector Association="OTHELLOModel.FK__Partida__idAdver__5CD6CB2B" />
+        <AssociationConnector Association="OTHELLOModel.FK__Partida__idUsuar__5BE2A6F2" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

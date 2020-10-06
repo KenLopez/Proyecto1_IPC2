@@ -17,9 +17,9 @@ namespace Proyecto1_IPC2.Controllers
 {
     public class MenuController : Controller
     {
-        static Jugador usuario = new Jugador();
+        static usuarioViewModel usuario = new usuarioViewModel();
         // GET: Menu/Principal
-        public ActionResult Principal(Jugador model)
+        public ActionResult Principal(usuarioViewModel model)
         {
             usuario = model;
             var viewResult = new ViewResult();
@@ -54,7 +54,8 @@ namespace Proyecto1_IPC2.Controllers
                         }
                     }
                     ViewBag.Message = "File Uploaded Successfully!!";
-                    return Redirect("~/Partida/UnJugador");
+                    TempData["Inicio"] = true;
+                    return RedirectToAction("UnJugador", "Partida", usuario);
                 }
                 return View("Principal", usuario);
             }
@@ -68,6 +69,7 @@ namespace Proyecto1_IPC2.Controllers
         [HttpPost]
         public ActionResult PVM()
         {
+            TempData["Inicio"] = true;
             return RedirectToAction("UnJugador", "Partida", usuario);
         }
     }
