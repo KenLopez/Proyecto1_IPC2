@@ -72,6 +72,13 @@ namespace Proyecto1_IPC2.Controllers
             TempData["Inicio"] = true;
             return RedirectToAction("UnJugador", "Partida", usuario);
         }
+
+        [HttpPost]
+        public ActionResult PVP()
+        {
+            TempData["Inicio"] = true;
+            return RedirectToAction("DosJugadores", "Partida", usuario);
+        }
     }
 
 }

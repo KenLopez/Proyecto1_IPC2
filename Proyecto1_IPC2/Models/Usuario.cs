@@ -17,10 +17,10 @@ namespace Proyecto1_IPC2.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
         {
-            this.Sala = new HashSet<Sala>();
-            this.Torneo = new HashSet<Torneo>();
+            this.Participante = new HashSet<Participante>();
             this.Partida = new HashSet<Partida>();
             this.Partida1 = new HashSet<Partida>();
+            this.Sala = new HashSet<Sala>();
         }
     
         public int idUsuario { get; set; }
@@ -33,12 +33,12 @@ namespace Proyecto1_IPC2.Models
         public string correo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sala> Sala { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Torneo> Torneo { get; set; }
+        public virtual ICollection<Participante> Participante { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Partida> Partida { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Partida> Partida1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sala> Sala { get; set; }
     }
 }

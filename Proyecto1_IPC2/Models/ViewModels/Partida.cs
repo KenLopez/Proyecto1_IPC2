@@ -13,16 +13,19 @@ namespace Proyecto1_IPC2.Models.ViewModels
         private int turnos;
         private int turno;
         private Tablero mesa = new Tablero();
-        private System.Timers.Timer cronometro;
         private int state;
+        private Jugador winner = new Jugador();
+        private int type;
 
         public Jugador P1 { get { return p1; } set { p1 = value; } }
         public Jugador P2 { get { return p2; } set { p2 = value; } }
         public int Turnos { get { return turnos; } set { turnos = value; } }
         public int Turno { get { return turno; } set { turno = value; } }
         public Tablero Mesa { get { return mesa; } set { mesa = value; } }
-        public System.Timers.Timer Cronometro { get { return cronometro; } set { cronometro = value; } }
         public int IsPlaying { get { return state; } set { state = value; } }
+        public Jugador Winner { get { return winner; } }
+
+        public int Type { get { return type; } set { type = value; } }
 
         public void disableAll()
         {
@@ -58,9 +61,58 @@ namespace Proyecto1_IPC2.Models.ViewModels
                 derecha = false;
             }
             mesa.ponerFicha(arriba, abajo, derecha, izquierda, fila, columna, color);
-            if(turno == 1) { turno = 2; }
+            if (turno == p1.Color)
+            {
+                p1.Movimientos++;
+            }
+            else
+            {
+                p2.Movimientos++;
+            }
+            if (turno == 1)
+            {
+                
+                turno = 2;
+            }
             else if(turno == 2) { turno = 1; }
+            turnos++;
 
+        }
+
+        public int contarFichas(Jugador color)
+        {
+            int contador=0;
+            for(int i = 0; i < 8; i++)
+            {
+                for(int j = 0; j < 8; j++)
+                {
+                    if(mesa.Cuadricula[i,j].Color == color.Color)
+                    {
+                        contador++;
+                    }
+                }
+            }
+            return contador;
+        }
+
+        public string getGanador()
+        {
+            int contadorP1 = contarFichas(P1);
+            int contadorP2 = contarFichas(P2);
+            if (contadorP1 > contadorP2)
+            {
+                winner = p1;
+                return "¡EL GANADOR ES " + p1.NombreUsuario + "!";
+            }else if (contadorP2 > contadorP1)
+            {
+                winner = p2;
+                return "¡El GANADOR ES " + p2.NombreUsuario + "!";
+            }
+            else
+            {
+                winner = null;
+                return "¡TENEMOS UN EMPATE!";
+            }
         }
 
         public void enableSpaces()
@@ -78,7 +130,7 @@ namespace Proyecto1_IPC2.Models.ViewModels
             }
             else
             {
-                p2.Playable = false;
+                p2.Playable = true;
             }
             for(int i = 0; i < 8; i++)
             {

@@ -18,24 +18,49 @@
 <br />
 <article id="articulo">
     <div class="botones1">
-        <button type="submit" class="opcion" id="Un jugador" data-target="#1PModal" data-toggle="modal" }><i class="fas fa-gamepad fa-lg"></i>Un jugador</button>
+        <button type="button" class="opcion" id="Un jugador" data-target="#partidaModal" data-toggle="modal" }><i class="fas fa-gamepad fa-lg"></i>Partida Local</button>
 
-        <button type="submit" class="opcion" id="Multijugador" onclick=""><i class="fas fa-wifi fa-lg"></i> Multijugador</button>
+        <button type="button" class="opcion" id="Multijugador" onclick=""><i class="fas fa-wifi fa-lg"></i> Online</button>
 
-        <button type="submit" class="opcion" id="Un jugador" onclick=""><i class="fas fa-trophy fa-lg"></i> Torneos</button>
+        <button type="button" class="opcion" id="Un jugador" onclick=""><i class="fas fa-trophy fa-lg"></i> Torneos</button>
     </div>
     <div class="botones2">
-        <button type="submit" class="opcion" id="Reportes" onclick=""><i class="fas fa-chart-bar fa-lg"></i> Reportes</button>
+        <button type="button" class="opcion" id="Reportes" onclick=""><i class="fas fa-chart-bar fa-lg"></i> Reportes</button>
 
-        <button type="submit" class="opcion" id="Reportes" data-target="#uploadModal" data-toggle="modal"><i class="fas fa-cloud-upload-alt"></i> Cargar Partida</button>
+        <button type="button" class="opcion" id="Reportes" data-target="#uploadModal" data-toggle="modal"><i class="fas fa-cloud-upload-alt"></i> Cargar Partida</button>
     </div>
 </article>
-<div class="modal fade" tabindex="-1" id="uploadModal" data-backdrop="static" data-show="true">
-    <div class="modal-dialog">
+<div class="modal fade" tabindex="-1" id="partidaModal" data-backdrop="static" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
+                <h2 class="modal-title">Selecciona el Modo de Juego</h2>
                 <button class="close" data-dismiss="modal">X</button>
-                <h2>Subir Partida XML</h2>
+            </div>
+
+            <div class="modal-body justify-content-center">
+                @using (Html.BeginForm("PVM", "Menu", FormMethod.Post, @Model))
+                {
+                    <button class="btn btn-success btn-block" type="submit" value="Upload"><i class="fas fa-gamepad fa-lg"></i> Vs. Máquina</button>
+                }
+                <br>
+                @using (Html.BeginForm("PVP", "Menu", FormMethod.Post))
+                {
+                    <button class="btn btn-success btn-block" type="submit" value="Upload"><i class="fas fa-gamepad fa-lg"></i> Vs. Jugador</button>
+                }
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger btn-lg" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" id="uploadModal" data-backdrop="static" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Subir Partida XML</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
             </div>
             @using (Html.BeginForm("UploadFile", "Menu", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
@@ -53,30 +78,4 @@
         </div>
     </div>
 </div>
-<div class="modal fade" tabindex="-1" id="1PModal" data-backdrop="static" data-show="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="close" data-dismiss="modal">X</button>
-                <h2>Selecciona el Modo de Juego</h2>
-            </div>
 
-            <div class="modal-body">
-                <div>
-                    @using (Html.BeginForm("PVM", "Menu", FormMethod.Post, @Model))
-                    {
-                        <button class="btn btn-success btn-lg center-block" type="submit" value="Upload"><i class="fas fa-gamepad fa-lg"></i> Vs. Máquina</button>
-                    }
-                    <br>
-                    @using (Html.BeginForm("PVP", "Partida", FormMethod.Post))
-                    {
-                        <button class="btn btn-success btn-lg center-block" type="submit" value="Upload"><i class="fas fa-gamepad fa-lg"></i> Vs. Jugador</button>
-                    }
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-danger btn-lg" data-dismiss="modal">Cancelar</button>
-            </div>
-        </div>
-    </div>
-</div>

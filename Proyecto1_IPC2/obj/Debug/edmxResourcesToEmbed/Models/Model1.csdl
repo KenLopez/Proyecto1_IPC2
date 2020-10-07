@@ -1,5 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="OTHELLOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Partida">
+    <Key>
+      <PropertyRef Name="idPartida" />
+    </Key>
+    <Property Name="idPartida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="idAdversario" Type="Int32" />
+    <Property Name="horaFecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="tipoPartida" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="turnos" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__Partida__idAdver__71D1E811" FromRole="Partida" ToRole="Usuario" />
+    <NavigationProperty Name="Usuario1" Relationship="Self.FK__Partida__idUsuar__70DDC3D8" FromRole="Partida" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Sala">
+    <Key>
+      <PropertyRef Name="idSala" />
+    </Key>
+    <Property Name="idSala" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="numeroSala" Type="Int32" Nullable="false" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__Sala__idUsuario__5FB337D6" FromRole="Sala" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Torneo">
+    <Key>
+      <PropertyRef Name="idTorneo" />
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idTorneo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="numero_jugadores" Type="Int32" Nullable="false" />
+    <Property Name="rondas" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__Torneo__idUsuari__49C3F6B7" FromRole="Torneo" ToRole="Usuario" />
+  </EntityType>
   <EntityType Name="Usuario">
     <Key>
       <PropertyRef Name="idUsuario" />
@@ -12,77 +48,38 @@
     <Property Name="fechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Sala" Relationship="OTHELLOModel.FK__Sala__idUsuario__5FB337D6" FromRole="Usuario" ToRole="Sala" />
-    <NavigationProperty Name="Torneo" Relationship="OTHELLOModel.FK__Torneo__idUsuari__49C3F6B7" FromRole="Usuario" ToRole="Torneo" />
-    <NavigationProperty Name="Partida" Relationship="OTHELLOModel.FK__Partida__idAdver__5CD6CB2B" FromRole="Usuario" ToRole="Partida" />
-    <NavigationProperty Name="Partida1" Relationship="OTHELLOModel.FK__Partida__idUsuar__5BE2A6F2" FromRole="Usuario" ToRole="Partida" />
+    <NavigationProperty Name="Partida" Relationship="Self.FK__Partida__idAdver__71D1E811" FromRole="Usuario" ToRole="Partida" />
+    <NavigationProperty Name="Partida1" Relationship="Self.FK__Partida__idUsuar__70DDC3D8" FromRole="Usuario" ToRole="Partida" />
+    <NavigationProperty Name="Sala" Relationship="Self.FK__Sala__idUsuario__5FB337D6" FromRole="Usuario" ToRole="Sala" />
+    <NavigationProperty Name="Torneo" Relationship="Self.FK__Torneo__idUsuari__49C3F6B7" FromRole="Usuario" ToRole="Torneo" />
   </EntityType>
-  <EntityContainer Name="OTHELLOEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
-    <EntitySet Name="Sala" EntityType="OTHELLOModel.Sala" />
-    <EntitySet Name="Torneo" EntityType="OTHELLOModel.Torneo" />
-    <EntitySet Name="Partida" EntityType="OTHELLOModel.Partida" />
-    <AssociationSet Name="FK__Sala__idUsuario__5FB337D6" Association="OTHELLOModel.FK__Sala__idUsuario__5FB337D6">
-      <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="Sala" EntitySet="Sala" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Torneo__idUsuari__49C3F6B7" Association="OTHELLOModel.FK__Torneo__idUsuari__49C3F6B7">
-      <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="Torneo" EntitySet="Torneo" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Partida__idAdver__5CD6CB2B" Association="OTHELLOModel.FK__Partida__idAdver__5CD6CB2B">
-      <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="Partida" EntitySet="Partida" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Partida__idUsuar__5BE2A6F2" Association="OTHELLOModel.FK__Partida__idUsuar__5BE2A6F2">
-      <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="Partida" EntitySet="Partida" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="Sala">
-    <Key>
-      <PropertyRef Name="idSala" />
-    </Key>
-    <Property Name="idSala" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="numeroSala" Type="Int32" Nullable="false" />
-    <Property Name="idUsuario" Type="Int32" Nullable="false" />
-    <Property Name="tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Usuario" Relationship="OTHELLOModel.FK__Sala__idUsuario__5FB337D6" FromRole="Sala" ToRole="Usuario" />
-  </EntityType>
-  <EntityType Name="Torneo">
-    <Key>
-      <PropertyRef Name="idTorneo" />
-      <PropertyRef Name="idUsuario" />
-    </Key>
-    <Property Name="idTorneo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="idUsuario" Type="Int32" Nullable="false" />
-    <Property Name="numero_jugadores" Type="Int32" Nullable="false" />
-    <Property Name="rondas" Type="Int32" Nullable="false" />
-    <Property Name="estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Usuario" Relationship="OTHELLOModel.FK__Torneo__idUsuari__49C3F6B7" FromRole="Torneo" ToRole="Usuario" />
-  </EntityType>
-  <EntityType Name="Partida">
-    <Key>
-      <PropertyRef Name="idPartida" />
-      <PropertyRef Name="idUsuario" />
-      <PropertyRef Name="horaFecha" />
-      <PropertyRef Name="tipoPartida" />
-      <PropertyRef Name="estado" />
-      <PropertyRef Name="turnos" />
-    </Key>
-    <Property Name="idPartida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="idUsuario" Type="Int32" Nullable="false" />
-    <Property Name="idAdversario" Type="Int32" />
-    <Property Name="horaFecha" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="tipoPartida" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="turnos" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Usuario" Relationship="OTHELLOModel.FK__Partida__idAdver__5CD6CB2B" FromRole="Partida" ToRole="Usuario" />
-    <NavigationProperty Name="Usuario1" Relationship="OTHELLOModel.FK__Partida__idUsuar__5BE2A6F2" FromRole="Partida" ToRole="Usuario" />
-  </EntityType>
+  <Association Name="FK__Partida__idAdver__71D1E811">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Partida" Type="Self.Partida" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="Partida">
+        <PropertyRef Name="idAdversario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Partida__idUsuar__70DDC3D8">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Partida" Type="Self.Partida" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="Partida">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Sala__idUsuario__5FB337D6">
-    <End Type="OTHELLOModel.Usuario" Role="Usuario" Multiplicity="1" />
-    <End Type="OTHELLOModel.Sala" Role="Sala" Multiplicity="*" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Sala" Type="Self.Sala" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Usuario">
         <PropertyRef Name="idUsuario" />
@@ -93,8 +90,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Torneo__idUsuari__49C3F6B7">
-    <End Type="OTHELLOModel.Usuario" Role="Usuario" Multiplicity="1" />
-    <End Type="OTHELLOModel.Torneo" Role="Torneo" Multiplicity="*" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Torneo" Type="Self.Torneo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Usuario">
         <PropertyRef Name="idUsuario" />
@@ -104,28 +101,26 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Partida__idAdver__5CD6CB2B">
-    <End Type="OTHELLOModel.Usuario" Role="Usuario" Multiplicity="0..1" />
-    <End Type="OTHELLOModel.Partida" Role="Partida" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuario">
-        <PropertyRef Name="idUsuario" />
-      </Principal>
-      <Dependent Role="Partida">
-        <PropertyRef Name="idAdversario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Partida__idUsuar__5BE2A6F2">
-    <End Type="OTHELLOModel.Usuario" Role="Usuario" Multiplicity="1" />
-    <End Type="OTHELLOModel.Partida" Role="Partida" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuario">
-        <PropertyRef Name="idUsuario" />
-      </Principal>
-      <Dependent Role="Partida">
-        <PropertyRef Name="idUsuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <EntityContainer Name="OTHELLOEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Partida" EntityType="Self.Partida" />
+    <EntitySet Name="Sala" EntityType="Self.Sala" />
+    <EntitySet Name="Torneo" EntityType="Self.Torneo" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <AssociationSet Name="FK__Partida__idAdver__71D1E811" Association="Self.FK__Partida__idAdver__71D1E811">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Partida" EntitySet="Partida" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Partida__idUsuar__70DDC3D8" Association="Self.FK__Partida__idUsuar__70DDC3D8">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Partida" EntitySet="Partida" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sala__idUsuario__5FB337D6" Association="Self.FK__Sala__idUsuario__5FB337D6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Sala" EntitySet="Sala" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Torneo__idUsuari__49C3F6B7" Association="Self.FK__Torneo__idUsuari__49C3F6B7">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Torneo" EntitySet="Torneo" />
+    </AssociationSet>
+  </EntityContainer>
 </Schema>

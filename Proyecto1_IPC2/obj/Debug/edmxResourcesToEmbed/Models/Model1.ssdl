@@ -1,20 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="OTHELLOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'OTHELLO.dbo.Partida' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="Partida">
     <Key>
       <PropertyRef Name="idPartida" />
-      <PropertyRef Name="idUsuario" />
-      <PropertyRef Name="horaFecha" />
-      <PropertyRef Name="tipoPartida" />
-      <PropertyRef Name="estado" />
-      <PropertyRef Name="turnos" />
     </Key>
     <Property Name="idPartida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idUsuario" Type="int" Nullable="false" />
     <Property Name="idAdversario" Type="int" />
-    <Property Name="horaFecha" Type="date" Nullable="false" />
+    <Property Name="horaFecha" Type="datetime" Nullable="false" />
     <Property Name="tipoPartida" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="estado" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="turnos" Type="int" Nullable="false" />
@@ -52,7 +45,7 @@ advertencia 6002: La tabla o vista 'OTHELLO.dbo.Partida' no tiene definida ningu
     <Property Name="pais" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="correo" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
-  <Association Name="FK__Partida__idAdver__5CD6CB2B">
+  <Association Name="FK__Partida__idAdver__75A278F5">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Partida" Type="Self.Partida" Multiplicity="*" />
     <ReferentialConstraint>
@@ -64,7 +57,7 @@ advertencia 6002: La tabla o vista 'OTHELLO.dbo.Partida' no tiene definida ningu
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Partida__idUsuar__5BE2A6F2">
+  <Association Name="FK__Partida__idUsuar__74AE54BC">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
     <End Role="Partida" Type="Self.Partida" Multiplicity="*" />
     <ReferentialConstraint>
@@ -101,25 +94,15 @@ advertencia 6002: La tabla o vista 'OTHELLO.dbo.Partida' no tiene definida ningu
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="OTHELLOModelStoreContainer">
+    <EntitySet Name="Partida" EntityType="Self.Partida" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sala" EntityType="Self.Sala" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Torneo" EntityType="Self.Torneo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Partida" EntityType="Self.Partida" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Partida].[idPartida] AS [idPartida], 
-    [Partida].[idUsuario] AS [idUsuario], 
-    [Partida].[idAdversario] AS [idAdversario], 
-    [Partida].[horaFecha] AS [horaFecha], 
-    [Partida].[tipoPartida] AS [tipoPartida], 
-    [Partida].[estado] AS [estado], 
-    [Partida].[turnos] AS [turnos]
-    FROM [dbo].[Partida] AS [Partida]</DefiningQuery>
-    </EntitySet>
-    <AssociationSet Name="FK__Partida__idAdver__5CD6CB2B" Association="Self.FK__Partida__idAdver__5CD6CB2B">
+    <AssociationSet Name="FK__Partida__idAdver__75A278F5" Association="Self.FK__Partida__idAdver__75A278F5">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Partida" EntitySet="Partida" />
     </AssociationSet>
-    <AssociationSet Name="FK__Partida__idUsuar__5BE2A6F2" Association="Self.FK__Partida__idUsuar__5BE2A6F2">
+    <AssociationSet Name="FK__Partida__idUsuar__74AE54BC" Association="Self.FK__Partida__idUsuar__74AE54BC">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Partida" EntitySet="Partida" />
     </AssociationSet>

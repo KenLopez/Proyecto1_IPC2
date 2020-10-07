@@ -44,7 +44,7 @@ namespace Proyecto1_IPC2.Models
                     if(enableArDer(fila, columna, color))
                     {
                         int i = 1;
-                        while(i<8-fila & i < 8 - columna)
+                        while(fila-i>=0 & i < 8 - columna)
                         {
                             if(cuadricula[fila - i, columna + i].Color == color) { break; }
                             cuadricula[fila - i, columna + i].Color = color;
