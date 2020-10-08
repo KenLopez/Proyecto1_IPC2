@@ -42,6 +42,17 @@ body {
     height: 158px;
 }
 
+.usuario {
+    line-height: 158px;
+    position: relative;
+    padding-left: 5px;
+    float: left;
+    font-family: 'Comic Sans MS';
+    font-size: 60px;
+    color: #ffffff;
+    background: none;
+}
+
 .usuarios {
     line-height: 74px;
     position: relative;
@@ -53,8 +64,17 @@ body {
     background: none;
 }
 
-.boton-turno{
-    font-size:50px;
+.boton-turno {
+    font-size: 50px;
+    margin-left: 25px;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+}
+
+.boton-turno-lg {
+    font-size: 60px;
+    margin-top: 30px;
     margin-left: 25px;
     background: transparent;
     border: none;
@@ -67,6 +87,14 @@ body {
     background-color: transparent;
     height:70px;
     width:70px;
+}
+
+.boton-color-lg {
+    position: center;
+    border: none;
+    background-color: transparent;
+    height: 80px;
+    width: 80px;
 }
 
 .turno {
@@ -102,17 +130,6 @@ body {
     cursor: pointer;
 }
 
-.usuario {
-    line-height: 158px;
-    position: relative;
-    padding-left: 25px;
-    float: left;
-    font-family: 'Comic Sans MS';
-    font-size: 60px;
-    color: #ffffff;
-    background: none;
-}
-
 .opcion {
     margin-top: 20px;
     font-size: 20px;
@@ -141,7 +158,7 @@ body {
 
 .empezar {
     margin-top: 20px;
-    font-size: 20px;
+    font-size: 40px;
     background-color: #24a61f;
     border-color: #000000;
     border-width: 5px;
@@ -202,21 +219,21 @@ body {
 }
 
 .player1-negro {
-    margin-top: 10px;
+    margin-top: 40px;
     margin-bottom: 10px;
     background-image: url('../img/Coin.png');
     background-size: contain;
     background-repeat: no-repeat;
-    height: 138px;
+    height: 80px;
 }
 
 .player1-blanco {
-    margin-top: 10px;
+    margin-top: 40px;
     margin-bottom: 10px;
     background-image: url('../img/coin_wh.png');
     background-size: contain;
     background-repeat: no-repeat;
-    height: 138px;
+    height: 80px;
 }
 
 .player-blanco {

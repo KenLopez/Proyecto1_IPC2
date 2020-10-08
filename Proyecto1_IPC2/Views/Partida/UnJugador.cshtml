@@ -9,15 +9,17 @@
         ViewBag.Tabla = "tabla-lg";
         ViewBag.Usuario = "usuario";
         ViewBag.Player = "1";
+        ViewBag.BTurno = "boton-turno-lg";
+        ViewBag.BColor = "boton-color-lg";
     }
-    else if(Model.Type == 2)
+    else if (Model.Type == 2)
     {
         ViewBag.Tabla = "tabla";
         ViewBag.Usuario = "usuarios";
         ViewBag.BTurno = "boton-turno";
         ViewBag.BColor = "boton-color";
     }
-    if(Model.Turno == Model.P1.Color)
+    if (Model.Turno == Model.P1.Color)
     {
         ViewBag.TurnoP1 = " turno";
         ViewBag.TurnoP2 = "";
@@ -41,14 +43,14 @@
                         @if (Model.IsPlaying > 0)
                         {
                             <div class="col-10">
-                                <p class="col @ViewBag.Usuario@ViewBag.TurnoP1">@Model.P1.NombreUsuario</p>
+                                <p class="col @ViewBag.TurnoP1 @ViewBag.Usuario ">@Model.P1.NombreUsuario</p>
                             </div>
                             <div class="col-2 @("player" + ViewBag.Player + "-" + Model.P1.getColor())">
                             </div>
                         }
                         else if (Model.IsPlaying == 0)
                         {
-                            using (Html.BeginForm("CambiarTurno", "Partida", FormMethod.Post, new { @class="form-turno" }))
+                            using (Html.BeginForm("CambiarTurno", "Partida", FormMethod.Post, new { @class = "form-turno" }))
                             {
                                 <button type="submit" class="@ViewBag.BTurno @ViewBag.TurnoP1">@Model.P1.NombreUsuario</button>
                             }
@@ -56,7 +58,7 @@
                             {
                                 <button type="submit" class="@("player" + ViewBag.Player + "-" + Model.P1.getColor()) @ViewBag.BColor"></button>
                             }
-                            
+
                         }
                     </div>
                     @{
@@ -78,8 +80,8 @@
                                 <div class="@ViewBag.Tabla row">
                                     @using (Html.BeginForm("DefinirP2", "Partida", FormMethod.Post))
                                     {
-                                            @Html.TextBox("p2Nombre", "", new { @class = "input", @placeholder = "Jugador 2" })
-                                            <button type="submit" class="nameOk">OK</button>
+                                        @Html.TextBox("p2Nombre", "", new { @class = "input", @placeholder = "Jugador 2" })
+                                        <button type="submit" class="nameOk">OK</button>
                                     }
                                 </div>
                             }
@@ -206,6 +208,17 @@
         </div>
         <div class="col-lg-6">
             <div class="container botones">
+                @if (Model.Type == 1 & Model.IsPlaying == 0)
+                {
+                    <div class="row">
+                        @using (Html.BeginForm("IniciarMaquina", "Partida", FormMethod.Post))
+                        {
+                            <div class="col-6">
+                                <button class="empezar" type="submit">Empezar</button>
+                            </div>
+                        }
+                    </div>
+                }
                 @if (Model.IsPlaying > 0)
                 {
                     <div class="row">
@@ -235,15 +248,15 @@
                         </div>
                     </div>
                 }
-                    <div class="row">
-                        @if (Model.IsPlaying == 2)
-                        {
-                            <div class="col-12">
-                                <h1 align="center"><b>@Model.getGanador()</b></h1>
-                            </div>
-                        }
-                    </div>
+                <div class="row">
+                    @if (Model.IsPlaying == 2)
+                    {
+                        <div class="col-12">
+                            <h1 align="center"><b>@Model.getGanador()</b></h1>
+                        </div>
+                    }
                 </div>
+            </div>
         </div>
     </div>
 </div>
@@ -265,4 +278,21 @@
         </div>
     </div>
 </div>
+@if (Model.Type == 1)
+{
+    if (Model.Turno == Model.P2.Color & Model.IsPlaying == 1)
+    {
+        using (Html.BeginForm("JugarMaquina", "Partida", FormMethod.Post, new { @id="maquina"}))
+        {
+
+        }
+        <script>
+            var auto_refresh = setInterval(function () { submitform(); }, 3000);
+            function submitform() {
+                document.getElementById("maquina").submit();
+            }
+        </script>
+        
+    }
+}
 

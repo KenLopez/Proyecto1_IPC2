@@ -10,6 +10,7 @@ namespace Proyecto1_IPC2.Models.ViewModels
     {
         private Jugador p1 = new Jugador();
         private Jugador p2 = new Jugador();
+        private Maquina maquina = new Maquina(0);
         private int turnos;
         private int turno;
         private Tablero mesa = new Tablero();
@@ -24,6 +25,7 @@ namespace Proyecto1_IPC2.Models.ViewModels
         public Tablero Mesa { get { return mesa; } set { mesa = value; } }
         public int IsPlaying { get { return state; } set { state = value; } }
         public Jugador Winner { get { return winner; } }
+        public Maquina Maquina { get { return maquina; } set { maquina = value; } }
 
         public int Type { get { return type; } set { type = value; } }
 
@@ -36,6 +38,13 @@ namespace Proyecto1_IPC2.Models.ViewModels
                     mesa.Cuadricula[i, j].Estado = false;
                 }
             }
+        }
+
+        public void playMaquina()
+        {
+            enableSpaces();
+            maquina.ponerFicha(mesa);
+            play(maquina.Fila, maquina.Columna, maquina.Color);
         }
 
         public void play(int fila, int columna, int color)
@@ -69,11 +78,7 @@ namespace Proyecto1_IPC2.Models.ViewModels
             {
                 p2.Movimientos++;
             }
-            if (turno == 1)
-            {
-                
-                turno = 2;
-            }
+            if (turno == 1) {turno = 2;}
             else if(turno == 2) { turno = 1; }
             turnos++;
 

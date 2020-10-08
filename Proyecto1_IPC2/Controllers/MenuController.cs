@@ -70,7 +70,7 @@ namespace Proyecto1_IPC2.Controllers
         public ActionResult PVM()
         {
             TempData["Inicio"] = true;
-            return RedirectToAction("UnJugador", "Partida", usuario);
+            return RedirectToAction("JugadorMaquina", "Partida", usuario);
         }
 
         [HttpPost]

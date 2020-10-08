@@ -43,6 +43,7 @@ namespace Proyecto1_IPC2.Models
                 {
                     if(enableArDer(fila, columna, color))
                     {
+                        cuadricula[fila, columna].Color = color;
                         int i = 1;
                         while(fila-i>=0 & i < 8 - columna)
                         {
@@ -56,6 +57,7 @@ namespace Proyecto1_IPC2.Models
                 {
                     if (enableArIzq(fila, columna, color))
                     {
+                        cuadricula[fila, columna].Color = color;
                         int i = 1;
                         while (fila-i>=0 & columna-i>=0)
                         {
@@ -83,6 +85,7 @@ namespace Proyecto1_IPC2.Models
                 {
                     if (enableAbDer(fila, columna, color))
                     {
+                        cuadricula[fila, columna].Color = color;
                         int i = 1;
                         while (i<8-fila & i<8-columna)
                         {
@@ -96,6 +99,7 @@ namespace Proyecto1_IPC2.Models
                 {
                     if (enableAbIzq(fila, columna, color))
                     {
+                        cuadricula[fila, columna].Color = color;
                         int i = 1;
                         while (i < 8 - fila & columna+i>=0)
                         {

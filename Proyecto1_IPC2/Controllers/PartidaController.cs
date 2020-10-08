@@ -11,17 +11,27 @@ namespace Proyecto1_IPC2.Controllers
 {
     public class PartidaController : Controller
     {
-        static bool pvp;
         static Models.ViewModels.Partida juego = new Models.ViewModels.Partida();
         // GET: Partida/UnJugador
         public ActionResult UnJugador(usuarioViewModel usuario)
         {
-            if (TempData["Inicio"] != null)
-            {
-                initJuego(usuario);
-                juego.Type = 1;
+            if (juego.IsPlaying == 1) 
+            { 
+                if(juego.Type == 2)
+                {
+                    juego.enableSpaces();
+                }else if(juego.Type==1){
+                    if(juego.Turno == juego.P2.Color)
+                    {
+                        juego.disableAll();
+                    }
+                    else
+                    {
+                        juego.enableSpaces();
+                    }
+                }
+                
             }
-            if (juego.IsPlaying == 1) { juego.enableSpaces(); }
             var viewResult = new ViewResult();
             viewResult.ViewData.Model = juego;
             return View(juego);
@@ -29,10 +39,84 @@ namespace Proyecto1_IPC2.Controllers
 
         public ActionResult DosJugadores(usuarioViewModel usuario)
         {
-            TempData["Inicio"] = null;
             initJuego(usuario);
             juego.Type = 2;
-            pvp = true;
+            return RedirectToAction("UnJugador", usuario);
+        }
+
+        [HttpPost]
+        public ActionResult IniciarMaquina()
+        {
+            juego.IsPlaying = 1;
+            juego.enableSpaces();
+            if (juego.Turno == juego.P2.Color)
+            {
+                juego.playMaquina();
+            }
+            return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
+        }
+
+        [HttpPost]
+        public ActionResult JugarMaquina(usuarioViewModel usuario)
+        {
+            juego.playMaquina();
+            if (juego.Turno == juego.P1.Color)
+            {
+                if (!juego.P1.Playable)
+                {
+                    juego.Turno = juego.P2.Color;
+                    juego.enableSpaces();
+                    if (!juego.P2.Playable)
+                    {
+                        juego.IsPlaying = 2;
+                    }
+                    else
+                    {
+                        juego.disableAll();
+                    }
+                }
+            }
+            if (juego.IsPlaying == 2)
+            {
+                juego.getGanador();
+                int result;
+                if (juego.Winner == null)
+                {
+                    result = 3;
+                }
+                else if (juego.Winner == juego.P1)
+                {
+                    result = 1;
+                }
+                else
+                {
+                    result = 2;
+                }
+                using (OTHELLOEntities db = new OTHELLOEntities())
+                {
+                    var partida = new Proyecto1_IPC2.Models.Partida
+                    {
+                        idUsuario = juego.P1.Id,
+                        idAdversario = null,
+                        horaFecha = DateTime.Now,
+                        idTipoPartida = juego.Type,
+                        idEstado = result,
+                        turnos = juego.P1.Movimientos,
+                    };
+
+                    db.Partida.Add(partida);
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
+        }
+
+        public ActionResult JugadorMaquina(usuarioViewModel usuario)
+        {
+            initJuego(usuario);
+            juego.Maquina = new Maquina(juego.P2.Color);
+            juego.Type = 1;
+            juego.P2.NombreUsuario = "Máquina";
             return RedirectToAction("UnJugador", usuario);
         }
 
@@ -94,27 +178,49 @@ namespace Proyecto1_IPC2.Controllers
             int columna = Int32.Parse(boton) % 8;
             juego.play(fila, columna, juego.Turno);
             juego.enableSpaces();
-            if(juego.Turno == juego.P1.Color)
+            if(juego.Type == 1)
             {
-                if (!juego.P1.Playable)
+                if (juego.Turno == juego.P2.Color)
                 {
-                    juego.Turno = juego.P2.Color;
-                    juego.enableSpaces();
                     if (!juego.P2.Playable)
                     {
-                        juego.IsPlaying = 2;
+                        juego.Turno = juego.P1.Color;
+                        juego.enableSpaces();
+                        if (!juego.P1.Playable)
+                        {
+                            juego.IsPlaying = 2;
+                        }
+                        else
+                        {
+                            juego.disableAll();
+                        }
                     }
                 }
             }
-            else
+            else if (juego.Type == 2)
             {
-                if (!juego.P2.Playable)
+                if (juego.Turno == juego.P1.Color)
                 {
-                    juego.Turno = juego.P1.Color;
-                    juego.enableSpaces();
                     if (!juego.P1.Playable)
                     {
-                        juego.IsPlaying = 2;
+                        juego.Turno = juego.P2.Color;
+                        juego.enableSpaces();
+                        if (!juego.P2.Playable)
+                        {
+                            juego.IsPlaying = 2;
+                        }
+                    }
+                }
+                else
+                {
+                    if (!juego.P2.Playable)
+                    {
+                        juego.Turno = juego.P1.Color;
+                        juego.enableSpaces();
+                        if (!juego.P1.Playable)
+                        {
+                            juego.IsPlaying = 2;
+                        }
                     }
                 }
             }
@@ -149,7 +255,6 @@ namespace Proyecto1_IPC2.Controllers
                     db.Partida.Add(partida);
                     db.SaveChanges();
                 }
-                return RedirectToAction("UnJugador");
             }
             return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario }); 
         }
