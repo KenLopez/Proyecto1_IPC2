@@ -29,6 +29,7 @@ namespace Proyecto1_IPC2.Controllers
 
         public ActionResult DosJugadores(usuarioViewModel usuario)
         {
+            TempData["Inicio"] = null;
             initJuego(usuario);
             juego.Type = 2;
             pvp = true;
@@ -76,7 +77,7 @@ namespace Proyecto1_IPC2.Controllers
         {
             if(p2Nombre == "" | p2Nombre == null)
             {
-                juego.P2.NombreUsuario = "Jugador 2";
+                juego.P2.NombreUsuario = "Jugador2";
             }
             else
             {
@@ -119,18 +120,19 @@ namespace Proyecto1_IPC2.Controllers
             }
             if(juego.IsPlaying == 2)
             {
-                string result;
+                juego.getGanador();
+                int result;
                 if (juego.Winner == null)
                 {
-                    result = "EMPATE";
+                    result = 3;
                 }
                 else if (juego.Winner == juego.P1)
                 {
-                    result = "GANADA";
+                    result = 1;
                 }
                 else
                 {
-                    result = "PERDIDA";
+                    result = 2;
                 }
                 using (OTHELLOEntities db = new OTHELLOEntities())
                 {
@@ -139,8 +141,8 @@ namespace Proyecto1_IPC2.Controllers
                         idUsuario = juego.P1.Id,
                         idAdversario = null,
                         horaFecha = DateTime.Now,
-                        tipoPartida = tipo,
-                        estado = result,
+                        idTipoPartida = juego.Type,
+                        idEstado = result,
                         turnos = juego.P1.Movimientos,
                     };
 

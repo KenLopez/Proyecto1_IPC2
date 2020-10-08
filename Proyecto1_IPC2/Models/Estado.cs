@@ -12,27 +12,18 @@ namespace Proyecto1_IPC2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Partida
+    public partial class Estado
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Partida()
+        public Estado()
         {
-            this.Ronda = new HashSet<Ronda>();
+            this.Partida = new HashSet<Partida>();
         }
     
-        public int idPartida { get; set; }
-        public int idUsuario { get; set; }
-        public Nullable<int> idAdversario { get; set; }
-        public System.DateTime horaFecha { get; set; }
-        public int idTipoPartida { get; set; }
         public int idEstado { get; set; }
-        public int turnos { get; set; }
+        public string nombre { get; set; }
     
-        public virtual Estado Estado { get; set; }
-        public virtual Usuario Usuario { get; set; }
-        public virtual TipoPartida TipoPartida { get; set; }
-        public virtual Usuario Usuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ronda> Ronda { get; set; }
+        public virtual ICollection<Partida> Partida { get; set; }
     }
 }

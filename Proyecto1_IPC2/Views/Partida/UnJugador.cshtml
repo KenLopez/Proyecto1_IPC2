@@ -4,13 +4,13 @@
     ViewBag.Title = "Partida Un Jugador";
     ViewBag.Style = "~/css/UnJugador.css";
     ViewBag.Bootstrap = true;
-    if (Model.Type == 0)
+    if (Model.Type == 1)
     {
         ViewBag.Tabla = "tabla-lg";
         ViewBag.Usuario = "usuario";
         ViewBag.Player = "1";
     }
-    else if(Model.Type == 1)
+    else if(Model.Type == 2)
     {
         ViewBag.Tabla = "tabla";
         ViewBag.Usuario = "usuarios";
@@ -60,7 +60,7 @@
                         }
                     </div>
                     @{
-                        if (Model.Type == 1)
+                        if (Model.Type == 2)
                         {
                             <div class="separador row"></div>
                             if (Model.IsPlaying > 0)
@@ -224,26 +224,26 @@
                         </div>
                     </div>
                 }
-                <div class="row">
-                    <div class="col-6">
-                        <button class="opcion"><i class="fas fa-cloud-download-alt"></i> Descargar Partida</button>
-                    </div>
-                    @if (Model.IsPlaying > 0)
-                    {
+                @if (Model.IsPlaying > 0)
+                {
+                    <div class="row">
+                        <div class="col-6">
+                            <button class="opcion"><i class="fas fa-cloud-download-alt"></i> Descargar Partida</button>
+                        </div>
                         <div class="col-6">
                             <button class="salir" data-target="#salirModal" data-toggle="modal">Salir</button>
                         </div>
-                    }
+                    </div>
+                }
+                    <div class="row">
+                        @if (Model.IsPlaying == 2)
+                        {
+                            <div class="col-12">
+                                <h1 align="center"><b>@Model.getGanador()</b></h1>
+                            </div>
+                        }
+                    </div>
                 </div>
-                <div class="row">
-                    @if (Model.IsPlaying == 2)
-                    {
-                        <div class="col-12">
-                            <h1 align="center"><b>@Model.getGanador()</b></h1>
-                        </div>
-                    }
-                </div>
-            </div>
         </div>
     </div>
 </div>
