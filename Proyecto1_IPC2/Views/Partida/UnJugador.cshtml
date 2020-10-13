@@ -240,10 +240,13 @@
                 @if (Model.IsPlaying > 0)
                 {
                     <div class="row">
-                        <div class="col-6">
-                            <button id="inicio" class="opcion" onclick="location.href='@Url.Action("Descargar")'"><i class="fas fa-cloud-download-alt"></i> Descargar Partida</button>
-                        </div>
-                        <div class="col-6">
+                        @if (Model.IsPlaying == 1)
+                        {
+                            <div class="container col-6">
+                                <button id="inicio" class="opcion" onclick="location.href='@Url.Action("Descargar")'"><i class="fas fa-cloud-download-alt"></i> Descargar Partida</button>
+                            </div>
+                        }
+                        <div class="container col-6">
                             <button class="salir" data-target="#salirModal" data-toggle="modal">Salir</button>
                         </div>
                     </div>
