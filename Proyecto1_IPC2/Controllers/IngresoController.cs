@@ -23,13 +23,13 @@ namespace Proyecto1_IPC2.Controllers
             return View();
         }
 
-        public List<Jugador> getUsuarios()
+        public List<User> getUsuarios()
         {
-            List<Jugador> listaUsuarios;
+            List<User> listaUsuarios;
             using (OTHELLOEntities db = new OTHELLOEntities())
             {
                 listaUsuarios = (from d in db.Usuario
-                                 select new Jugador
+                                 select new User
                                  {
                                      Id = d.idUsuario,
                                      Nombre = d.nombre,
@@ -54,7 +54,7 @@ namespace Proyecto1_IPC2.Controllers
 
         public bool disponible(string nombreUsuario, string correo)
         { 
-            List<Jugador> users = getUsuarios();
+            List<User> users = getUsuarios();
 
             foreach (var user in users)
             {
@@ -89,7 +89,13 @@ namespace Proyecto1_IPC2.Controllers
                         db.Usuario.Add(usuario);
                         db.SaveChanges();
                     }
-                    return RedirectToAction("Principal", "Menu");
+                    List<User> listaUsuarios = getUsuarios();
+                    var user = new User();
+                    user = listaUsuarios.Find(x => x.NombreUsuario.Equals(modelo.NombreUsuario));
+                    var model = new usuarioViewModel();
+                    model.NombreUsuario = user.NombreUsuario;
+                    model.Id = user.Id;
+                    return RedirectToAction("Principal", "Menu", model);
                 }
                 return View();
             }
@@ -103,12 +109,15 @@ namespace Proyecto1_IPC2.Controllers
         public ActionResult Inicio_sesion(inicioSesionViewModel modelo)
         {
             //return Redirect("~/Menu/Principal");
-            List<Jugador> listaUsuarios = getUsuarios();
+            List<User> listaUsuarios = getUsuarios();
             foreach (var user in listaUsuarios)
             {
                 if (modelo.NombreUsuario == user.NombreUsuario & modelo.Contraseña == user.Contraseña)
                 {
-                    return RedirectToAction("Principal", "Menu", user);
+                    usuarioViewModel usuario = new usuarioViewModel();
+                    usuario.NombreUsuario = user.NombreUsuario;
+                    usuario.Id = user.Id;
+                    return RedirectToAction("Principal", "Menu", usuario);
                 }
 
             }

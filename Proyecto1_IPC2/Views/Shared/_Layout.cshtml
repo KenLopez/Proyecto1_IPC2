@@ -11,7 +11,8 @@
     @if (ViewBag.bootstrap)
     {
         @Styles.Render("~/Content/bootstrap.min.css");
-        @Scripts.Render("~/Scripts/jquery-3.4.1.min.js");
+        @Scripts.Render("~/Scripts/jquery-3.5.1.slim.min.js");
+        @Scripts.Render("~/Scripts/popper.min.js")
         @Scripts.Render("~/Scripts/bootstrap.min.js")
     }
     @Styles.Render(@ViewBag.Style)

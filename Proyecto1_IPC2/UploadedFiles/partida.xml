@@ -1,8 +1,8 @@
 <tablero>
  <ficha>
- <color>blanco</color>
- <columna>D</columna>
- <fila>4</fila>
+<color>blanco</color>
+<columna>D</columna>
+<fila>4</fila>
  </ficha>
  <ficha>
  <color>negro</color>
@@ -50,6 +50,6 @@
  <fila>8</fila>
  </ficha>
  <siguienteTiro>
- <color> negro </color>
+ <color>negro</color>
  </siguienteTiro>
 </tablero>
