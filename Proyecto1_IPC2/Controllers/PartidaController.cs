@@ -132,9 +132,16 @@ namespace Proyecto1_IPC2.Controllers
         public ActionResult setTablero(usuarioViewModel usuario)
         {
             initJuego(usuario);
-            juego.Maquina = new Maquina(juego.P2.Color);
-            juego.Type = 1;
-            juego.P2.NombreUsuario = "Máquina";
+            if(TempData["Type"].ToString() == "1")
+            {
+                juego.Type = 1;
+                juego.Maquina = new Maquina(juego.P2.Color);
+                juego.P2.NombreUsuario = "Máquina";
+            }
+            else if(TempData["Type"].ToString() == "2")
+            {
+                juego.Type = 2;
+            }
             XmlTextReader reader = new XmlTextReader(TempData["Ruta"].ToString());
             Tablero tablero = new Tablero();
             reader.Read();

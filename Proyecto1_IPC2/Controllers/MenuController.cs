@@ -38,7 +38,7 @@ namespace Proyecto1_IPC2.Controllers
         }
 
         [HttpPost]
-        public ActionResult UploadFile(HttpPostedFileBase file)
+        public ActionResult UploadFile(HttpPostedFileBase file, string opcion)
         {
             try
             {
@@ -85,6 +85,7 @@ namespace Proyecto1_IPC2.Controllers
                                 }
                                 if (tablero.validar())
                                 {
+                                    TempData["Type"] = opcion;
                                     TempData["Ruta"] = _path;
                                     return RedirectToAction("setTablero", "Partida", usuario);
                                 }
