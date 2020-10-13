@@ -5,7 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
 using System.Web.UI.WebControls;
+using System.IO;
+using System.Text;
 
 namespace Proyecto1_IPC2.Controllers
 {
@@ -78,6 +81,16 @@ namespace Proyecto1_IPC2.Controllers
             }
             if (juego.IsPlaying == 2)
             {
+                
+                guardarRegistro();
+            }
+            return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
+        }
+
+        public void guardarRegistro()
+        {
+            using (OTHELLOEntities db = new OTHELLOEntities())
+            {
                 juego.getGanador();
                 int result;
                 if (juego.Winner == null)
@@ -92,23 +105,19 @@ namespace Proyecto1_IPC2.Controllers
                 {
                     result = 2;
                 }
-                using (OTHELLOEntities db = new OTHELLOEntities())
+                var partida = new Proyecto1_IPC2.Models.Partida
                 {
-                    var partida = new Proyecto1_IPC2.Models.Partida
-                    {
-                        idUsuario = juego.P1.Id,
-                        idAdversario = null,
-                        horaFecha = DateTime.Now,
-                        idTipoPartida = juego.Type,
-                        idEstado = result,
-                        turnos = juego.P1.Movimientos,
-                    };
+                    idUsuario = juego.P1.Id,
+                    idAdversario = null,
+                    horaFecha = DateTime.Now,
+                    idTipoPartida = juego.Type,
+                    idEstado = result,
+                    turnos = juego.P1.Movimientos,
+                };
 
-                    db.Partida.Add(partida);
-                    db.SaveChanges();
-                }
+                db.Partida.Add(partida);
+                db.SaveChanges();
             }
-            return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
         }
 
         public ActionResult JugadorMaquina(usuarioViewModel usuario)
@@ -117,6 +126,39 @@ namespace Proyecto1_IPC2.Controllers
             juego.Maquina = new Maquina(juego.P2.Color);
             juego.Type = 1;
             juego.P2.NombreUsuario = "Máquina";
+            return RedirectToAction("UnJugador", usuario);
+        }
+
+        public ActionResult setTablero(usuarioViewModel usuario)
+        {
+            initJuego(usuario);
+            juego.Maquina = new Maquina(juego.P2.Color);
+            juego.Type = 1;
+            juego.P2.NombreUsuario = "Máquina";
+            XmlTextReader reader = new XmlTextReader(TempData["Ruta"].ToString());
+            Tablero tablero = new Tablero();
+            reader.Read();
+            if (reader.IsStartElement("tablero"))
+            {
+                reader.ReadToDescendant("ficha");
+                while (reader.IsStartElement("ficha"))
+                {
+                    reader.ReadToDescendant("color");
+                    string color = reader.ReadElementContentAsString();
+                    reader.ReadToNextSibling("columna");
+                    string columna = reader.ReadElementContentAsString();
+                    reader.ReadToNextSibling("fila");
+                    int fila = reader.ReadElementContentAsInt();
+                    int col = tablero.letraToInt(columna);
+                    tablero.Cuadricula[fila - 1, col].Color = tablero.colorToInt(color);
+                    reader.Read();
+                    reader.Read();
+                }
+                juego.Mesa = tablero;
+                reader.ReadToDescendant("color");
+                string turn = reader.ReadElementContentAsString();
+                juego.Turno = juego.Mesa.colorToInt(turn);
+            }
             return RedirectToAction("UnJugador", usuario);
         }
 
@@ -226,35 +268,7 @@ namespace Proyecto1_IPC2.Controllers
             }
             if(juego.IsPlaying == 2)
             {
-                juego.getGanador();
-                int result;
-                if (juego.Winner == null)
-                {
-                    result = 3;
-                }
-                else if (juego.Winner == juego.P1)
-                {
-                    result = 1;
-                }
-                else
-                {
-                    result = 2;
-                }
-                using (OTHELLOEntities db = new OTHELLOEntities())
-                {
-                    var partida = new Proyecto1_IPC2.Models.Partida
-                    {
-                        idUsuario = juego.P1.Id,
-                        idAdversario = null,
-                        horaFecha = DateTime.Now,
-                        idTipoPartida = juego.Type,
-                        idEstado = result,
-                        turnos = juego.P1.Movimientos,
-                    };
-
-                    db.Partida.Add(partida);
-                    db.SaveChanges();
-                }
+                guardarRegistro();
             }
             return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario }); 
         }
@@ -262,8 +276,19 @@ namespace Proyecto1_IPC2.Controllers
         [HttpPost]
         public ActionResult CambiarColor()
         {
-            if (juego.P1.Color == 1) { juego.P1.Color = 2; juego.P2.Color = 1; }
-            else { juego.P1.Color = 1; juego.P2.Color = 2; }
+            if (juego.P1.Color == 1) 
+            { 
+                juego.P1.Color = 2; 
+                juego.P2.Color = 1; 
+            }
+            else { 
+                juego.P1.Color = 1; 
+                juego.P2.Color = 2; 
+            }
+            if(juego.Type == 1)
+            {
+                juego.Maquina.Color = juego.P2.Color;
+            }
             return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
         }
 
@@ -279,6 +304,19 @@ namespace Proyecto1_IPC2.Controllers
         public ActionResult Salir()
         {
             return RedirectToAction("Principal", "Menu", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
+        }
+
+        public FileResult Descargar()
+        {
+            string data = juego.toXml();
+            string virtualPath = Server.MapPath("~/XMLFiles/partida-" + DateTime.Now.Day.ToString()+DateTime.Now.Month.ToString()+DateTime.Now.Year.ToString()+
+                "-"+DateTime.Now.Hour.ToString()+"_"+DateTime.Now.Minute.ToString()+"_"+DateTime.Now.Second+".xml");
+            using (FileStream file = System.IO.File.Create(virtualPath))
+            {
+                byte[] info = new UTF8Encoding(true).GetBytes(data);
+                file.Write(info, 0, info.Length);
+            }
+            return File(virtualPath, "application/force- download", Path.GetFileName(virtualPath));
         }
     }
 }

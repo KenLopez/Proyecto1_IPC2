@@ -29,6 +29,33 @@ namespace Proyecto1_IPC2.Models.ViewModels
 
         public int Type { get { return type; } set { type = value; } }
 
+        public string toXml()
+        {
+            string data = "<tablero>\n";
+            for(int i = 0; i < 8; i++)
+            {
+                for(int j = 0; j < 8; j++)
+                {
+                    if (mesa.Cuadricula[i, j].Color != 0)
+                    {
+                        data += "<ficha>\n<color>" + mesa.Cuadricula[i, j].getColor() + "</color>\n<columna>" + mesa.intToLetra(j) + 
+                            "</columna>\n" + "<fila>" + (i+1).ToString() + "</fila>\n</ficha>\n";
+                    } 
+                }
+            }
+            data += "<siguienteTiro>\n<color>";
+            if(turno == 1)
+            {
+                data += "blanco";
+            }
+            else
+            {
+                data += "negro";
+            }
+            data += "</color>\n</siguienteTiro>\n</tablero>";
+            return data;
+        }
+
         public void disableAll()
         {
             for(int i = 0; i<8; i++)
@@ -42,6 +69,7 @@ namespace Proyecto1_IPC2.Models.ViewModels
 
         public void playMaquina()
         {
+            disableAll();
             enableSpaces();
             maquina.ponerFicha(mesa);
             play(maquina.Fila, maquina.Columna, maquina.Color);
@@ -107,11 +135,25 @@ namespace Proyecto1_IPC2.Models.ViewModels
             if (contadorP1 > contadorP2)
             {
                 winner = p1;
-                return "¡EL GANADOR ES " + p1.NombreUsuario + "!";
+                if(type == 1)
+                {
+                    return "¡VICTORIA!";
+                }
+                else
+                {
+                    return "¡EL GANADOR ES " + p1.NombreUsuario + "!";
+                }
             }else if (contadorP2 > contadorP1)
             {
                 winner = p2;
-                return "¡El GANADOR ES " + p2.NombreUsuario + "!";
+                if (type == 1)
+                {
+                    return "¡DERROTA!";
+                }
+                else
+                {
+                    return "¡EL GANADOR ES " + p2.NombreUsuario + "!";
+                }
             }
             else
             {

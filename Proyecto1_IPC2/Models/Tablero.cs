@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -22,6 +23,69 @@ namespace Proyecto1_IPC2.Models
         }
 
         public Casilla[,] Cuadricula { get { return cuadricula; } }
+
+        public int colorToInt(string color)
+        {
+            switch (color)
+            {
+                case "blanco":
+                    return 1;
+                case "negro":
+                    return 2;
+                default:
+                    return 0;
+            }
+        }
+
+        public string intToLetra(int num)
+        {
+            switch (num)
+            {
+                case 0:
+                    return "A";
+                case 1:
+                    return "B";
+                case 2:
+                    return "C";
+                case 3:
+                    return "D";
+                case 4:
+                    return "E";
+                case 5:
+                    return "F";
+                case 6:
+                    return "G";
+                case 7:
+                    return "H";
+                default:
+                    return "";
+            }
+        }
+
+        public int letraToInt(string letra)
+        {
+            switch (letra)
+            {
+                case "A":
+                    return 0;
+                case "B":
+                    return 1;
+                case "C":
+                    return 2;
+                case "D":
+                    return 3;
+                case "E":
+                    return 4;
+                case "F":
+                    return 5;
+                case "G":
+                    return 6;
+                case "H":
+                    return 7;
+                default:
+                    return 8;
+            }
+        }
 
         public void ponerFicha(bool arriba, bool abajo, bool derecha, bool izquierda, int fila, int columna, int color)
         {
@@ -391,6 +455,84 @@ namespace Proyecto1_IPC2.Models
             return false;
         }
 
-
+        public bool validar()
+        {
+            if(cuadricula[3,3].Color == 0 | cuadricula[3,4].Color == 0 | cuadricula[4,3].Color == 0 | cuadricula[4,4].Color == 0)
+            {
+                return false;
+            }
+            int validaciones;
+            for(int i = 0; i < 8; i++)
+            {
+                for(int j = 0; j < 8; j++)
+                {
+                    validaciones = 0;
+                    if(cuadricula[i,j].Color != 0)
+                    {
+                        if (i > 0)
+                        {
+                            if (cuadricula[i - 1, j].Color != 0)
+                            {
+                                validaciones++;
+                            }
+                            if (j > 0)
+                            {
+                                if(cuadricula[i-1,j-1].Color != 0)
+                                {
+                                    validaciones++;
+                                }
+                            }
+                            if (j < 7)
+                            {
+                                if(cuadricula[i-1,j+1].Color != 0)
+                                {
+                                    validaciones++;
+                                }
+                            }
+                        }
+                        if (i < 7)
+                        {
+                            if (cuadricula[i + 1, j].Color != 0)
+                            {
+                                validaciones++;
+                            }
+                            if (j > 0)
+                            {
+                                if (cuadricula[i + 1, j - 1].Color != 0)
+                                {
+                                    validaciones++;
+                                }
+                            }
+                            if (j < 7)
+                            {
+                                if (cuadricula[i + 1, j + 1].Color != 0)
+                                {
+                                    validaciones++;
+                                }
+                            }
+                        }
+                        if (j > 0)
+                        {
+                            if(cuadricula[i,j-1].Color != 0)
+                            {
+                                validaciones++;
+                            }
+                        }
+                        if (j < 7)
+                        {
+                            if(cuadricula[i,j+1].Color != 0)
+                            {
+                                validaciones++;
+                            }
+                        }
+                        if (validaciones == 0)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
     }
 }

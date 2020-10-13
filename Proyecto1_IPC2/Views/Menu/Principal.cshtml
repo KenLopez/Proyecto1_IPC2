@@ -55,7 +55,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" tabindex="-1" id="uploadModal" data-backdrop="static" role="dialog">
+<div class="modal fade" tabindex="-1" id="uploadModal" data-backdrop="static" role="dialog" data-show="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -65,10 +65,8 @@
             @using (Html.BeginForm("UploadFile", "Menu", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 <div class="modal-body">
-                    <div>
-                        <p class="alert">@Html.TextBox("file", "", new { @class = "custom-file-input", @type = "file" })</p> <br />
-                        @ViewBag.Message
-                    </div>
+                    <input type="file" name="file" id="file" />
+                    <p class="text-danger">@ViewBag.Message</p>
                 </div>
                 <div class="modal-footer">
                     <input class="btn btn-success btn-lg" type="submit" value="Upload" />
@@ -78,4 +76,12 @@
         </div>
     </div>
 </div>
+@if (ViewBag.Message != null)
+{
+    <script>
+        $(window).on('load', function () {
+            $('#uploadModal').modal('show');
+        });
+    </script>
+}
 

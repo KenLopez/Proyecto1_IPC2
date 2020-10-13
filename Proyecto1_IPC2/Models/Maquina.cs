@@ -74,7 +74,7 @@ namespace Proyecto1_IPC2.Models
                             {
                                 maxCount = counter;
                                 fila = i;
-                                fila = j;
+                                columna = j;
                             }
                         }
                     }

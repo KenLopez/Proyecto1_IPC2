@@ -371,8 +371,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Downloaded Files\" />
     <Folder Include="UploadedFiles\" />
     <Folder Include="Views\Registro\" />
+    <Folder Include="XMLFiles\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
