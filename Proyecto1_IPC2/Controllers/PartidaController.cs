@@ -65,6 +65,7 @@ namespace Proyecto1_IPC2.Controllers
             juego.playMaquina();
             if (juego.Turno == juego.P1.Color)
             {
+                juego.enableSpaces();
                 if (!juego.P1.Playable)
                 {
                     juego.Turno = juego.P2.Color;
