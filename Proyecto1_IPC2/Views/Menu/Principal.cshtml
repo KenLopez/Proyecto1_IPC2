@@ -1,0 +1,95 @@
+﻿@using Proyecto1_IPC2.Models.ViewModels;
+@model usuarioViewModel
+@{
+    ViewBag.Title = "Menu";
+    ViewBag.Style = "~/css/principal.css";
+    ViewBag.Bootstrap = true;
+}
+
+<header id="encabezado">
+    <img id="othelloLogo" src="~/img/Logo Othello-mini.jpg" />
+    <div class="tabla">
+        <p id="usuario">@Model.NombreUsuario</p>
+    </div>
+    <div class="separador">
+
+    </div>
+</header>
+<br />
+<article id="articulo">
+    <div class="botones1">
+        <button type="button" class="opcion" id="Un jugador" data-target="#partidaModal" data-toggle="modal" }><i class="fas fa-gamepad fa-lg"></i>Partida Local</button>
+
+        <button type="button" class="opcion" id="Multijugador" onclick=""><i class="fas fa-wifi fa-lg"></i> Online</button>
+
+        <button type="button" class="opcion" id="Un jugador" onclick=""><i class="fas fa-trophy fa-lg"></i> Torneos</button>
+    </div>
+    <div class="botones2">
+        <button type="button" class="opcion" id="Reportes" onclick=""><i class="fas fa-chart-bar fa-lg"></i> Reportes</button>
+
+        <button type="button" class="opcion" id="Reportes" data-target="#uploadModal" data-toggle="modal"><i class="fas fa-cloud-upload-alt"></i> Cargar Partida</button>
+    </div>
+</article>
+<div class="modal fade" tabindex="-1" id="partidaModal" data-backdrop="static" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Selecciona el Modo de Juego</h2>
+                <button class="close" data-dismiss="modal">X</button>
+            </div>
+
+            <div class="modal-body justify-content-center">
+                @using (Html.BeginForm("PVM", "Menu", FormMethod.Post, @Model))
+                {
+                <div class="container">
+                    <button class="btn btn-success btn-block" type="submit" value="Upload"><i class="fas fa-gamepad fa-lg"></i> Vs. Máquina</button>
+                </div>
+                    
+                }
+                <br>
+                @using (Html.BeginForm("PVP", "Menu", FormMethod.Post))
+                {
+            <div class="container">
+                <button class="btn btn-info btn-block" type="submit" value="Upload"><i class="fas fa-gamepad fa-lg"></i> Vs. Jugador</button>
+            </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger btn-lg" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" id="uploadModal" data-backdrop="static" role="dialog" data-show="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Subir Partida XML</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+            </div>
+            @using (Html.BeginForm("UploadFile", "Menu", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="modal-body">
+                    <input type="file" name="file" />
+                    <p class="text-danger">@ViewBag.Message</p>
+                </div>
+                <div class="container">
+                    <button name="opcion" class="btn btn-success btn-lg" type="submit" value=1>Empezar Vs. Máquina</button>
+                    <button name="opcion" class="btn btn-info btn-lg" type="submit" value=2>Empezar Vs. Jugador</button>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger btn-lg" data-dismiss="modal">Cancelar</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@if (ViewBag.Message != null)
+{
+    <script>
+        $(window).on('load', function () {
+            $('#uploadModal').modal('show');
+        });
+    </script>
+}
+
