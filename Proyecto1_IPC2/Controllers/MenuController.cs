@@ -44,9 +44,10 @@ namespace Proyecto1_IPC2.Controllers
             {
                 if (file != null)
                 {
-                    if (Path.GetExtension(file.FileName) != "xml")
+                    if (Path.GetExtension(file.FileName) != ".xml")
                     {
                         ViewBag.Message = "El archivo subido debe tener la extensión xml";
+                        return View("Principal", usuario);
                     }
                     if (file.ContentLength > 0)
                     {
@@ -92,7 +93,7 @@ namespace Proyecto1_IPC2.Controllers
                                 else
                                 {
                                     ViewBag.Message = "ERROR: El archivo XML posee errores en su contenido.";
-                                    return RedirectToAction("Principal", usuario);
+                                    return View("Principal", usuario);
                                 }
 
                             }
@@ -100,6 +101,7 @@ namespace Proyecto1_IPC2.Controllers
                         catch
                         {
                             ViewBag.Message = "ERROR: El archivo XML posee errores en su contenido.";
+                            return View("Principal", usuario);
                         }
                     }
                 }
