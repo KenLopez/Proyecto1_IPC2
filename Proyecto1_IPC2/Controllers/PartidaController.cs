@@ -15,6 +15,7 @@ namespace Proyecto1_IPC2.Controllers
     public class PartidaController : Controller
     {
         static Models.ViewModels.Partida juego = new Models.ViewModels.Partida();
+        static int counter;
         // GET: Partida/UnJugador
         public ActionResult UnJugador(usuarioViewModel usuario)
         {
@@ -51,6 +52,17 @@ namespace Proyecto1_IPC2.Controllers
         {
             initJuego(usuario);
             juego.Type = Int32.Parse(TempData["modo"].ToString());
+            if (bool.Parse(TempData["personalizado"].ToString()))
+            {
+                juego.IsPlaying = -1;
+                counter = 0;
+                juego.Mesa.Cuadricula[3, 3].Color = 0;
+                juego.Mesa.Cuadricula[3, 4].Color = 0;
+                juego.Mesa.Cuadricula[4, 3].Color = 0;
+                juego.Mesa.Cuadricula[4, 4].Color = 0;
+                juego.disableAll();
+
+            }
             return RedirectToAction("UnJugador", usuario);
         }
 
@@ -224,7 +236,19 @@ namespace Proyecto1_IPC2.Controllers
             {
                 juego.P2.NombreUsuario = p2Nombre;
             }
-            juego.IsPlaying = 1;
+            if(juego.IsPlaying != -1)
+            {
+                juego.IsPlaying = 1;
+            }
+            else
+            {
+                juego.IsPlaying = -2;
+                juego.Mesa.Cuadricula[3, 3].Estado = true;
+                juego.Mesa.Cuadricula[3, 4].Estado = true;
+                juego.Mesa.Cuadricula[4, 3].Estado = true;
+                juego.Mesa.Cuadricula[4, 4].Estado = true;
+
+            }
             return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
         }
 
@@ -233,6 +257,19 @@ namespace Proyecto1_IPC2.Controllers
         {
             int fila = Int32.Parse(boton) / 8;
             int columna = Int32.Parse(boton) % 8;
+            if(juego.IsPlaying == -2)
+            {
+                juego.Mesa.Cuadricula[fila, columna].Color = juego.Turno;
+                juego.Mesa.Cuadricula[fila, columna].Estado = false;
+                counter++;
+                if (juego.Turno == 1) { juego.Turno = 2; }
+                else { juego.Turno = 1; }
+                if(counter == 4)
+                {
+                    juego.IsPlaying = 1;
+                }
+                return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
+            }
             juego.play(fila, columna, juego.Turno);
             juego.enableSpaces();
             if(juego.Type == 1)
