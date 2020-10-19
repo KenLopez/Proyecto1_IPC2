@@ -131,6 +131,14 @@ namespace Proyecto1_IPC2.Controllers
             TempData["Inicio"] = true;
             return RedirectToAction("DosJugadores", "Partida", usuario);
         }
+
+        [HttpPost]
+        public ActionResult PartidaXtream(int modo, bool inicio = false)
+        {
+            TempData["personalizado"] = inicio;
+            TempData["modo"] = modo;
+            return RedirectToAction("PartidaXtream", "Partida", usuario);
+        }
     }
 
 }

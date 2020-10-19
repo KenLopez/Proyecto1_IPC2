@@ -18,19 +18,54 @@
 <br />
 <article id="articulo">
     <div class="botones1">
-        <button type="button" class="opcion" id="Un jugador" data-target="#partidaModal" data-toggle="modal" }><i class="fas fa-gamepad fa-lg"></i>Partida Local</button>
+        <button type="button" class="opcion" id="Un jugador" data-target="#partidaModal" data-toggle="modal" ><i class="fas fa-gamepad fa-lg"></i> Partida Local</button>
 
-        <button type="button" class="opcion" id="Multijugador" onclick=""><i class="fas fa-wifi fa-lg"></i> Online</button>
+        <button type="button" class="opcion" id="Xtream" data-target="#xtreamModal" data-toggle="modal"><i class="fab fa-buromobelexperte fa-lg"></i> Xtream</button>
 
         <button type="button" class="opcion" id="Un jugador" onclick=""><i class="fas fa-trophy fa-lg"></i> Torneos</button>
     </div>
     <div class="botones2">
-        <button type="button" class="opcion" id="Reportes" onclick=""><i class="fas fa-chart-bar fa-lg"></i> Reportes</button>
+        <button type="button" class="opcion" id="Reportes" onclick=""><i class="fas fa-user fa-lg"></i> Perfil</button>
 
         <button type="button" class="opcion" id="Reportes" data-target="#uploadModal" data-toggle="modal"><i class="fas fa-cloud-upload-alt"></i> Cargar Partida</button>
     </div>
 </article>
-<div class="modal fade" tabindex="-1" id="partidaModal" data-backdrop="static" role="dialog">
+<div class="modal fade" tabindex="-1" id="xtreamModal" data-backdrop="static" role="dialog" data-show="true">
+    <div class="modal-dialog modal-dialog-centered" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Configuración Xtream</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+            </div>
+            @using (Html.BeginForm("PartidaXtream", "Menu", FormMethod.Post))
+            {
+                <div class="modal-body">
+                    <div class="container">
+                        <h4>Condiciones de Victoria</h4>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="modo" id="normal" value="4" checked />
+                            <label class="custom-control-label" for="normal">Normal</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="modo" id="inverso" value="5" />
+                            <label class="custom-control-label" for="inverso">Inverso</label>
+                        </div>
+                        <h4>Inicio</h4>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" name="inicio" id="inicio"  value="true"/>
+                            <label class="custom-control-label" for="inicio">Inicio Personalizado</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btn-lg" type="submit">Empezar</button>
+                    <button class="btn btn-danger btn-lg" data-dismiss="modal">Cancelar</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" id="partidaModal" data-backdrop="static" role="dialog" data-show="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -53,6 +88,7 @@
                 <button class="btn btn-info btn-block" type="submit" value="Upload"><i class="fas fa-gamepad fa-lg"></i> Vs. Jugador</button>
             </div>
                 }
+                <br />
             </div>
             <div class="modal-footer">
                 <button class="btn btn-danger btn-lg" data-dismiss="modal">Cancelar</button>
@@ -73,9 +109,10 @@
                     <input type="file" name="file" />
                     <p class="text-danger">@ViewBag.Message</p>
                 </div>
-                <div class="container">
-                    <button name="opcion" class="btn btn-success btn-lg" type="submit" value=1>Empezar Vs. Máquina</button>
-                    <button name="opcion" class="btn btn-info btn-lg" type="submit" value=2>Empezar Vs. Jugador</button>
+                <div class="container align-items-center">
+                    <button name="opcion" class="btn btn-danger col-3" type="submit" value=3>Empezar Xtream</button>
+                    <button name="opcion" class="btn btn-success col-3" type="submit" value=1>Empezar Vs. Máquina</button>
+                    <button name="opcion" class="btn btn-info col-3" type="submit" value=2>Empezar Vs. Jugador</button>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-danger btn-lg" data-dismiss="modal">Cancelar</button>

@@ -20,7 +20,7 @@ namespace Proyecto1_IPC2.Controllers
         {
             if (juego.IsPlaying == 1) 
             { 
-                if(juego.Type == 2)
+                if(juego.Type != 1)
                 {
                     juego.enableSpaces();
                 }else if(juego.Type==1){
@@ -44,6 +44,13 @@ namespace Proyecto1_IPC2.Controllers
         {
             initJuego(usuario);
             juego.Type = 2;
+            return RedirectToAction("UnJugador", usuario);
+        }
+
+        public ActionResult PartidaXtream(usuarioViewModel usuario)
+        {
+            initJuego(usuario);
+            juego.Type = Int32.Parse(TempData["modo"].ToString());
             return RedirectToAction("UnJugador", usuario);
         }
 
@@ -247,7 +254,7 @@ namespace Proyecto1_IPC2.Controllers
                     }
                 }
             }
-            else if (juego.Type == 2)
+            else if (juego.Type == 2 | juego.Type == 4 | juego.Type == 5)
             {
                 if (juego.Turno == juego.P1.Color)
                 {

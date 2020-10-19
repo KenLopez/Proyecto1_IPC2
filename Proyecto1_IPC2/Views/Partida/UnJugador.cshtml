@@ -12,7 +12,7 @@
         ViewBag.BTurno = "boton-turno-lg";
         ViewBag.BColor = "boton-color-lg";
     }
-    else if (Model.Type == 2)
+    else if (Model.Type == 2 | Model.Type == 4 | Model.Type == 5)
     {
         ViewBag.Tabla = "tabla";
         ViewBag.Usuario = "usuarios";
@@ -62,7 +62,7 @@
                         }
                     </div>
                     @{
-                        if (Model.Type == 2)
+                        if (Model.Type == 2 | Model.Type == 4 | Model.Type == 5)
                         {
                             <div class="separador row"></div>
                             if (Model.IsPlaying > 0)
