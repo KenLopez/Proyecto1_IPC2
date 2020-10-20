@@ -24,7 +24,19 @@ namespace Proyecto1_IPC2.Controllers
                 if(juego.Type != 1)
                 {
                     juego.enableSpaces();
+                    if(juego.Turno == juego.P1.Color)
+                    {
+                        juego.P1.Cronometro.Start();
+                    }
+                    else
+                    {
+                        juego.P2.Cronometro.Start();
+                    }
                 }else if(juego.Type==1){
+                    if(juego.Turno == juego.P1.Color)
+                    {
+                        juego.P1.Cronometro.Start();
+                    }
                     if(juego.Turno == juego.P2.Color)
                     {
                         juego.disableAll();
@@ -70,10 +82,15 @@ namespace Proyecto1_IPC2.Controllers
         public ActionResult IniciarMaquina()
         {
             juego.IsPlaying = 1;
+            if (juego.Turno == juego.P1.Color)
+            {
+                juego.P1.Cronometro.Start();
+            }
             juego.enableSpaces();
             if (juego.Turno == juego.P2.Color)
             {
                 juego.playMaquina();
+                juego.P2.Cronometro.Stop();
             }
             return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
         }
@@ -239,6 +256,14 @@ namespace Proyecto1_IPC2.Controllers
             if(juego.IsPlaying != -1)
             {
                 juego.IsPlaying = 1;
+                if(juego.Turno == juego.P1.Color)
+                {
+                    juego.P1.Cronometro.Start();
+                }
+                else
+                {
+                    juego.P2.Cronometro.Start();
+                }
             }
             else
             {
@@ -267,8 +292,31 @@ namespace Proyecto1_IPC2.Controllers
                 if(counter == 4)
                 {
                     juego.IsPlaying = 1;
+                    if (juego.Turno == juego.P1.Color)
+                    {
+                        juego.P1.Cronometro.Start();
+                    }
+                    else
+                    {
+                        juego.P2.Cronometro.Start();
+                    }
                 }
                 return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
+            }
+            if(juego.Type == 1)
+            {
+                juego.P1.Cronometro.Stop();
+            }
+            else
+            {
+                if(juego.Turno == juego.P1.Color)
+                {
+                    juego.P1.Cronometro.Stop();
+                }
+                else
+                {
+                    juego.P2.Cronometro.Stop();
+                }
             }
             juego.play(fila, columna, juego.Turno);
             juego.enableSpaces();
@@ -356,6 +404,12 @@ namespace Proyecto1_IPC2.Controllers
         public ActionResult Salir()
         {
             return RedirectToAction("Principal", "Menu", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
+        }
+
+        [HttpPost]
+        public ActionResult Timers()
+        {
+            return PartialView("_Cronometros", juego);
         }
 
         public FileResult Descargar()
