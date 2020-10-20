@@ -17,6 +17,8 @@ namespace Proyecto1_IPC2.Models
         public int idRonda { get; set; }
         public int idTorneo { get; set; }
         public int idPartida { get; set; }
+        public int NumJuego { get; set; }
+        public int NumRonda { get; set; }
     
         public virtual Partida Partida { get; set; }
         public virtual Torneo Torneo { get; set; }

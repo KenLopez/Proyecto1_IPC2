@@ -1,6 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="OTHELLOModelStoreContainer" CdmEntityContainer="OTHELLOEntities">
+    <EntitySetMapping Name="Equipo">
+      <EntityTypeMapping TypeName="OTHELLOModel.Equipo">
+        <MappingFragment StoreEntitySet="Equipo">
+          <ScalarProperty Name="idEquipo" ColumnName="idEquipo" />
+          <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Estado">
       <EntityTypeMapping TypeName="OTHELLOModel.Estado">
         <MappingFragment StoreEntitySet="Estado">
@@ -14,7 +23,7 @@
         <MappingFragment StoreEntitySet="Participante">
           <ScalarProperty Name="idParticipante" ColumnName="idParticipante" />
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-          <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />
+          <ScalarProperty Name="idEquipo" ColumnName="idEquipo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -28,6 +37,7 @@
           <ScalarProperty Name="idTipoPartida" ColumnName="idTipoPartida" />
           <ScalarProperty Name="idEstado" ColumnName="idEstado" />
           <ScalarProperty Name="turnos" ColumnName="turnos" />
+          <ScalarProperty Name="tiempo" ColumnName="tiempo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -37,16 +47,8 @@
           <ScalarProperty Name="idRonda" ColumnName="idRonda" />
           <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />
           <ScalarProperty Name="idPartida" ColumnName="idPartida" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Sala">
-      <EntityTypeMapping TypeName="OTHELLOModel.Sala">
-        <MappingFragment StoreEntitySet="Sala">
-          <ScalarProperty Name="idSala" ColumnName="idSala" />
-          <ScalarProperty Name="numeroSala" ColumnName="numeroSala" />
-          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="NumJuego" ColumnName="NumJuego" />
+          <ScalarProperty Name="NumRonda" ColumnName="NumRonda" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -63,7 +65,8 @@
         <MappingFragment StoreEntitySet="Torneo">
           <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />
           <ScalarProperty Name="participantes" ColumnName="participantes" />
-          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

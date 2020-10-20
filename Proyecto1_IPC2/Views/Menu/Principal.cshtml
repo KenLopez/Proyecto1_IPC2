@@ -41,18 +41,27 @@
             {
                 <div class="modal-body">
                     <div class="container">
+                        <h4>Cantidad de Jugadores</h4>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="maquina" id="solo" value="true" checked />
+                            <label class="custom-control-label" for="solo">Un Jugador</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="maquina" id="multiplayer" value="false" />
+                            <label class="custom-control-label" for="multiplayer">Multijugador</label>
+                        </div>
                         <h4>Condiciones de Victoria</h4>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input class="custom-control-input" type="radio" name="modo" id="normal" value="4" checked />
+                            <input class="custom-control-input" type="radio" name="modo" id="normal" value="true" checked />
                             <label class="custom-control-label" for="normal">Normal</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input class="custom-control-input" type="radio" name="modo" id="inverso" value="5" />
+                            <input class="custom-control-input" type="radio" name="modo" id="inverso" value="false" />
                             <label class="custom-control-label" for="inverso">Inverso</label>
                         </div>
                         <h4>Inicio</h4>
                         <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" name="inicio" id="inicio"  value="true"/>
+                            <input class="custom-control-input" type="checkbox" name="inicio" id="inicio" value="true" />
                             <label class="custom-control-label" for="inicio">Inicio Personalizado</label>
                         </div>
                     </div>

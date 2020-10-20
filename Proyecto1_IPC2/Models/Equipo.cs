@@ -12,21 +12,20 @@ namespace Proyecto1_IPC2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Estado
+    public partial class Equipo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Estado()
+        public Equipo()
         {
-            this.Partida = new HashSet<Partida>();
-            this.Torneo = new HashSet<Torneo>();
+            this.Participante = new HashSet<Participante>();
         }
     
-        public int idEstado { get; set; }
+        public int idEquipo { get; set; }
+        public int idTorneo { get; set; }
         public string nombre { get; set; }
     
+        public virtual Torneo Torneo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Partida> Partida { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Torneo> Torneo { get; set; }
+        public virtual ICollection<Participante> Participante { get; set; }
     }
 }

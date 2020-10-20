@@ -21,7 +21,7 @@ namespace Proyecto1_IPC2.Controllers
         {
             if (juego.IsPlaying == 1) 
             { 
-                if(juego.Type != 1)
+                if(juego.Type > 1 & juego.Type < 6)
                 {
                     juego.enableSpaces();
                     if(juego.Turno == juego.P1.Color)
@@ -32,7 +32,7 @@ namespace Proyecto1_IPC2.Controllers
                     {
                         juego.P2.Cronometro.Start();
                     }
-                }else if(juego.Type==1){
+                }else{
                     if(juego.Turno == juego.P1.Color)
                     {
                         juego.P1.Cronometro.Start();
@@ -64,15 +64,37 @@ namespace Proyecto1_IPC2.Controllers
         {
             initJuego(usuario);
             juego.Type = Int32.Parse(TempData["modo"].ToString());
+            if(juego.Type == 6 | juego.Type == 7)
+            {
+                juego.Maquina = new Maquina(juego.P2.Color);
+                juego.P2.NombreUsuario = "Máquina";
+            }
             if (bool.Parse(TempData["personalizado"].ToString()))
             {
-                juego.IsPlaying = -1;
-                counter = 0;
-                juego.Mesa.Cuadricula[3, 3].Color = 0;
-                juego.Mesa.Cuadricula[3, 4].Color = 0;
-                juego.Mesa.Cuadricula[4, 3].Color = 0;
-                juego.Mesa.Cuadricula[4, 4].Color = 0;
-                juego.disableAll();
+                if(juego.Type > 1 & juego.Type < 6)
+                {
+                    juego.IsPlaying = -1;
+                    counter = 0;
+                    juego.Mesa.Cuadricula[3, 3].Color = 0;
+                    juego.Mesa.Cuadricula[3, 4].Color = 0;
+                    juego.Mesa.Cuadricula[4, 3].Color = 0;
+                    juego.Mesa.Cuadricula[4, 4].Color = 0;
+                    juego.disableAll();
+                }
+                else
+                {
+                    juego.IsPlaying = -2;
+                    counter = 0;
+                    juego.Mesa.Cuadricula[3, 3].Color = 0;
+                    juego.Mesa.Cuadricula[3, 4].Color = 0;
+                    juego.Mesa.Cuadricula[4, 3].Color = 0;
+                    juego.Mesa.Cuadricula[4, 4].Color = 0;
+                    juego.Mesa.Cuadricula[3, 3].Estado = true;
+                    juego.Mesa.Cuadricula[3, 4].Estado = true;
+                    juego.Mesa.Cuadricula[4, 3].Estado = true;
+                    juego.Mesa.Cuadricula[4, 4].Estado = true;
+                }
+                
 
             }
             return RedirectToAction("UnJugador", usuario);
@@ -150,6 +172,7 @@ namespace Proyecto1_IPC2.Controllers
                     idTipoPartida = juego.Type,
                     idEstado = result,
                     turnos = juego.P1.Movimientos,
+                    tiempo = juego.P1.getTiempo(),
                 };
 
                 db.Partida.Add(partida);
@@ -303,7 +326,7 @@ namespace Proyecto1_IPC2.Controllers
                 }
                 return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
             }
-            if(juego.Type == 1)
+            if(juego.Type == 1 | juego.Type > 5)
             {
                 juego.P1.Cronometro.Stop();
             }
@@ -320,7 +343,7 @@ namespace Proyecto1_IPC2.Controllers
             }
             juego.play(fila, columna, juego.Turno);
             juego.enableSpaces();
-            if(juego.Type == 1)
+            if(juego.Type == 1 | juego.Type > 5)
             {
                 if (juego.Turno == juego.P2.Color)
                 {
@@ -385,7 +408,7 @@ namespace Proyecto1_IPC2.Controllers
                 juego.P1.Color = 1; 
                 juego.P2.Color = 2; 
             }
-            if(juego.Type == 1)
+            if(juego.Type == 1 | juego.Type == 6 | juego.Type == 7)
             {
                 juego.Maquina.Color = juego.P2.Color;
             }

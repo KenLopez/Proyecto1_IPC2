@@ -27,6 +27,7 @@ namespace Proyecto1_IPC2.Models
         public int idTipoPartida { get; set; }
         public int idEstado { get; set; }
         public int turnos { get; set; }
+        public string tiempo { get; set; }
     
         public virtual Estado Estado { get; set; }
         public virtual Usuario Usuario { get; set; }

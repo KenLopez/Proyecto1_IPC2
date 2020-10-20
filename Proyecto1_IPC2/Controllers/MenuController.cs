@@ -133,10 +133,26 @@ namespace Proyecto1_IPC2.Controllers
         }
 
         [HttpPost]
-        public ActionResult PartidaXtream(int modo, bool inicio = false)
+        public ActionResult PartidaXtream(bool maquina, bool modo, bool inicio = false)
         {
             TempData["personalizado"] = inicio;
-            TempData["modo"] = modo;
+            if(maquina && modo)
+            {
+                TempData["modo"] = 6;
+            }
+            else if(maquina && !modo)
+            {
+                TempData["modo"] = 7;
+            }
+            else if(!maquina && modo)
+            {
+                TempData["modo"] = 4;
+            }
+            else if(!maquina && !modo)
+            {
+                TempData["modo"] = 5;
+            }
+            
             return RedirectToAction("PartidaXtream", "Partida", usuario);
         }
     }

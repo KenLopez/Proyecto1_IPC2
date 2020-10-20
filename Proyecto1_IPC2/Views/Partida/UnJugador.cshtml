@@ -8,9 +8,9 @@
     {
         HttpMethod = "POST",
         InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "Timers"
+        UpdateTargetId = "timers",
     };
-    if (Model.Type == 1)
+    if (Model.Type == 1 | Model.Type == 6 | Model.Type == 7)
     {
         ViewBag.Tabla = "tabla-lg";
         ViewBag.Usuario = "usuario";
@@ -214,7 +214,7 @@
         </div>
         <div class="col-lg-6">
             <div class="container botones">
-                @if (Model.Type == 1 & Model.IsPlaying == 0)
+                @if ((Model.Type == 1 | Model.Type > 5) & Model.IsPlaying == 0)
                 {
                     <div class="row">
                         <div class="container col-6">
@@ -243,11 +243,11 @@
                         </div>
                     </div>
                     <div class="row col-12">
-                        @using (Ajax.BeginForm("Timers","Partida",ajaxOptions, new { id="timerForm" }))
+                        @using (Ajax.BeginForm("Timers", "Partida","", ajaxOptions, new { id="timerForm" }))
                         {
 
                         }
-                        <div id="Timers">
+                        <div id="timers">
                             @Html.Partial("_Cronometros", Model)
                         </div>
                     </div>
@@ -297,14 +297,14 @@
 </div>
 @if (Model.IsPlaying == 1)
 {
-    <script>
+    /*<script>
         var auto_refresh = setInterval(function () { submitform(); }, 1000);
         function submitform() {
             document.getElementById("timerForm").submit();
         }
-    </script>
+    </script>*/
 }
-@if (Model.Type == 1)
+@if (Model.Type == 1 | Model.Type == 6 | Model.Type == 7)
 {
     if (Model.Turno == Model.P2.Color & Model.IsPlaying == 1)
     {

@@ -135,9 +135,13 @@ namespace Proyecto1_IPC2.Models.ViewModels
             if (contadorP1 > contadorP2)
             {
                 winner = p1;
-                if(type == 5)
+                if(type == 5 | type == 7)
                 {
                     winner = p2;
+                    if(type == 7)
+                    {
+                        return "DERROTA";
+                    }
                     return "¡EL GANADOR ES " + p2.NombreUsuario + "!";
                 }
                 if(type == 1)
@@ -151,9 +155,13 @@ namespace Proyecto1_IPC2.Models.ViewModels
             }else if (contadorP2 > contadorP1)
             {
                 winner = p2;
-                if (type == 5)
+                if (type == 5 | type == 7)
                 {
                     winner = p1;
+                    if(type == 7)
+                    {
+                        return "VICTORIA";
+                    }
                     return "¡EL GANADOR ES " + p1.NombreUsuario + "!";
                 }
                 if (type == 1)
