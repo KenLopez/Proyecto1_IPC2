@@ -115,7 +115,7 @@ namespace Proyecto1_IPC2.Models
         {
             disableAll();
             enableSpaces();
-            maquina.ponerFicha(mesa);
+            maquina.ponerFicha(mesa, p2.Color);
             play(maquina.Fila, maquina.Columna, maquina.Color);
         }
 
@@ -164,14 +164,14 @@ namespace Proyecto1_IPC2.Models
 
         }
 
-        public int contarFichas(Jugador color)
+        public int contarFichas(Jugador colores)
         {
             int contador=0;
-            for(int i = 0; i < 8; i++)
+            for(int i = 0; i < mesa.Filas; i++)
             {
-                for(int j = 0; j < 8; j++)
+                for(int j = 0; j < mesa.Columnas; j++)
                 {
-                    if(mesa.Cuadricula[i,j].Color == color.Color)
+                    if(colores.colorExists(mesa.Cuadricula[i,j].Color))
                     {
                         contador++;
                     }
@@ -232,7 +232,7 @@ namespace Proyecto1_IPC2.Models
             }
         }
 
-        public void enableSpaces()
+        public bool enableSpaces()
         {
             disableAll();
             int play = 0;
@@ -299,15 +299,9 @@ namespace Proyecto1_IPC2.Models
             }
             if (play == 0)
             {
-                if(p1.colorExists(turno))
-                {
-                    p1.Playable = false;
-                }
-                else
-                {
-                    p2.Playable = false;
-                }
+                return false;
             }
+            return true;
         }
 
         public void ponerFicha(bool arriba, bool abajo, bool derecha, bool izquierda, int fila, int columna, int color, Jugador player)

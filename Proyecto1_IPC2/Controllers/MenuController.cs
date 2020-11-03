@@ -168,24 +168,20 @@ namespace Proyecto1_IPC2.Controllers
             if(maquina && modo)
             {
                 TempData["modo"] = 6;
-                return RedirectToAction("JugadorMaquina", "PartidaX", usuario);
             }
             else if(maquina && !modo)
             {
                 TempData["modo"] = 7;
-                return RedirectToAction("JugadorMaquina", "PartidaX", usuario);
             }
             else if(!maquina && modo)
             {
                 TempData["modo"] = 4;
-                return RedirectToAction("JugadorMaquina", "PartidaX", usuario);
             }
             else if(!maquina && !modo)
             {
                 TempData["modo"] = 5;
-                return RedirectToAction("JugadorMaquina", "PartidaX", usuario);
             }
-            return View("Principal", usuario);
+            return RedirectToAction("PartidaXtream", "PartidaX" , usuario);
         }
     }
 

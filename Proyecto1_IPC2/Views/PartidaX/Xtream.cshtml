@@ -61,11 +61,10 @@
                         <div class="col-10">
                             <p class="col row @ViewBag.TurnoP1 @ViewBag.Usuario ">@Model.P1.NombreUsuario</p>
                             <div class="col row">
-                                <div class="col negro-sm"></div>
-                                <div class="col negro-sm"></div>
-                                <div class="col negro-sm"></div>
-                                <div class="col negro-sm"></div>
-                                <div class="col negro-sm"></div>
+                                @foreach (int color in Model.P1.Colores)
+                                {
+                                    <div class="col @Model.intToColor(color)-sm"></div>
+                                }
                             </div>
                         </div>
                         <div class="col-2 @("player" + ViewBag.Player + "-" + Model.P1.getColor())">
@@ -81,7 +80,10 @@
                                     <div class="col-10">
                                         <p class="col row usuarios @ViewBag.TurnoP2">@Model.P2.NombreUsuario</p>
                                         <div class="col row">
-                                            <div class="col negro-sm"></div>
+                                            @foreach (int color in Model.P2.Colores)
+                                            {
+                                                <div class="col @Model.intToColor(color)-sm"></div>
+                                            }
                                         </div>
                                     </div>
                                     <div class="col-2 @("player-" + Model.P2.getColor())">
@@ -269,9 +271,9 @@
         }
         @if (Model.Type == 1 | Model.Type == 6 | Model.Type == 7)
         {
-            if (Model.Turno == Model.P2.Color & Model.IsPlaying == 1)
+            if (Model.P2.colorExists(Model.Turno) & Model.IsPlaying == 1)
             {
-                using (Html.BeginForm("JugarMaquina", "Partida", FormMethod.Post, new { @id = "maquina" }))
+                using (Html.BeginForm("JugarMaquina", "PartidaX", FormMethod.Post, new { @id = "maquina" }))
                 {
 
                 }

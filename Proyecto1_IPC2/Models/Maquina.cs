@@ -14,6 +14,7 @@ namespace Proyecto1_IPC2.Models
         private int columna;
         private int color;
         private int maxCount;
+        private int[] colores;
 
         public Maquina(int color)
         {
@@ -21,14 +22,18 @@ namespace Proyecto1_IPC2.Models
             columna = 0;
             Color = color;
             maxCount = 0;
+            colores = new int[1];
+            colores[0] = color;
         }
 
         public int Color { get { return color; } set { color = value; } }
         public int Fila { get { return fila; }}
         public int Columna { get { return columna; } }
+        public int[] Colores { get { return colores; } set { colores = value; } }
 
-        public void ponerFicha(Tablero mesa)
+        public void ponerFicha(Tablero mesa, int color)
         {
+            this.color = color;
             maxCount = 0;
             int counter;
             bool arriba;
@@ -148,7 +153,7 @@ namespace Proyecto1_IPC2.Models
             int i = x - 1;
             while (i >= 0)
             {
-                if (mesa.Cuadricula[i, y].Color == color) { break; }
+                if (colorExists(mesa.Cuadricula[i, y].Color)) { break; }
                 counter++;
                 i--;
             }
@@ -159,9 +164,9 @@ namespace Proyecto1_IPC2.Models
         {
             int counter = 0;
             int i = x + 1;
-            while (i < 8)
+            while (i < mesa.Filas)
             {
-                if (mesa.Cuadricula[i, y].Color == color) { break; }
+                if (colorExists(mesa.Cuadricula[i, y].Color)) { break; }
                 counter++;
                 i++;
             }
@@ -174,7 +179,7 @@ namespace Proyecto1_IPC2.Models
             int i = y - 1;
             while (i >= 0)
             {
-                if (mesa.Cuadricula[x, i].Color == color) { break; }
+                if (colorExists(mesa.Cuadricula[x, i].Color)) { break; }
                 counter++;
                 i--;
             }
@@ -185,9 +190,9 @@ namespace Proyecto1_IPC2.Models
         {
             int counter = 0;
             int i = y + 1;
-            while (i < 8)
+            while (i < mesa.Columnas)
             {
-                if (mesa.Cuadricula[x, i].Color == color) { break; }
+                if (colorExists(mesa.Cuadricula[x, i].Color)) { break; }
                 counter++;
                 i++;
             }
@@ -197,12 +202,14 @@ namespace Proyecto1_IPC2.Models
         public int contarArIzq(Tablero mesa, int x, int y)
         {
             int counter = 0;
-            int i = 1;
-            while (x - i >= 0 & y - i >= 0)
+            int i = x - 1;
+            int j = y - 1;
+            while (x - i >= 0 & y - j >= 0)
             {
-                if (mesa.Cuadricula[x - i, y - i].Color == color) { break; }
+                if (colorExists(mesa.Cuadricula[x - i, y - j].Color)) { break; }
                 counter++;
                 i++;
+                j++;
             }
             return counter;
         }
@@ -210,12 +217,14 @@ namespace Proyecto1_IPC2.Models
         public int contarAbIzq(Tablero mesa, int x, int y)
         {
             int counter = 0;
-            int i = 1;
-            while (i < 8 - x & y + i >= 0)
+            int i = x + 1;
+            int j = y - 1;
+            while (i < mesa.Filas - x & y - j  >= 0)
             {
-                if (mesa.Cuadricula[x + i, y - i].Color == color) { break; }
+                if (colorExists(mesa.Cuadricula[x + i, y - j].Color)) { break; }
                 counter++;
                 i++;
+                j++;
             }
             return counter;
         }
@@ -223,12 +232,14 @@ namespace Proyecto1_IPC2.Models
         public int contarArDer(Tablero mesa, int x, int y)
         {
             int counter = 0;
-            int i = 1;
-            while (x - i >= 0 & i < 8 - y)
+            int i = x - 1;
+            int j = y + 1;
+            while (x - i >= 0 & j < mesa.Columnas - y)
             {
-                if (mesa.Cuadricula[x - i, y + i].Color == color) { break; }
+                if (colorExists(mesa.Cuadricula[x - i, y + j].Color)) { break; }
                 counter++;
                 i++;
+                j++;
             }
             return counter;
         }
@@ -236,14 +247,28 @@ namespace Proyecto1_IPC2.Models
         public int contarAbDer(Tablero mesa, int x, int y)
         {
             int counter = 0;
-            int i = 1;
-            while (i < 8 - x & i < 8 - y)
+            int i = x + 1;
+            int j = y + 1;
+            while (i < mesa.Filas - x & j < mesa.Columnas - y)
             {
-                if (mesa.Cuadricula[x + i, y + i].Color == color) { break; }
+                if (colorExists(mesa.Cuadricula[x + i, y + j].Color)) { break; }
                 counter++;
                 i++;
+                j++;
             }
             return counter;
         }
+        public bool colorExists(int color)
+        {
+            foreach (int elemento in colores)
+            {
+                if (color == elemento)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 }

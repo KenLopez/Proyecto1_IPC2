@@ -76,29 +76,29 @@ namespace Proyecto1_IPC2.Controllers
                 {
                     juego.IsPlaying = -1;
                     counter = 0;
-                    juego.Mesa.Cuadricula[3, 3].Color = 0;
-                    juego.Mesa.Cuadricula[3, 4].Color = 0;
-                    juego.Mesa.Cuadricula[4, 3].Color = 0;
-                    juego.Mesa.Cuadricula[4, 4].Color = 0;
+                    juego.Mesa.Cuadricula[(juego.Mesa.Filas / 2) - 1, (juego.Mesa.Columnas / 2) - 1].Color = 0;
+                    juego.Mesa.Cuadricula[(juego.Mesa.Filas / 2) - 1, juego.Mesa.Columnas / 2].Color = 0;
+                    juego.Mesa.Cuadricula[juego.Mesa.Filas / 2, juego.Mesa.Columnas / 2].Color = 0;
+                    juego.Mesa.Cuadricula[juego.Mesa.Filas / 2, (juego.Mesa.Columnas / 2) - 1].Color = 0;
                     juego.disableAll();
                 }
                 else
                 {
                     juego.IsPlaying = -2;
                     counter = 0;
-                    juego.Mesa.Cuadricula[3, 3].Color = 0;
-                    juego.Mesa.Cuadricula[3, 4].Color = 0;
-                    juego.Mesa.Cuadricula[4, 3].Color = 0;
-                    juego.Mesa.Cuadricula[4, 4].Color = 0;
-                    juego.Mesa.Cuadricula[3, 3].Estado = true;
-                    juego.Mesa.Cuadricula[3, 4].Estado = true;
-                    juego.Mesa.Cuadricula[4, 3].Estado = true;
-                    juego.Mesa.Cuadricula[4, 4].Estado = true;
+                    juego.Mesa.Cuadricula[(juego.Mesa.Filas / 2) - 1, (juego.Mesa.Columnas / 2) - 1].Color = 0;
+                    juego.Mesa.Cuadricula[(juego.Mesa.Filas / 2) - 1, juego.Mesa.Columnas / 2].Color = 0;
+                    juego.Mesa.Cuadricula[juego.Mesa.Filas / 2, juego.Mesa.Columnas / 2].Color = 0;
+                    juego.Mesa.Cuadricula[juego.Mesa.Filas / 2, (juego.Mesa.Columnas / 2) - 1].Color = 0;
+                    juego.Mesa.Cuadricula[(juego.Mesa.Filas / 2) - 1, (juego.Mesa.Columnas / 2) - 1].Estado = true;
+                    juego.Mesa.Cuadricula[(juego.Mesa.Filas / 2) - 1, juego.Mesa.Columnas / 2].Estado = true;
+                    juego.Mesa.Cuadricula[juego.Mesa.Filas / 2, juego.Mesa.Columnas / 2].Estado = true;
+                    juego.Mesa.Cuadricula[juego.Mesa.Filas / 2, (juego.Mesa.Columnas / 2) - 1].Estado = true;
                 }
 
 
             }
-            return RedirectToAction("UnJugador", usuario);
+            return RedirectToAction("Xtream", usuario);
         }
 
         [HttpPost]
@@ -122,21 +122,29 @@ namespace Proyecto1_IPC2.Controllers
         public ActionResult JugarMaquina(usuarioViewModel usuario)
         {
             juego.playMaquina();
-            if (juego.Turno == juego.P1.Color)
+            for (int i = 0; i <= juego.Orden.Length; i++)
             {
-                juego.enableSpaces();
-                if (!juego.P1.Playable)
+                if (i != juego.Orden.Length)
                 {
-                    juego.Turno = juego.P2.Color;
-                    juego.enableSpaces();
-                    if (!juego.P2.Playable)
+                    if (juego.enableSpaces())
                     {
-                        juego.IsPlaying = 2;
+                        if (juego.Type == 1 | juego.Type > 5)
+                        {
+                            if (juego.P2.colorExists(juego.Turno))
+                            {
+                                juego.disableAll();
+                            }
+                        }
+                        break;
                     }
                     else
                     {
-                        juego.disableAll();
+                        juego.cambiarTurno();
                     }
+                }
+                else
+                {
+                    juego.IsPlaying = 2;
                 }
             }
             if (juego.IsPlaying == 2)
@@ -186,6 +194,7 @@ namespace Proyecto1_IPC2.Controllers
             initJuego(usuario);
             juego.Maquina = new Maquina(juego.P2.Colores[0]);
             juego.P2.NombreUsuario = "Máquina";
+            juego.Maquina.Colores = juego.P2.Colores;
             return RedirectToAction("Xtream", usuario);
         }
 
@@ -244,7 +253,7 @@ namespace Proyecto1_IPC2.Controllers
             partida.Mesa.Columnas = Int32.Parse(TempData["columnas"].ToString());
             partida.Mesa.Filas = Int32.Parse(TempData["filas"].ToString());
             partida.Mesa.dimensionTablero();
-            partida.Type = Int32.Parse(TempData["modo"].ToString());
+            partida.Type = juego.Type;
             partida.P1.Colores = TempData["coloresP1"] as int[];
             partida.P2.Colores = TempData["coloresP2"] as int[];
             partida.P1.Color = partida.P1.Colores[0];
@@ -276,6 +285,8 @@ namespace Proyecto1_IPC2.Controllers
             partida.cambiarTurno();
             partida.Mesa.Cuadricula[partida.Mesa.Filas / 2, (partida.Mesa.Columnas / 2) - 1].Color = partida.Turno;
             partida.Turno = partida.Orden[0];
+            partida.P1.Color = partida.P1.Colores[0];
+            partida.P2.Color = partida.P2.Colores[0];
             partida.disableAll();
             juego = partida;
         }
@@ -306,10 +317,14 @@ namespace Proyecto1_IPC2.Controllers
             else
             {
                 juego.IsPlaying = -2;
-                juego.Mesa.Cuadricula[3, 3].Estado = true;
-                juego.Mesa.Cuadricula[3, 4].Estado = true;
-                juego.Mesa.Cuadricula[4, 3].Estado = true;
-                juego.Mesa.Cuadricula[4, 4].Estado = true;
+                juego.Mesa.Cuadricula[(juego.Mesa.Filas / 2) - 1, (juego.Mesa.Columnas / 2) - 1].Color = 0;
+                juego.Mesa.Cuadricula[(juego.Mesa.Filas / 2) - 1, juego.Mesa.Columnas / 2].Color = 0;
+                juego.Mesa.Cuadricula[juego.Mesa.Filas / 2, juego.Mesa.Columnas / 2].Color = 0;
+                juego.Mesa.Cuadricula[juego.Mesa.Filas / 2, (juego.Mesa.Columnas / 2) - 1].Color = 0;
+                juego.Mesa.Cuadricula[(juego.Mesa.Filas / 2) - 1, (juego.Mesa.Columnas / 2) - 1].Estado = true;
+                juego.Mesa.Cuadricula[(juego.Mesa.Filas / 2) - 1, juego.Mesa.Columnas / 2].Estado = true;
+                juego.Mesa.Cuadricula[juego.Mesa.Filas / 2, juego.Mesa.Columnas / 2].Estado = true;
+                juego.Mesa.Cuadricula[juego.Mesa.Filas / 2, (juego.Mesa.Columnas / 2) - 1].Estado = true;
 
             }
             return RedirectToAction("Xtream", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
@@ -318,19 +333,21 @@ namespace Proyecto1_IPC2.Controllers
         [HttpPost]
         public ActionResult PonerFicha(int boton)
         {
-            int fila = boton / juego.Mesa.Filas;
-            int columna = boton % juego.Mesa.Filas;
+            int fila = boton / juego.Mesa.Columnas;
+            int columna = boton  % juego.Mesa.Columnas;
             if (juego.IsPlaying == -2)
             {
                 juego.Mesa.Cuadricula[fila, columna].Color = juego.Turno;
                 juego.Mesa.Cuadricula[fila, columna].Estado = false;
                 counter++;
-                if (juego.Turno == 1) { juego.Turno = 2; }
-                else { juego.Turno = 1; }
+                juego.cambiarTurno();
                 if (counter == 4)
                 {
+                    juego.Turno = juego.Orden[0];
+                    juego.P1.Color = juego.P1.Colores[0];
+                    juego.P2.Color = juego.P2.Colores[0];
                     juego.IsPlaying = 1;
-                    if (juego.Turno == juego.P1.Color)
+                    if (juego.P1.colorExists(juego.Turno))
                     {
                         juego.P1.Cronometro.Start();
                     }
@@ -357,51 +374,29 @@ namespace Proyecto1_IPC2.Controllers
                 }
             }
             juego.play(fila, columna, juego.Turno);
-            juego.enableSpaces();
-            if (juego.Type == 1 | juego.Type > 5)
+            for(int i = 0; i<=juego.Orden.Length; i++)
             {
-                if (juego.Turno == juego.P2.Color)
+                if(i!= juego.Orden.Length)
                 {
-                    if (!juego.P2.Playable)
+                    if (juego.enableSpaces())
                     {
-                        juego.Turno = juego.P1.Color;
-                        juego.enableSpaces();
-                        if (!juego.P1.Playable)
+                        if (juego.Type == 1 | juego.Type > 5)
                         {
-                            juego.IsPlaying = 2;
-                        }
-                        else
-                        {
-                            juego.disableAll();
-                        }
+                            if (juego.P2.colorExists(juego.Turno))
+                            {
+                                juego.disableAll();
+                            }
+                        }  
+                        break;
                     }
-                }
-            }
-            else if (juego.Type == 2 | juego.Type == 4 | juego.Type == 5)
-            {
-                if (juego.Turno == juego.P1.Color)
-                {
-                    if (!juego.P1.Playable)
+                    else
                     {
-                        juego.Turno = juego.P2.Color;
-                        juego.enableSpaces();
-                        if (!juego.P2.Playable)
-                        {
-                            juego.IsPlaying = 2;
-                        }
+                        juego.cambiarTurno();
                     }
                 }
                 else
                 {
-                    if (!juego.P2.Playable)
-                    {
-                        juego.Turno = juego.P1.Color;
-                        juego.enableSpaces();
-                        if (!juego.P1.Playable)
-                        {
-                            juego.IsPlaying = 2;
-                        }
-                    }
+                    juego.IsPlaying = 2;
                 }
             }
             if (juego.IsPlaying == 2)

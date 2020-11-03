@@ -71,7 +71,7 @@ namespace Proyecto1_IPC2.Models.ViewModels
         {
             disableAll();
             enableSpaces();
-            maquina.ponerFicha(mesa);
+            maquina.ponerFicha(mesa, p2.Color);
             play(maquina.Fila, maquina.Columna, maquina.Color);
         }
 
