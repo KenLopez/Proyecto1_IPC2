@@ -35,9 +35,9 @@ namespace Proyecto1_IPC2.Models
             bool abajo;
             bool izquierda;
             bool derecha;
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < mesa.Filas; i++)
             {
-                for(int j = 0; j < 8; j++)
+                for(int j = 0; j < mesa.Columnas; j++)
                 {
                     arriba = true;
                     abajo = true;
@@ -49,7 +49,7 @@ namespace Proyecto1_IPC2.Models
                         {
                             arriba = false;
                         }
-                        if (i == 7)
+                        if (i == mesa.Filas-1)
                         {
                             abajo = false;
                         }
@@ -57,7 +57,7 @@ namespace Proyecto1_IPC2.Models
                         {
                             izquierda = false;
                         }
-                        if (j == 7)
+                        if (j == mesa.Columnas-1)
                         {
                             derecha = false;
                         }

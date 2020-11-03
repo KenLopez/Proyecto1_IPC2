@@ -12,20 +12,19 @@ using System.Text;
 
 namespace Proyecto1_IPC2.Controllers
 {
-    public class PartidaController : Controller
+    public class PartidaXController : Controller
     {
-        static Models.ViewModels.Partida juego = new Models.ViewModels.Partida();
+        static Models.PartidaXtream juego = new Models.PartidaXtream();
         static int counter;
-        // GET: Partida/UnJugador
-
-        public ActionResult UnJugador(usuarioViewModel usuario)
+        // GET: Partida/PartidaX
+        public ActionResult Xtream(usuarioViewModel usuario)
         {
-            if (juego.IsPlaying == 1) 
-            { 
-                if(juego.Type > 1 & juego.Type < 6)
+            if (juego.IsPlaying == 1)
+            {
+                if (juego.Type > 1 & juego.Type < 6)
                 {
                     juego.enableSpaces();
-                    if(juego.Turno == juego.P1.Color)
+                    if (juego.P1.colorExists(juego.Turno))
                     {
                         juego.P1.Cronometro.Start();
                     }
@@ -33,12 +32,14 @@ namespace Proyecto1_IPC2.Controllers
                     {
                         juego.P2.Cronometro.Start();
                     }
-                }else{
-                    if(juego.Turno == juego.P1.Color)
+                }
+                else
+                {
+                    if (juego.P1.colorExists(juego.Turno))
                     {
                         juego.P1.Cronometro.Start();
                     }
-                    if(juego.Turno == juego.P2.Color)
+                    if (juego.P2.colorExists(juego.Turno))
                     {
                         juego.disableAll();
                     }
@@ -47,32 +48,31 @@ namespace Proyecto1_IPC2.Controllers
                         juego.enableSpaces();
                     }
                 }
-                
+
             }
             var viewResult = new ViewResult();
             viewResult.ViewData.Model = juego;
             return View(juego);
-        }
+        } 
 
         public ActionResult DosJugadores(usuarioViewModel usuario)
         {
             initJuego(usuario);
-            juego.Type = 2;
-            return RedirectToAction("UnJugador", usuario);
+            return RedirectToAction("Xtream", usuario);
         }
 
         public ActionResult PartidaXtream(usuarioViewModel usuario)
         {
             initJuego(usuario);
             juego.Type = Int32.Parse(TempData["modo"].ToString());
-            if(juego.Type == 6 | juego.Type == 7)
+            if (juego.Type == 6 | juego.Type == 7)
             {
                 juego.Maquina = new Maquina(juego.P2.Color);
                 juego.P2.NombreUsuario = "Máquina";
             }
             if (bool.Parse(TempData["personalizado"].ToString()))
             {
-                if(juego.Type > 1 & juego.Type < 6)
+                if (juego.Type > 1 & juego.Type < 6)
                 {
                     juego.IsPlaying = -1;
                     counter = 0;
@@ -95,10 +95,10 @@ namespace Proyecto1_IPC2.Controllers
                     juego.Mesa.Cuadricula[4, 3].Estado = true;
                     juego.Mesa.Cuadricula[4, 4].Estado = true;
                 }
-                
+
 
             }
-            return RedirectToAction("Xtream", usuario);
+            return RedirectToAction("UnJugador", usuario);
         }
 
         [HttpPost]
@@ -115,7 +115,7 @@ namespace Proyecto1_IPC2.Controllers
                 juego.playMaquina();
                 juego.P2.Cronometro.Stop();
             }
-            return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
+            return RedirectToAction("Xtream", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
         }
 
         [HttpPost]
@@ -141,10 +141,10 @@ namespace Proyecto1_IPC2.Controllers
             }
             if (juego.IsPlaying == 2)
             {
-                
+
                 guardarRegistro();
             }
-            return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
+            return RedirectToAction("Xtream", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
         }
 
         public void guardarRegistro()
@@ -184,22 +184,21 @@ namespace Proyecto1_IPC2.Controllers
         public ActionResult JugadorMaquina(usuarioViewModel usuario)
         {
             initJuego(usuario);
-            juego.Maquina = new Maquina(juego.P2.Color);
-            juego.Type = 1;
+            juego.Maquina = new Maquina(juego.P2.Colores[0]);
             juego.P2.NombreUsuario = "Máquina";
-            return RedirectToAction("UnJugador", usuario);
+            return RedirectToAction("Xtream", usuario);
         }
 
         public ActionResult setTablero(usuarioViewModel usuario)
         {
             initJuego(usuario);
-            if(TempData["Type"].ToString() == "1")
+            if (TempData["Type"].ToString() == "1")
             {
                 juego.Type = 1;
                 juego.Maquina = new Maquina(juego.P2.Color);
                 juego.P2.NombreUsuario = "Máquina";
             }
-            else if(TempData["Type"].ToString() == "2")
+            else if (TempData["Type"].ToString() == "2")
             {
                 juego.Type = 2;
             }
@@ -227,49 +226,64 @@ namespace Proyecto1_IPC2.Controllers
                 string turn = reader.ReadElementContentAsString();
                 juego.Turno = juego.Mesa.colorToInt(turn);
             }
-            return RedirectToAction("UnJugador", usuario);
+            return RedirectToAction("Xtream", usuario);
         }
 
         public void initJuego(usuarioViewModel usuario)
         {
+
             var rand = new Random();
-            Models.ViewModels.Partida partida = new Models.ViewModels.Partida();
+            Models.PartidaXtream partida = new Models.PartidaXtream();
             partida.Turnos = 0;
             partida.P1.NombreUsuario = usuario.NombreUsuario;
             partida.P1.Id = usuario.Id;
             partida.P1.Movimientos = 0;
             partida.P2.Movimientos = 0;
-            partida.Mesa.Cuadricula[3, 3].Color = 1;
-            partida.Mesa.Cuadricula[3, 4].Color = 2;
-            partida.Mesa.Cuadricula[4, 3].Color = 2;
-            partida.Mesa.Cuadricula[4, 4].Color = 1;
             partida.P1.Playable = true;
             partida.P2.Playable = true;
+            partida.Mesa.Columnas = Int32.Parse(TempData["columnas"].ToString());
+            partida.Mesa.Filas = Int32.Parse(TempData["filas"].ToString());
+            partida.Mesa.dimensionTablero();
+            partida.Type = Int32.Parse(TempData["modo"].ToString());
+            partida.P1.Colores = TempData["coloresP1"] as int[];
+            partida.P2.Colores = TempData["coloresP2"] as int[];
+            partida.P1.Color = partida.P1.Colores[0];
+            partida.P2.Color = partida.P2.Colores[0];
             partida.IsPlaying = 0;
-            partida.P1.Color = rand.Next(1, 3);
-            if (partida.P1.Color == 1)
-            {
-                partida.P2.Color = 2;
-            }
-            else
-            {
-                partida.P2.Color = 1;
-            }
+            partida.Orden = new int[partida.P1.Colores.Length + partida.P2.Colores.Length];
             if (rand.Next(1, 3) == 1)
             {
-                partida.Turno = partida.P1.Color;
+                for(int i = 0; i < partida.P1.Colores.Length; i++)
+                {
+                    partida.Orden[2*i] = partida.P1.Colores[i];
+                    partida.Orden[2*i+1] = partida.P2.Colores[i];
+                }
             }
             else
             {
-                partida.Turno = partida.P2.Color;
+                for (int i = 0; i < partida.P1.Colores.Length; i++)
+                {
+                    partida.Orden[2 * i] = partida.P2.Colores[i];
+                    partida.Orden[2 * i + 1] = partida.P1.Colores[i];
+                }
             }
+            partida.Turno = partida.Orden[0];
+            partida.Mesa.Cuadricula[(partida.Mesa.Filas / 2)-1, (partida.Mesa.Columnas / 2)-1].Color = partida.Turno;
+            partida.cambiarTurno();
+            partida.Mesa.Cuadricula[(partida.Mesa.Filas / 2)-1, partida.Mesa.Columnas / 2].Color = partida.Turno;
+            partida.cambiarTurno();
+            partida.Mesa.Cuadricula[partida.Mesa.Filas / 2, partida.Mesa.Columnas / 2].Color = partida.Turno;
+            partida.cambiarTurno();
+            partida.Mesa.Cuadricula[partida.Mesa.Filas / 2, (partida.Mesa.Columnas / 2) - 1].Color = partida.Turno;
+            partida.Turno = partida.Orden[0];
+            partida.disableAll();
             juego = partida;
         }
 
         [HttpPost]
         public ActionResult DefinirP2(string p2Nombre)
         {
-            if(p2Nombre == "" | p2Nombre == null)
+            if (p2Nombre == "" | p2Nombre == null)
             {
                 juego.P2.NombreUsuario = "Jugador2";
             }
@@ -277,10 +291,10 @@ namespace Proyecto1_IPC2.Controllers
             {
                 juego.P2.NombreUsuario = p2Nombre;
             }
-            if(juego.IsPlaying != -1)
+            if (juego.IsPlaying != -1)
             {
                 juego.IsPlaying = 1;
-                if(juego.Turno == juego.P1.Color)
+                if (juego.Turno == juego.P1.Color)
                 {
                     juego.P1.Cronometro.Start();
                 }
@@ -298,22 +312,22 @@ namespace Proyecto1_IPC2.Controllers
                 juego.Mesa.Cuadricula[4, 4].Estado = true;
 
             }
-            return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
+            return RedirectToAction("Xtream", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
         }
 
         [HttpPost]
-        public ActionResult PonerFicha(string boton)
+        public ActionResult PonerFicha(int boton)
         {
-            int fila = Int32.Parse(boton) / 8;
-            int columna = Int32.Parse(boton) % 8;
-            if(juego.IsPlaying == -2)
+            int fila = boton / juego.Mesa.Filas;
+            int columna = boton % juego.Mesa.Filas;
+            if (juego.IsPlaying == -2)
             {
                 juego.Mesa.Cuadricula[fila, columna].Color = juego.Turno;
                 juego.Mesa.Cuadricula[fila, columna].Estado = false;
                 counter++;
                 if (juego.Turno == 1) { juego.Turno = 2; }
                 else { juego.Turno = 1; }
-                if(counter == 4)
+                if (counter == 4)
                 {
                     juego.IsPlaying = 1;
                     if (juego.Turno == juego.P1.Color)
@@ -325,15 +339,15 @@ namespace Proyecto1_IPC2.Controllers
                         juego.P2.Cronometro.Start();
                     }
                 }
-                return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
+                return RedirectToAction("Xtream", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
             }
-            if(juego.Type == 1 | juego.Type > 5)
+            if (juego.Type > 5)
             {
                 juego.P1.Cronometro.Stop();
             }
             else
             {
-                if(juego.Turno == juego.P1.Color)
+                if (juego.P1.colorExists(juego.Turno))
                 {
                     juego.P1.Cronometro.Stop();
                 }
@@ -344,7 +358,7 @@ namespace Proyecto1_IPC2.Controllers
             }
             juego.play(fila, columna, juego.Turno);
             juego.enableSpaces();
-            if(juego.Type == 1 | juego.Type > 5)
+            if (juego.Type == 1 | juego.Type > 5)
             {
                 if (juego.Turno == juego.P2.Color)
                 {
@@ -390,38 +404,39 @@ namespace Proyecto1_IPC2.Controllers
                     }
                 }
             }
-            if(juego.IsPlaying == 2)
+            if (juego.IsPlaying == 2)
             {
                 guardarRegistro();
             }
-            return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario }); 
+            return RedirectToAction("Xtream", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
         }
 
         [HttpPost]
         public ActionResult CambiarColor()
         {
-            if (juego.P1.Color == 1) 
-            { 
-                juego.P1.Color = 2; 
-                juego.P2.Color = 1; 
+            if (juego.P1.Color == 1)
+            {
+                juego.P1.Color = 2;
+                juego.P2.Color = 1;
             }
-            else { 
-                juego.P1.Color = 1; 
-                juego.P2.Color = 2; 
+            else
+            {
+                juego.P1.Color = 1;
+                juego.P2.Color = 2;
             }
-            if(juego.Type == 1 | juego.Type == 6 | juego.Type == 7)
+            if (juego.Type == 1 | juego.Type == 6 | juego.Type == 7)
             {
                 juego.Maquina.Color = juego.P2.Color;
             }
-            return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
+            return RedirectToAction("Xtream", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
         }
 
         [HttpPost]
         public ActionResult CambiarTurno()
         {
-            if(juego.Turno == 1) { juego.Turno = 2; }
+            if (juego.Turno == 1) { juego.Turno = 2; }
             else { juego.Turno = 1; }
-            return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
+            return RedirectToAction("Xtream", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
         }
 
         [HttpPost]
@@ -433,14 +448,14 @@ namespace Proyecto1_IPC2.Controllers
         [HttpPost]
         public ActionResult Timers()
         {
-            return PartialView("_Cronometros", juego);
+            return PartialView("CronometrosX", juego);
         }
 
         public FileResult Descargar()
         {
             string data = juego.toXml();
-            string virtualPath = Server.MapPath("~/XMLFiles/partida-" + DateTime.Now.Day.ToString()+DateTime.Now.Month.ToString()+DateTime.Now.Year.ToString()+
-                "-"+DateTime.Now.Hour.ToString()+"_"+DateTime.Now.Minute.ToString()+"_"+DateTime.Now.Second+".xml");
+            string virtualPath = Server.MapPath("~/XMLFiles/partida-" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() +
+                "-" + DateTime.Now.Hour.ToString() + "_" + DateTime.Now.Minute.ToString() + "_" + DateTime.Now.Second + ".xml");
             using (FileStream file = System.IO.File.Create(virtualPath))
             {
                 byte[] info = new UTF8Encoding(true).GetBytes(data);

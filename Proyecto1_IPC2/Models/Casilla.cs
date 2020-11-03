@@ -27,6 +27,22 @@ namespace Proyecto1_IPC2.Models
                     return "blanco";
                 case 2:
                     return "negro";
+                case 3:
+                    return "azul";
+                case 4:
+                    return "rojo";
+                case 5:
+                    return "cafe";
+                case 6:
+                    return "verde";
+                case 7:
+                    return "naranja";
+                case 8:
+                    return "amarillo";
+                case 9:
+                    return "rosado";
+                case 10:
+                    return "morado";
                 default:
                     return "casilla";
             }

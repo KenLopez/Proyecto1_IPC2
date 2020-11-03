@@ -18,7 +18,7 @@
 <br />
 <article id="articulo">
     <div class="botones1">
-        <button type="button" class="opcion" id="Un jugador" data-target="#partidaModal" data-toggle="modal" ><i class="fas fa-gamepad fa-lg"></i> Clásico</button>
+        <button type="button" class="opcion" id="Un jugador" data-target="#partidaModal" data-toggle="modal"><i class="fas fa-gamepad fa-lg"></i> Clásico</button>
 
         <button type="button" class="opcion" id="Xtream" data-target="#xtreamModal" data-toggle="modal"><i class="fab fa-buromobelexperte fa-lg"></i> Xtream</button>
 
@@ -30,7 +30,7 @@
         <button type="button" class="opcion" id="Reportes" data-target="#uploadModal" data-toggle="modal"><i class="fas fa-cloud-upload-alt"></i> Cargar Partida</button>
     </div>
 </article>
-<div class="modal fade" tabindex="-1" id="xtreamModal" data-backdrop="static" role="dialog" data-show="true">
+<div class="modal fade" tabindex="-1" id="xtreamModal" data-backdrop="static" role="dialog" data-show="true" width="500px">
     <div class="modal-dialog modal-dialog-centered" role="dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -41,6 +41,101 @@
             {
                 <div class="modal-body">
                     <div class="container">
+                        <h4>Tablero</h4>
+                        <div class="custom-control-inline">
+                            <input class="form-control form-control-sm" type="number" min="6" max="20" step="2" value="6" name="filas" required />
+                            <p>X</p>
+                            <input class="form-control form-control-sm" type="number" min="6" max="20" step="2" value="6" name="columnas" required/>
+                        </div>
+                        <p class="text-danger">@ViewBag.ErrorSize</p>
+                        <h4>Colores</h4>
+                        <h5>    Jugador 1</h5>
+                        <div class="input-group">
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="1p1" value="1" name="coloresP1" checked>
+                                <label class="custom-control-label" for="1p1">Blanco</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="2p1" value="2" name="coloresP1">
+                                <label class="custom-control-label" for="2p1">Negro</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="3p1" value="3" name="coloresP1">
+                                <label class="custom-control-label" for="3p1">Azul</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="4p1" value="4" name="coloresP1">
+                                <label class="custom-control-label" for="4p1">Rojo</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="5p1" value="5" name="coloresP1">
+                                <label class="custom-control-label" for="5p1">Café</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="6p1" value="6" name="coloresP1">
+                                <label class="custom-control-label" for="6p1">Verde</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="7p1" value="7" name="coloresP1">
+                                <label class="custom-control-label" for="7p1">Naranja</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="8p1" value="8" name="coloresP1">
+                                <label class="custom-control-label" for="8p1">Amarillo</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="9p1" value="9" name="coloresP1">
+                                <label class="custom-control-label" for="9p1">Rosado</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="10p1" value="10" name="coloresP1">
+                                <label class="custom-control-label" for="10p1">Morado</label>
+                            </div>
+                        </div>
+                        <h5>    Jugador 2</h5>
+                        <div class="input-group">
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="1p2" value="1" name="coloresP2">
+                                <label class="custom-control-label" for="1p2">Blanco</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="2p2" value="2" name="coloresP2" checked>
+                                <label class="custom-control-label" for="2p2">Negro</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="3p2" value="3" name="coloresP2">
+                                <label class="custom-control-label" for="3p2">Azul</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="4p2" value="4" name="coloresP2">
+                                <label class="custom-control-label" for="4p2">Rojo</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="5p2" value="5" name="coloresP2">
+                                <label class="custom-control-label" for="5p2">Café</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="6p2" value="6" name="coloresP2">
+                                <label class="custom-control-label" for="6p2">Verde</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="7p2" value="7" name="coloresP2">
+                                <label class="custom-control-label" for="7p2">Naranja</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="8p2" value="8" name="coloresP2">
+                                <label class="custom-control-label" for="8p2">Amarillo</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="9p2" value="9" name="coloresP2">
+                                <label class="custom-control-label" for="9p2">Rosado</label>
+                            </div>
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" class="custom-control-input" id="10p2" value="10" name="coloresP2">
+                                <label class="custom-control-label" for="10p2">Morado</label>
+                            </div>
+                        </div>
+                        <p class="text-danger">@ViewBag.ErrorColores</p>
                         <h4>Cantidad de Jugadores</h4>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input class="custom-control-input" type="radio" name="maquina" id="solo" value="true" checked />
@@ -85,17 +180,17 @@
             <div class="modal-body justify-content-center">
                 @using (Html.BeginForm("PVM", "Menu", FormMethod.Post, @Model))
                 {
-                <div class="container">
-                    <button class="btn btn-success btn-block" type="submit" value="Upload"><i class="fas fa-gamepad fa-lg"></i> Vs. Máquina</button>
-                </div>
-                    
+                    <div class="container">
+                        <button class="btn btn-success btn-block" type="submit" value="Upload"><i class="fas fa-gamepad fa-lg"></i> Vs. Máquina</button>
+                    </div>
+
                 }
                 <br>
                 @using (Html.BeginForm("PVP", "Menu", FormMethod.Post))
                 {
-            <div class="container">
-                <button class="btn btn-info btn-block" type="submit" value="Upload"><i class="fas fa-gamepad fa-lg"></i> Vs. Jugador</button>
-            </div>
+                    <div class="container">
+                        <button class="btn btn-info btn-block" type="submit" value="Upload"><i class="fas fa-gamepad fa-lg"></i> Vs. Jugador</button>
+                    </div>
                 }
                 <br />
             </div>
@@ -134,6 +229,14 @@
     <script>
         $(window).on('load', function () {
             $('#uploadModal').modal('show');
+        });
+    </script>
+}
+@if (ViewBag.XtreamError != null)
+{
+    <script>
+        $(window).on('load', function () {
+            $('#xtreamModal').modal('show');
         });
     </script>
 }

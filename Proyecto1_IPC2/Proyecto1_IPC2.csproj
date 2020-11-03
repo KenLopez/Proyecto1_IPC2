@@ -143,6 +143,7 @@
     <Compile Include="Controllers\IngresoController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\PartidaController.cs" />
+    <Compile Include="Controllers\PartidaXController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -176,6 +177,7 @@
     <Compile Include="Models\Partida.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PartidaXtream.cs" />
     <Compile Include="Models\Ronda.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -209,6 +211,7 @@
     <Content Include="css\registro.css" />
     <Content Include="css\UnJugador.css" />
     <Content Include="css\upload.css" />
+    <Content Include="css\xtream.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -371,6 +374,8 @@
     <Content Include="Views\Menu\Principal.cshtml" />
     <Content Include="Views\Partida\UnJugador.cshtml" />
     <Content Include="Views\Shared\_Cronometros.cshtml" />
+    <Content Include="Views\PartidaX\Xtream.cshtml" />
+    <Content Include="Views\Shared\CronometrosX.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

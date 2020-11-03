@@ -133,27 +133,59 @@ namespace Proyecto1_IPC2.Controllers
         }
 
         [HttpPost]
-        public ActionResult PartidaXtream(bool maquina, bool modo, bool inicio = false)
+        public ActionResult PartidaXtream(int[] coloresP1, int[] coloresP2, bool maquina, bool modo, bool inicio = false, int filas = 0, int columnas = 0)
         {
+            if (coloresP1 == null | coloresP2 == null)
+            {
+                ViewBag.ErrorColores = "Ambos jugadores deben escoger al menos un color.";
+                ViewBag.XtreamError = true;
+                return View("Principal", usuario);
+            }
+            if (coloresP1.Length != coloresP2.Length)
+            {
+                ViewBag.ErrorColores = "La cantidad de colores por jugador debe ser la misma";
+                ViewBag.XtreamError = true;
+                return View("Principal", usuario);
+            }
+            foreach (int color in coloresP1)
+            {
+                foreach(int color2 in coloresP2)
+                {
+                    if(color == color2)
+                    {
+                        ViewBag.ErrorColores = "Los jugadores no pueden tener colores en común.";
+                        ViewBag.XtreamError = true;
+                        return View("Principal", usuario);
+                    }
+                }
+            }
+            TempData["filas"] = filas;
+            TempData["columnas"] = columnas;
+            TempData["coloresP1"] = coloresP1;
+            TempData["coloresP2"] = coloresP2;
             TempData["personalizado"] = inicio;
+            Console.Write(TempData["coloresP1"]);
             if(maquina && modo)
             {
                 TempData["modo"] = 6;
+                return RedirectToAction("JugadorMaquina", "PartidaX", usuario);
             }
             else if(maquina && !modo)
             {
                 TempData["modo"] = 7;
+                return RedirectToAction("JugadorMaquina", "PartidaX", usuario);
             }
             else if(!maquina && modo)
             {
                 TempData["modo"] = 4;
+                return RedirectToAction("JugadorMaquina", "PartidaX", usuario);
             }
             else if(!maquina && !modo)
             {
                 TempData["modo"] = 5;
+                return RedirectToAction("JugadorMaquina", "PartidaX", usuario);
             }
-            
-            return RedirectToAction("PartidaXtream", "Partida", usuario);
+            return View("Principal", usuario);
         }
     }
 
