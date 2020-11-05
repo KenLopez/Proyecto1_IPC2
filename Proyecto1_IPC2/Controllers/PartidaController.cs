@@ -61,46 +61,6 @@ namespace Proyecto1_IPC2.Controllers
             return RedirectToAction("UnJugador", usuario);
         }
 
-        public ActionResult PartidaXtream(usuarioViewModel usuario)
-        {
-            initJuego(usuario);
-            juego.Type = Int32.Parse(TempData["modo"].ToString());
-            if(juego.Type == 6 | juego.Type == 7)
-            {
-                juego.Maquina = new Maquina(juego.P2.Color);
-                juego.P2.NombreUsuario = "Máquina";
-            }
-            if (bool.Parse(TempData["personalizado"].ToString()))
-            {
-                if(juego.Type > 1 & juego.Type < 6)
-                {
-                    juego.IsPlaying = -1;
-                    counter = 0;
-                    juego.Mesa.Cuadricula[3, 3].Color = 0;
-                    juego.Mesa.Cuadricula[3, 4].Color = 0;
-                    juego.Mesa.Cuadricula[4, 3].Color = 0;
-                    juego.Mesa.Cuadricula[4, 4].Color = 0;
-                    juego.disableAll();
-                }
-                else
-                {
-                    juego.IsPlaying = -2;
-                    counter = 0;
-                    juego.Mesa.Cuadricula[3, 3].Color = 0;
-                    juego.Mesa.Cuadricula[3, 4].Color = 0;
-                    juego.Mesa.Cuadricula[4, 3].Color = 0;
-                    juego.Mesa.Cuadricula[4, 4].Color = 0;
-                    juego.Mesa.Cuadricula[3, 3].Estado = true;
-                    juego.Mesa.Cuadricula[3, 4].Estado = true;
-                    juego.Mesa.Cuadricula[4, 3].Estado = true;
-                    juego.Mesa.Cuadricula[4, 4].Estado = true;
-                }
-                
-
-            }
-            return RedirectToAction("Xtream", usuario);
-        }
-
         [HttpPost]
         public ActionResult IniciarMaquina()
         {
@@ -249,11 +209,25 @@ namespace Proyecto1_IPC2.Controllers
             partida.P1.Color = rand.Next(1, 3);
             if (partida.P1.Color == 1)
             {
+                partida.P1.Colores = new int[1];
+                partida.P1.Colores[0] = partida.P1.Color;
                 partida.P2.Color = 2;
+                partida.P2.Colores = new int[1];
+                partida.P2.Colores[0] = partida.P2.Color;
+                partida.Orden = new int[2];
+                partida.Orden[0] = partida.P1.Color;
+                partida.Orden[1] = partida.P2.Color;
             }
             else
             {
-                partida.P2.Color = 1;
+                partida.P2.Colores = new int[1];
+                partida.P2.Colores[0] = partida.P2.Color;
+                partida.P1.Color = 2;
+                partida.P1.Colores = new int[1];
+                partida.P1.Colores[0] = partida.P1.Color;
+                partida.Orden = new int[2];
+                partida.Orden[0] = partida.P2.Color;
+                partida.Orden[1] = partida.P1.Color;
             }
             if (rand.Next(1, 3) == 1)
             {
@@ -327,7 +301,7 @@ namespace Proyecto1_IPC2.Controllers
                 }
                 return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
             }
-            if(juego.Type == 1 | juego.Type > 5)
+            if(juego.Type == 1)
             {
                 juego.P1.Cronometro.Stop();
             }
@@ -344,53 +318,32 @@ namespace Proyecto1_IPC2.Controllers
             }
             juego.play(fila, columna, juego.Turno);
             juego.enableSpaces();
-            if(juego.Type == 1 | juego.Type > 5)
+            for (int i = 0; i <= juego.Orden.Length; i++)
             {
-                if (juego.Turno == juego.P2.Color)
+                if (i != juego.Orden.Length)
                 {
-                    if (!juego.P2.Playable)
+                    if (juego.enableSpaces())
                     {
-                        juego.Turno = juego.P1.Color;
-                        juego.enableSpaces();
-                        if (!juego.P1.Playable)
+                        if (juego.Type == 1 | juego.Type > 5)
                         {
-                            juego.IsPlaying = 2;
+                            if (juego.P2.colorExists(juego.Turno))
+                            {
+                                juego.disableAll();
+                            }
                         }
-                        else
-                        {
-                            juego.disableAll();
-                        }
+                        break;
                     }
-                }
-            }
-            else if (juego.Type == 2 | juego.Type == 4 | juego.Type == 5)
-            {
-                if (juego.Turno == juego.P1.Color)
-                {
-                    if (!juego.P1.Playable)
+                    else
                     {
-                        juego.Turno = juego.P2.Color;
-                        juego.enableSpaces();
-                        if (!juego.P2.Playable)
-                        {
-                            juego.IsPlaying = 2;
-                        }
+                        juego.cambiarTurno();
                     }
                 }
                 else
                 {
-                    if (!juego.P2.Playable)
-                    {
-                        juego.Turno = juego.P1.Color;
-                        juego.enableSpaces();
-                        if (!juego.P1.Playable)
-                        {
-                            juego.IsPlaying = 2;
-                        }
-                    }
+                    juego.IsPlaying = 2;
                 }
             }
-            if(juego.IsPlaying == 2)
+            if (juego.IsPlaying == 2)
             {
                 guardarRegistro();
             }

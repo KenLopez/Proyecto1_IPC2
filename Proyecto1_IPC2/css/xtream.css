@@ -323,6 +323,78 @@ body {
     height: 80px;
 }
 
+.player1-azul {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background-image: url('../img/coin_bl.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 80px;
+}
+
+.player1-rojo {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background-image: url('../img/coin_rd.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 80px;
+}
+
+.player1-cafe {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background-image: url('../img/coin_br.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 80px;
+}
+
+.player1-amarillo {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background-image: url('../img/coin_yw.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 80px;
+}
+
+.player1-verde {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background-image: url('../img/coin_gr.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 80px;
+}
+
+.player1-rosado {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background-image: url('../img/coin_rs.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 80px;
+}
+
+.player1-morado {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background-image: url('../img/coin_pp.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 80px;
+}
+
+.player1-naranja {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background-image: url('../img/coin_og.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 80px;
+}
+
 .negro-sm {
     background-image: url('../img/Coin.png');
     background-size: contain;

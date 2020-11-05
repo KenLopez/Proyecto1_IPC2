@@ -14,7 +14,7 @@ namespace Proyecto1_IPC2.Controllers
 {
     public class PartidaXController : Controller
     {
-        static Models.PartidaXtream juego = new Models.PartidaXtream();
+        static Models.ViewModels.Partida juego = new Models.ViewModels.Partida();
         static int counter;
         // GET: Partida/PartidaX
         public ActionResult Xtream(usuarioViewModel usuario)
@@ -200,40 +200,19 @@ namespace Proyecto1_IPC2.Controllers
 
         public ActionResult setTablero(usuarioViewModel usuario)
         {
+            TempData["coloresP1"] = TempData["colores1"];
+            TempData["coloresP2"] = TempData["colores2"];
             initJuego(usuario);
-            if (TempData["Type"].ToString() == "1")
+            juego.Type = Int32.Parse(TempData["Type"].ToString());
+            juego.Mesa = TempData["tablero"] as Tablero;
+            juego.Turno = Int32.Parse(TempData["siguienteTiro"].ToString());
+            if (juego.P1.colorExists(juego.Turno))
             {
-                juego.Type = 1;
-                juego.Maquina = new Maquina(juego.P2.Color);
-                juego.P2.NombreUsuario = "Máquina";
+                juego.P1.Color = juego.Turno;
             }
-            else if (TempData["Type"].ToString() == "2")
+            else
             {
-                juego.Type = 2;
-            }
-            XmlTextReader reader = new XmlTextReader(TempData["Ruta"].ToString());
-            Tablero tablero = new Tablero();
-            reader.Read();
-            if (reader.IsStartElement("tablero"))
-            {
-                reader.ReadToDescendant("ficha");
-                while (reader.IsStartElement("ficha"))
-                {
-                    reader.ReadToDescendant("color");
-                    string color = reader.ReadElementContentAsString();
-                    reader.ReadToNextSibling("columna");
-                    string columna = reader.ReadElementContentAsString();
-                    reader.ReadToNextSibling("fila");
-                    int fila = reader.ReadElementContentAsInt();
-                    int col = tablero.letraToInt(columna);
-                    tablero.Cuadricula[fila - 1, col].Color = tablero.colorToInt(color);
-                    reader.Read();
-                    reader.Read();
-                }
-                juego.Mesa = tablero;
-                reader.ReadToDescendant("color");
-                string turn = reader.ReadElementContentAsString();
-                juego.Turno = juego.Mesa.colorToInt(turn);
+                juego.P2.Color = juego.Turno;
             }
             return RedirectToAction("Xtream", usuario);
         }
@@ -242,7 +221,7 @@ namespace Proyecto1_IPC2.Controllers
         {
 
             var rand = new Random();
-            Models.PartidaXtream partida = new Models.PartidaXtream();
+            Models.ViewModels.Partida partida = new Models.ViewModels.Partida();
             partida.Turnos = 0;
             partida.P1.NombreUsuario = usuario.NombreUsuario;
             partida.P1.Id = usuario.Id;
@@ -260,22 +239,31 @@ namespace Proyecto1_IPC2.Controllers
             partida.P2.Color = partida.P2.Colores[0];
             partida.IsPlaying = 0;
             partida.Orden = new int[partida.P1.Colores.Length + partida.P2.Colores.Length];
+            Jugador eligiendo;
             if (rand.Next(1, 3) == 1)
             {
-                for(int i = 0; i < partida.P1.Colores.Length; i++)
-                {
-                    partida.Orden[2*i] = partida.P1.Colores[i];
-                    partida.Orden[2*i+1] = partida.P2.Colores[i];
-                }
+                eligiendo = partida.P1;
             }
             else
             {
-                for (int i = 0; i < partida.P1.Colores.Length; i++)
+                eligiendo = partida.P2;
+            }
+            for (int i = 0; i < partida.Orden.Length; i++)
+            {
+                partida.Orden[i] = eligiendo.Color;
+                if (eligiendo == juego.P1)
                 {
-                    partida.Orden[2 * i] = partida.P2.Colores[i];
-                    partida.Orden[2 * i + 1] = partida.P1.Colores[i];
+                    partida.P1.sigColor();
+                    eligiendo = partida.P2;
+                }
+                else
+                {
+                    partida.P2.sigColor();
+                    eligiendo = partida.P1;
                 }
             }
+            partida.P1.Color = partida.P1.Colores[0];
+            partida.P2.Color = partida.P2.Colores[0];
             partida.Turno = partida.Orden[0];
             partida.Mesa.Cuadricula[(partida.Mesa.Filas / 2)-1, (partida.Mesa.Columnas / 2)-1].Color = partida.Turno;
             partida.cambiarTurno();
@@ -443,13 +431,13 @@ namespace Proyecto1_IPC2.Controllers
         [HttpPost]
         public ActionResult Timers()
         {
-            return PartialView("CronometrosX", juego);
+            return PartialView("_Cronometros", juego);
         }
 
         public FileResult Descargar()
         {
             string data = juego.toXml();
-            string virtualPath = Server.MapPath("~/XMLFiles/partida-" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() +
+            string virtualPath = Server.MapPath("~/XMLFiles/partida_xtream-" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() +
                 "-" + DateTime.Now.Hour.ToString() + "_" + DateTime.Now.Minute.ToString() + "_" + DateTime.Now.Second + ".xml");
             using (FileStream file = System.IO.File.Create(virtualPath))
             {

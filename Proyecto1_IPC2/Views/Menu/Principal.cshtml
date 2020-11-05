@@ -27,7 +27,7 @@
     <div class="botones2">
         <button type="button" class="opcion" id="Reportes" onclick=""><i class="fas fa-user fa-lg"></i> Perfil</button>
 
-        <button type="button" class="opcion" id="Reportes" data-target="#uploadModal" data-toggle="modal"><i class="fas fa-cloud-upload-alt"></i> Cargar Partida</button>
+        <button type="button" class="opcion" id="Reportes" data-target="#uploadMenu" data-toggle="modal"><i class="fas fa-cloud-upload-alt"></i> Cargar Partida</button>
     </div>
 </article>
 <div class="modal fade" tabindex="-1" id="xtreamModal" data-backdrop="static" role="dialog" data-show="true" width="500px">
@@ -45,7 +45,7 @@
                         <div class="custom-control-inline">
                             <input class="form-control form-control-sm" type="number" min="6" max="20" step="2" value="6" name="filas" required />
                             <p>X</p>
-                            <input class="form-control form-control-sm" type="number" min="6" max="20" step="2" value="6" name="columnas" required/>
+                            <input class="form-control form-control-sm" type="number" min="6" max="20" step="2" value="6" name="columnas" required />
                         </div>
                         <p class="text-danger">@ViewBag.ErrorSize</p>
                         <h4>Colores</h4>
@@ -200,7 +200,38 @@
         </div>
     </div>
 </div>
-<div class="modal fade" tabindex="-1" id="uploadModal" data-backdrop="static" role="dialog" data-show="true">
+<div class="modal fade" tabindex="-1" id="uploadMenu" data-backdrop="static" role="dialog" data-show="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Selecciona el Modo de Juego</h2>
+                <button class="close" data-dismiss="modal">X</button>
+            </div>
+            <div class="modal-body justify-content-center container">
+                <div class="col">
+                    <button class="btn btn-success btn-block" data-target="#uploadClasico" data-toggle="modal" data-dismiss="modal">
+                        <i class="fas fa-gamepad fa-lg"></i> Clásico
+                    </button>
+                </div>
+                <br>
+                <div class="col">
+                    <button class="btn btn-info btn-block" data-target="#uploadXtream" data-toggle="modal" data-dismiss="modal">
+                        <i class="fab fa-buromobelexperte fa-lg"></i> Xtream
+                    </button>
+                </div>
+                <br />
+                <div class="col">
+                    <button class="btn btn-warning btn-block"><i class="fas fa-trophy fa-lg"></i> Torneo</button>
+                </div>
+                <br />
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger btn-lg" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" id="uploadClasico" data-backdrop="static" role="dialog" data-show="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -218,7 +249,31 @@
                     <button name="opcion" class="btn btn-info btn-lg" type="submit" value=2>Empezar Vs. Jugador</button>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-danger btn-lg" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-danger btn-lg" data-target="#uploadMenu" data-toggle="modal" data-dismiss="modal">Volver</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" id="uploadXtream" data-backdrop="static" role="dialog" data-show="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Subir Partida XML</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+            </div>
+            @using (Html.BeginForm("UploadFileX", "Menu", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="modal-body">
+                    <input type="file" name="file" />
+                    <p class="text-danger">@ViewBag.MessageX</p>
+                </div>
+                <div class="container">
+                    <button name="opcion" class="btn btn-success btn-lg" type="submit" value=1>Empezar Vs. Máquina</button>
+                    <button name="opcion" class="btn btn-info btn-lg" type="submit" value=2>Empezar Vs. Jugador</button>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger btn-lg" data-target="#uploadMenu" data-toggle="modal" data-dismiss="modal">Volver</button>
                 </div>
             }
         </div>
@@ -228,7 +283,15 @@
 {
     <script>
         $(window).on('load', function () {
-            $('#uploadModal').modal('show');
+            $('#uploadClasico').modal('show');
+        });
+    </script>
+}
+@if (ViewBag.MessageX != null)
+{
+    <script>
+        $(window).on('load', function () {
+            $('#uploadXtream').modal('show');
         });
     </script>
 }

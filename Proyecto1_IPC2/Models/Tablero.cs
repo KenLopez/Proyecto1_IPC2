@@ -53,6 +53,22 @@ namespace Proyecto1_IPC2.Models
                     return 1;
                 case "negro":
                     return 2;
+                case "azul":
+                    return 3;
+                case "rojo":
+                    return 4;
+                case "cafe":
+                    return 5;
+                case "verde":
+                    return 6;
+                case "naranja":
+                    return 7;
+                case "amarillo":
+                    return 8;
+                case "rosado":
+                    return 9;
+                case "morado":
+                    return 10;
                 default:
                     return 0;
             }
@@ -79,31 +95,29 @@ namespace Proyecto1_IPC2.Models
                 case 7:
                     return "H";
                 case 8:
-                    return "J";
+                    return "I";
                 case 9:
-                    return "K";
+                    return "J";
                 case 10:
-                    return "L";
+                    return "K";
                 case 11:
-                    return "M";
+                    return "L";
                 case 12:
-                    return "N";
+                    return "M";
                 case 13:
-                    return "O";
+                    return "N";
                 case 14:
-                    return "P";
+                    return "O";
                 case 15:
-                    return "Q";
+                    return "P";
                 case 16:
-                    return "R";
+                    return "Q";
                 case 17:
-                    return "S";
+                    return "R";
                 case 18:
-                    return "T";
+                    return "S";
                 case 19:
-                    return "U";
-                case 20:
-                    return "V";
+                    return "T";
                 default:
                     return "";
             }
@@ -129,6 +143,30 @@ namespace Proyecto1_IPC2.Models
                     return 6;
                 case "H":
                     return 7;
+                case "I":
+                    return 8;
+                case "J":
+                    return 9;
+                case "K":
+                    return 10;
+                case "L":
+                    return 11;
+                case "M":
+                    return 12;
+                case "N":
+                    return 13;
+                case "O":
+                    return 14;
+                case "P":
+                    return 15;
+                case "Q":
+                    return 16;
+                case "R":
+                    return 17;
+                case "S":
+                    return 18;
+                case "T":
+                    return 19;
                 default:
                     return 8;
             }
@@ -504,7 +542,12 @@ namespace Proyecto1_IPC2.Models
 
         public bool validar()
         {
-            if(cuadricula[3,3].Color == 0 | cuadricula[3,4].Color == 0 | cuadricula[4,3].Color == 0 | cuadricula[4,4].Color == 0)
+            if(filas % 2 != 0 | columnas % 2 != 0)
+            {
+                return false;
+            }
+            if(cuadricula[(filas/2) -1,(columnas/2)-1].Color == 0 | cuadricula[(filas / 2) - 1, (columnas / 2)].Color == 0 | 
+                cuadricula[(filas / 2), (columnas / 2) - 1].Color == 0 | cuadricula[(filas / 2), (columnas / 2)].Color == 0)
             {
                 return false;
             }

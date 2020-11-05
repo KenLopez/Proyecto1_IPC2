@@ -1,5 +1,5 @@
-﻿@using Proyecto1_IPC2.Models;
-@model PartidaXtream
+﻿@using Proyecto1_IPC2.Models.ViewModels;
+@model Partida
 @{
     ViewBag.Title = "Partida Xtream";
     ViewBag.Style = "~/css/xtream.css";
@@ -214,7 +214,7 @@
 
                         }
                         <div id="timers">
-                            @Html.Partial("CronometrosX", Model)
+                            @Html.Partial("_Cronometros", Model)
                         </div>
                     </div>
                 }
