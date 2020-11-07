@@ -16,9 +16,7 @@ namespace Proyecto1_IPC2.Models
     {
         public int idParticipante { get; set; }
         public int idUsuario { get; set; }
-        public int idEquipo { get; set; }
     
-        public virtual Equipo Equipo { get; set; }
         public virtual Usuario Usuario { get; set; }
     }
 }

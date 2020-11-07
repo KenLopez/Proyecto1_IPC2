@@ -14,22 +14,11 @@ namespace Proyecto1_IPC2.Models
     
     public partial class Torneo
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Torneo()
-        {
-            this.Equipo = new HashSet<Equipo>();
-            this.Ronda = new HashSet<Ronda>();
-        }
-    
         public int idTorneo { get; set; }
+        public int idCreador { get; set; }
         public int participantes { get; set; }
-        public int idEstado { get; set; }
         public string nombre { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Equipo> Equipo { get; set; }
-        public virtual Estado Estado { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ronda> Ronda { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

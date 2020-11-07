@@ -14,12 +14,6 @@ namespace Proyecto1_IPC2.Models
     
     public partial class Partida
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Partida()
-        {
-            this.Ronda = new HashSet<Ronda>();
-        }
-    
         public int idPartida { get; set; }
         public int idUsuario { get; set; }
         public Nullable<int> idAdversario { get; set; }
@@ -33,7 +27,5 @@ namespace Proyecto1_IPC2.Models
         public virtual Usuario Usuario { get; set; }
         public virtual TipoPartida TipoPartida { get; set; }
         public virtual Usuario Usuario1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ronda> Ronda { get; set; }
     }
 }

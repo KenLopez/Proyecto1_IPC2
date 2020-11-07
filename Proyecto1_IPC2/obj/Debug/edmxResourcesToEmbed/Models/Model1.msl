@@ -1,15 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="OTHELLOModelStoreContainer" CdmEntityContainer="OTHELLOEntities">
-    <EntitySetMapping Name="Equipo">
-      <EntityTypeMapping TypeName="OTHELLOModel.Equipo">
-        <MappingFragment StoreEntitySet="Equipo">
-          <ScalarProperty Name="idEquipo" ColumnName="idEquipo" />
-          <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Estado">
       <EntityTypeMapping TypeName="OTHELLOModel.Estado">
         <MappingFragment StoreEntitySet="Estado">
@@ -23,7 +14,6 @@
         <MappingFragment StoreEntitySet="Participante">
           <ScalarProperty Name="idParticipante" ColumnName="idParticipante" />
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-          <ScalarProperty Name="idEquipo" ColumnName="idEquipo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -41,17 +31,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Ronda">
-      <EntityTypeMapping TypeName="OTHELLOModel.Ronda">
-        <MappingFragment StoreEntitySet="Ronda">
-          <ScalarProperty Name="idRonda" ColumnName="idRonda" />
-          <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />
-          <ScalarProperty Name="idPartida" ColumnName="idPartida" />
-          <ScalarProperty Name="NumJuego" ColumnName="NumJuego" />
-          <ScalarProperty Name="NumRonda" ColumnName="NumRonda" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TipoPartida">
       <EntityTypeMapping TypeName="OTHELLOModel.TipoPartida">
         <MappingFragment StoreEntitySet="TipoPartida">
@@ -64,8 +43,8 @@
       <EntityTypeMapping TypeName="OTHELLOModel.Torneo">
         <MappingFragment StoreEntitySet="Torneo">
           <ScalarProperty Name="idTorneo" ColumnName="idTorneo" />
+          <ScalarProperty Name="idCreador" ColumnName="idCreador" />
           <ScalarProperty Name="participantes" ColumnName="participantes" />
-          <ScalarProperty Name="idEstado" ColumnName="idEstado" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
         </MappingFragment>
       </EntityTypeMapping>

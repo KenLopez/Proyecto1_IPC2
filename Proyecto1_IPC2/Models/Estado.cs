@@ -18,7 +18,6 @@ namespace Proyecto1_IPC2.Models
         public Estado()
         {
             this.Partida = new HashSet<Partida>();
-            this.Torneo = new HashSet<Torneo>();
         }
     
         public int idEstado { get; set; }
@@ -26,7 +25,5 @@ namespace Proyecto1_IPC2.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Partida> Partida { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Torneo> Torneo { get; set; }
     }
 }

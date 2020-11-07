@@ -22,12 +22,12 @@
 
         <button type="button" class="opcion" id="Xtream" data-target="#xtreamModal" data-toggle="modal"><i class="fab fa-buromobelexperte fa-lg"></i> Xtream</button>
 
-        <button type="button" class="opcion" id="Un jugador" onclick=""><i class="fas fa-trophy fa-lg"></i> Torneos</button>
+        <button type="button" class="opcion" id="Torneo" data-target="#TorneoModal" data-toggle="modal"><i class="fas fa-trophy fa-lg"></i> Torneos</button>
     </div>
     <div class="botones2">
-        <button type="button" class="opcion" id="Reportes" onclick=""><i class="fas fa-user fa-lg"></i> Perfil</button>
+        <button type="button" class="opcion" id="Perfil" onclick=""><i class="fas fa-user fa-lg"></i> Perfil</button>
 
-        <button type="button" class="opcion" id="Reportes" data-target="#uploadMenu" data-toggle="modal"><i class="fas fa-cloud-upload-alt"></i> Cargar Partida</button>
+        <button type="button" class="opcion" id="Subir" data-target="#uploadMenu" data-toggle="modal"><i class="fas fa-cloud-upload-alt"></i> Cargar Partida</button>
     </div>
 </article>
 <div class="modal fade" tabindex="-1" id="xtreamModal" data-backdrop="static" role="dialog" data-show="true" width="500px">
@@ -219,11 +219,6 @@
                         <i class="fab fa-buromobelexperte fa-lg"></i> Xtream
                     </button>
                 </div>
-                <br />
-                <div class="col">
-                    <button class="btn btn-warning btn-block"><i class="fas fa-trophy fa-lg"></i> Torneo</button>
-                </div>
-                <br />
             </div>
             <div class="modal-footer">
                 <button class="btn btn-danger btn-lg" data-dismiss="modal">Cancelar</button>
@@ -279,6 +274,57 @@
         </div>
     </div>
 </div>
+<div class="modal fade" tabindex="-1" id="TorneoModal" data-backdrop="static" role="dialog" data-show="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Crear Torneo</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+            </div>
+            @using (Html.BeginForm("ConfigTorneo", "Menu", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="modal-body">
+                    <div class="container">
+                        <h4>Nombre del Torneo</h4>
+                        <input class="form-control" type="text" name="nombre" placeholder="Mi Torneo..." required/>
+                    </div>
+                    <br />
+                    <div class="container">
+                        <h4>Cantidad de Equipos Participantes</h4>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="participantes" id="cuatro" value="4" checked />
+                            <label class="custom-control-label" for="cuatro">4</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="participantes" id="ocho" value="8" />
+                            <label class="custom-control-label" for="ocho">8</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input class="custom-control-input" type="radio" name="participantes" id="dieciséis" value="16" />
+                            <label class="custom-control-label" for="dieciséis">16</label>
+                        </div>
+                        <br />
+                    </div>
+                    <br />
+                    <div class="container">
+                        <h4>Subir Archivo XML</h4>
+                        <div class="modal-body">
+                            <input type="file" name="file" />
+                            <p class="text-danger">@ViewBag.MessageT</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <p class="text-danger">@ViewBag.MessageT</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btn-lg" type="submit">Crear</button>
+                    <button class="btn btn-danger btn-lg" data-dismiss="modal">Volver</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
 @if (ViewBag.Message != null)
 {
     <script>
@@ -300,6 +346,14 @@
     <script>
         $(window).on('load', function () {
             $('#xtreamModal').modal('show');
+        });
+    </script>
+}
+@if (ViewBag.MessageT != null)
+{
+    <script>
+        $(window).on('load', function () {
+            $('#TorneoModal').modal('show');
         });
     </script>
 }

@@ -1,0 +1,75 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: "Comic Sans MS";
+}
+
+body {
+    background-color: #B6D7A8;
+}
+
+#encabezado {
+    position: relative;
+    margin: auto;
+    height: 158px;
+    width: auto;
+    text-align: center;
+    padding-top: 20px;
+}
+
+#othelloLogo {
+    float: left;
+    padding-left: 135px;
+    padding-right: 50px;
+    height: 158px;
+    width: 750px;
+}
+
+.tabla {
+    float: left;
+    position: relative;
+    background-image: url('../img/tabla.jpg');
+    width: 600px;
+    height: 158px;
+}
+
+#usuario {
+    line-height: 158px;
+    position: relative;
+    padding-left: 25px;
+    float: left;
+    font-family: 'Comic Sans MS';
+    font-size: 60px;
+    color: #ffffff;
+    background: none;
+}
+
+.encabezadoEquipo {
+    border-color: #000000;
+    border-bottom: solid;
+    border-bottom-width: 5px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.encabezadoEquipo input{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.cuerpoEquipo{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.cuerpoEquipo input{
+    margin-bottom: 10px;
+}
+
+.equipo {
+    border-style: solid;
+    border-color: #000000;
+    border-width: 5px;
+    background-color: #51b8e8;
+}

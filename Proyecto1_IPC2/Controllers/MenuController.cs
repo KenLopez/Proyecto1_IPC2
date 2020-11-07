@@ -119,6 +119,21 @@ namespace Proyecto1_IPC2.Controllers
         }
 
         [HttpPost]
+        public ActionResult ConfigTorneo(string nombre, int participantes, HttpPostedFile file = null)
+        {
+            TempData["nombre"] = nombre;
+            TempData["cantidad"] = participantes;
+            if(file == null)
+            {
+                return RedirectToAction("Equipos", "Torneo", usuario);
+            }
+            else
+            {
+                return RedirectToAction("setTeams", "Torneo", usuario);
+            }
+        }
+
+        [HttpPost]
         public ActionResult UploadFileX(HttpPostedFileBase file, string opcion)
         {
             try
