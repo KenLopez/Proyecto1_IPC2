@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 
 namespace Proyecto1_IPC2.Models.ViewModels
@@ -41,5 +42,20 @@ namespace Proyecto1_IPC2.Models.ViewModels
         public Equipo[] Final { get { return final; } set { final = value; } }
         public Equipo Ganador { get { return ganador; } set { ganador = value; } }
         public int Id { get { return id; } set { id = value; } }
+
+        public void armarEquipos(string[] teams, string[] usernames)
+        {
+            int counter = 0;
+            for(int i = 0; i < equipos.Length; i++)
+            {
+                equipos[i] = new Equipo();
+                equipos[i].Nombre = teams[i];
+                for(int j = 0; j<3; j++)
+                {
+                    equipos[i].Integrantes[j].NombreUsuario = usernames[counter];
+                    counter++;
+                }
+            }
+        }
     }
 }

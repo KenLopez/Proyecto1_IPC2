@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Proyecto1_IPC2.Models.ViewModels.Torneo
+@{
     ViewBag.Title = "Definir Equipos";
     ViewBag.Style = "~/css/torneo.css";
     ViewBag.Bootstrap = true;
@@ -6,7 +7,7 @@
 <header id="encabezado">
     <img id="othelloLogo" src="~/img/Logo Othello-mini.jpg" />
     <div class="tabla">
-        <p id="usuario"></p>
+        <p id="usuario">@Model.Nombre</p>
     </div>
     <div class="separador">
 
@@ -16,7 +17,7 @@
     <br />
     <br />
     <br />
-    @using (Html.BeginForm("definirEquipos", "Torneo", FormMethod.Post))
+    @using (Html.BeginForm("defEquipos", "Torneo", FormMethod.Post))
     {
         <div class="row">
             @for (int i = 0; i < 4; i++)
@@ -34,7 +35,7 @@
             }
         </div>
         <br />
-        if (true)
+        if (Model.Equipos.Length > 4)
         {
             <div class="row">
                 @for (int i = 4; i < 8; i++)
@@ -53,7 +54,7 @@
             </div>
         }
         <br />
-        if (true)
+        if (Model.Equipos.Length > 16)
         {
             <div class="row">
                 @for (int i = 8; i < 12; i++)

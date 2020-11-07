@@ -219,10 +219,37 @@
                         <i class="fab fa-buromobelexperte fa-lg"></i> Xtream
                     </button>
                 </div>
+                <br />
+                <div class="col">
+                    <button class="btn btn-warning btn-block" data-target="#uploadTorneo" data-toggle="modal" data-dismiss="modal">
+                        <i class="fas fa-trophy fa-lg"></i> Torneo
+                    </button>
+                </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-danger btn-lg" data-dismiss="modal">Cancelar</button>
             </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" id="uploadTorneo" data-backdrop="static" role="dialog" data-show="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Subir Archivo XML</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+            </div>
+            @using (Html.BeginForm("uploadTorneo", "Menu", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="modal-body">
+                    <input type="file" name="file" />
+                    <p class="text-danger">@ViewBag.MessageT</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btn-lg" type="submit">Crear</button>
+                    <button class="btn btn-danger btn-lg" data-target="#uploadMenu" data-toggle="modal" data-dismiss="modal">Volver</button>
+                </div>
+            }
         </div>
     </div>
 </div>
@@ -286,7 +313,7 @@
                 <div class="modal-body">
                     <div class="container">
                         <h4>Nombre del Torneo</h4>
-                        <input class="form-control" type="text" name="nombre" placeholder="Mi Torneo..." required/>
+                        <input class="form-control" type="text" name="nombre" placeholder="Nuevo Torneo" required/>
                     </div>
                     <br />
                     <div class="container">
@@ -306,16 +333,6 @@
                         <br />
                     </div>
                     <br />
-                    <div class="container">
-                        <h4>Subir Archivo XML</h4>
-                        <div class="modal-body">
-                            <input type="file" name="file" />
-                            <p class="text-danger">@ViewBag.MessageT</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <p class="text-danger">@ViewBag.MessageT</p>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-success btn-lg" type="submit">Crear</button>
@@ -353,7 +370,7 @@
 {
     <script>
         $(window).on('load', function () {
-            $('#TorneoModal').modal('show');
+            $('#uploadTorneo').modal('show');
         });
     </script>
 }

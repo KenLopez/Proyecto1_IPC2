@@ -119,18 +119,85 @@ namespace Proyecto1_IPC2.Controllers
         }
 
         [HttpPost]
-        public ActionResult ConfigTorneo(string nombre, int participantes, HttpPostedFile file = null)
+        public ActionResult uploadTorneo(HttpPostedFileBase file)
         {
-            TempData["nombre"] = nombre;
-            TempData["cantidad"] = participantes;
-            if(file == null)
+            if (file == null)
             {
-                return RedirectToAction("Equipos", "Torneo", usuario);
+                ViewBag.MessageT = "No se ha subido ningún archivo.";
+                return View("Principal", usuario);
             }
             else
             {
-                return RedirectToAction("setTeams", "Torneo", usuario);
+                if (Path.GetExtension(file.FileName) != ".xml")
+                {
+                    ViewBag.MessageT = "El archivo subido debe tener la extensión xml";
+                    return View("Principal", usuario);
+                }
+                string _FileName = Path.GetFileName(file.FileName);
+                string _path = Path.Combine(Server.MapPath("~/UploadedFiles"), _FileName);
+                int counter = 1;
+                while (System.IO.File.Exists(_path))
+                {
+                    _FileName = Path.GetFileNameWithoutExtension(file.FileName);
+                    _FileName = _FileName + "(" + counter + ").xml";
+                    _path = Path.Combine(Server.MapPath("~/UploadedFiles"), _FileName);
+                    counter += 1;
+                }
+                file.SaveAs(_path);
+                XmlTextReader reader = new XmlTextReader(_path);
+                reader.Read();
+                try
+                {
+                    if (reader.IsStartElement("campeonato"))
+                    {
+                        reader.ReadToDescendant("nombre");
+                        TempData["nombre"] = reader.ReadElementContentAsString();
+                        reader.ReadToNextSibling("equipo");
+                        List<string> teams = new List<string>();
+                        List<string> players = new List<string>();
+                        while (reader.IsStartElement("equipo"))
+                        {
+                            reader.ReadToDescendant("nombreEquipo");
+                            teams.Add(reader.ReadElementContentAsString());
+                            for (int i = 0; i < 3; i++)
+                            {
+                                reader.ReadToNextSibling("jugador");
+                                players.Add(reader.ReadElementContentAsString());
+                            }
+                            reader.Read();
+                            reader.Read();
+                        }
+                        if (teams.Count * 3 != players.Count)
+                        {
+                            ViewBag.MessageT = "ERROR: El archivo XML posee errores en su contenido.";
+                            return View("Principal", usuario);
+                        }
+                        TempData["cantidad"] = teams.Count;
+                        TempData["teams"] = teams;
+                        TempData["players"] = players;
+                        return RedirectToAction("setTeams", "Torneo", usuario);
+                    }
+                    else
+                    {
+                        ViewBag.MessageT = "ERROR: El archivo XML posee errores en su contenido.";
+                        return View("Principal", usuario);
+                    }
+                }
+                catch
+                {
+                    ViewBag.MessageT = "ERROR: El archivo XML posee errores en su contenido.";
+                    return View("Principal", usuario);
+                }
             }
+        }
+
+        [HttpPost]
+        public ActionResult ConfigTorneo(string nombre, int participantes)
+        {
+            TempData["nombre"] = nombre;
+            TempData["cantidad"] = participantes;
+            return RedirectToAction("Equipos", "Torneo", usuario);
+            
         }
 
         [HttpPost]

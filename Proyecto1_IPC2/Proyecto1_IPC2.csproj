@@ -373,6 +373,7 @@
     <Content Include="Views\Shared\_Cronometros.cshtml" />
     <Content Include="Views\PartidaX\Xtream.cshtml" />
     <Content Include="Views\Torneo\Equipos.cshtml" />
+    <Content Include="Views\Torneo\Llaves.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
