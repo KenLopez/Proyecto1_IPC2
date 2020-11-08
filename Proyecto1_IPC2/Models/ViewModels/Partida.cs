@@ -199,6 +199,24 @@ namespace Proyecto1_IPC2.Models.ViewModels
             return contador;
         }
 
+        public int Ganador()
+        {
+            int contadorP1 = contarFichas(P1);
+            int contadorP2 = contarFichas(P2);
+            if (contadorP1 > contadorP2)
+            {
+                return 1;
+            }
+            else if(contadorP2 > contadorP1)
+            {
+                return 2;
+            }
+            else
+            {
+                return 3;
+            }
+        }
+
         public string getGanador()
         {
             int contadorP1 = contarFichas(P1);

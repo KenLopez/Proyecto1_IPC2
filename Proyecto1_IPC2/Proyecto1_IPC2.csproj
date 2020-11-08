@@ -149,6 +149,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Casilla.cs" />
+    <Compile Include="Models\Encuentro.cs" />
     <Compile Include="Models\Equipo.cs" />
     <Compile Include="Models\Estado.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -176,6 +177,7 @@
     <Compile Include="Models\Partida.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Ronda.cs" />
     <Compile Include="Models\Tablero.cs" />
     <Compile Include="Models\TipoPartida.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -374,6 +376,7 @@
     <Content Include="Views\PartidaX\Xtream.cshtml" />
     <Content Include="Views\Torneo\Equipos.cshtml" />
     <Content Include="Views\Torneo\Llaves.cshtml" />
+    <Content Include="Views\Torneo\_Cuatro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

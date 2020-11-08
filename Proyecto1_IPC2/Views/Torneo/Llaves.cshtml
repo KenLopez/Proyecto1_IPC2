@@ -13,3 +13,62 @@
 
     </div>
 </header>
+<body>
+    <br />
+    <div class="estado">
+        @Html.Partial("_Cuatro", Model)
+    </div>
+    @using (Html.BeginForm("Continuar", "Torneo", FormMethod.Post))
+    {
+        <div class="container control">
+            <div class="row">
+                <div class="col">
+                    <p class="tituloEquipo">@Model.getRondaActual().Equipo1.Nombre :</p>
+                    @if (Model.getRondaActual().Estado == 2)
+                    {
+                        <div class="form-group">
+                            <label for="jugador1">Elije un jugador:</label>
+                            <select class="form-control" id="jugador1" name="desempate1">
+                                @for (int i = 0; i < 3; i++)
+                                {
+                                    <option value=@i>@Model.getRondaActual().Equipo1.Integrantes[i].NombreUsuario</option>
+                                }
+                            </select>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="tituloNombre">@Model.getRondaActual().getEncuentroActual().Jugador1.NombreUsuario</p>
+                    }
+
+                </div>
+                <div class="col container controlBotones">
+
+                    <button type="submit" class="btn btn-block btn-warning" value="1" name="opcion">Ganar @Model.getRondaActual().Equipo1.Nombre</button>
+                    <button type="submit" class="btn btn-block btn-danger" value="2" name="opcion">Empatar</button>
+                    <button type="submit" class="btn btn-block btn-warning" value="3" name="opcion">Ganar @Model.getRondaActual().Equipo2.Nombre</button>
+                    <button type="submit" class="btn btn-block btn-info" value="4" name="opcion">Jugar</button>
+                </div>
+                <div class="col">
+                    <p class="tituloEquipo">@Model.getRondaActual().Equipo2.Nombre :</p>
+                    @if (Model.getRondaActual().Estado == 2)
+                    {
+                        <div class="form-group">
+                            <label for="jugador2">Elije un jugador:</label>
+                            <select class="form-control" id="jugador2" name="desempate2">
+                                @for (int i = 0; i < 3; i++)
+                                {
+                                    <option value=@i>@Model.getRondaActual().Equipo2.Integrantes[i].NombreUsuario</option>
+                                }
+                            </select>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="tituloNombre">@Model.getRondaActual().getEncuentroActual().Jugador2.NombreUsuario</p>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</body>

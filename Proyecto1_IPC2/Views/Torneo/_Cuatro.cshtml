@@ -1,0 +1,37 @@
+﻿@model Proyecto1_IPC2.Models.ViewModels.Torneo
+
+<br />
+<br />
+<div class="container llave4">
+    <div class="row">
+        <div class="col container row">
+            <p class="col-5 equipoName4">@Model.Semi[0].Equipo1.Nombre</p>
+            <p class="col-7">@Model.Semi[0].Equipo1.Puntos</p>
+        </div>
+        <div class="col container row">
+            <p class="col-7 toRight">@Model.Semi[1].Equipo1.Puntos</p>
+            <p class="col-5 equipoName4 toRight">@Model.Semi[1].Equipo1.Nombre</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col container row">
+            <p class="col-6"></p>
+            <p class="col-4 equipoName4 finalName4">@Model.Final.Equipo1.Nombre</p>
+            <p class="col-2 toRight">@Model.Final.Equipo1.Puntos</p>
+        </div>
+        <div class="col container row">
+            <p class="col-2">@Model.Final.Equipo2.Puntos</p>
+            <p class="col-4 equipoName4 toRight">@Model.Final.Equipo2.Nombre</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col container row">
+            <p class="col-5 equipoName4">@Model.Semi[0].Equipo2.Nombre</p>
+            <p class="col-7">@Model.Semi[0].Equipo2.Puntos</p>
+        </div>
+        <div class="col container row">
+            <p class="col-7 toRight">@Model.Semi[1].Equipo2.Puntos</p>
+            <p class="col-5 equipoName4 toRight">@Model.Semi[1].Equipo2.Nombre</p>
+        </div>
+    </div>
+</div>

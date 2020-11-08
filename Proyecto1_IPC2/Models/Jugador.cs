@@ -19,6 +19,7 @@ namespace Proyecto1_IPC2.Models
         public Jugador()
         {
             cronometro = new Stopwatch();
+            Id = 0;
         }
 
         public bool Playable { get { return playable; } set { playable = value; } }

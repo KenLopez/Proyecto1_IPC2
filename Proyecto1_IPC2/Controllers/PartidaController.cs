@@ -9,6 +9,7 @@ using System.Xml;
 using System.Web.UI.WebControls;
 using System.IO;
 using System.Text;
+using System.Web.Http.ModelBinding;
 
 namespace Proyecto1_IPC2.Controllers
 {
@@ -22,7 +23,7 @@ namespace Proyecto1_IPC2.Controllers
         {
             if (juego.IsPlaying == 1) 
             { 
-                if(juego.Type > 1 & juego.Type < 6)
+                if(juego.Type == 2 | juego.Type == 8)
                 {
                     juego.enableSpaces();
                     if(juego.Turno == juego.P1.Color)
@@ -99,7 +100,7 @@ namespace Proyecto1_IPC2.Controllers
                     }
                 }
             }
-            if (juego.IsPlaying == 2)
+            if (juego.IsPlaying == 2 & juego.Type != 8)
             {
                 
                 guardarRegistro();
@@ -240,6 +241,20 @@ namespace Proyecto1_IPC2.Controllers
             juego = partida;
         }
 
+        public ActionResult Torneo()
+        {
+            juego = TempData["partida"] as Models.ViewModels.Partida;
+            if (juego.Turno == juego.P1.Color)
+            {
+                juego.P1.Cronometro.Start();
+            }
+            else
+            {
+                juego.P2.Cronometro.Start();
+            }
+            return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario });
+        }
+
         [HttpPost]
         public ActionResult DefinirP2(string p2Nombre)
         {
@@ -324,7 +339,7 @@ namespace Proyecto1_IPC2.Controllers
                 {
                     if (juego.enableSpaces())
                     {
-                        if (juego.Type == 1 | juego.Type > 5)
+                        if (juego.Type == 1 )
                         {
                             if (juego.P2.colorExists(juego.Turno))
                             {
@@ -343,11 +358,34 @@ namespace Proyecto1_IPC2.Controllers
                     juego.IsPlaying = 2;
                 }
             }
-            if (juego.IsPlaying == 2)
+            if (juego.IsPlaying == 2 & juego.Type != 8)
             {
                 guardarRegistro();
             }
             return RedirectToAction("UnJugador", new usuarioViewModel { Id = juego.P1.Id, NombreUsuario = juego.P1.NombreUsuario }); 
+        }
+
+        [HttpPost]
+        public ActionResult Rendirse()
+        {
+            if(juego.Turno == juego.P1.Color)
+            {
+                TempData["ganador"] = 2;
+            }
+            else if(juego.Turno == juego.P2.Color)
+            {
+                TempData["ganador"] = 1;
+            }
+            TempData["terminada"] = juego;
+            return RedirectToAction("Resultados", "Torneo");
+        }
+
+        [HttpPost]
+        public ActionResult RegresarTorneo()
+        {
+            TempData["terminada"] = juego;
+            TempData["ganador"] = juego.Ganador();
+            return RedirectToAction("Resultados", "Torneo");
         }
 
         [HttpPost]
