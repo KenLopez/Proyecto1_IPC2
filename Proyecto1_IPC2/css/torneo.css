@@ -52,6 +52,13 @@ body {
     background-size: contain;
 }
 
+.llave8 {
+    height: 500px;
+    background-image: url('../img/Torneo8.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
 .encabezadoEquipo {
     border-color: #000000;
     border-bottom: solid;
@@ -74,14 +81,25 @@ body {
     margin-bottom: 10px;
 }
 
-.row{
+.row4{
     height: 183px;
 }
+
+.row8{
+    height: 56px;
+}
+
 
 .equipoName4{
     line-height: 20px;
     font-size: 20px;
     margin-top: 20px;
+}
+
+.equipoName8 {
+    line-height: 20px;
+    font-size: 15px;
+    margin-top: 10px;
 }
 
 .control {
@@ -106,6 +124,30 @@ body {
 .controlBotones{
     margin-top: 10px;
 }
+
+.campeon{
+    text-align:center;
+    color: #ffffff;
+}
+
+.salir {
+    margin-top: 20px;
+    font-size: 40px;
+    background-color: #d92414;
+    border-color: #000000;
+    border-width: 5px;
+    width: 250px;
+    height: 100px;
+    line-height: 100px;
+    cursor: pointer;
+}
+
+    .salir:hover {
+        background-color: #ffffff;
+        color: #d92414;
+        border-color: #d92414;
+        border-style: solid;
+    }
 
 .tituloEquipo{
     color: #ffffff;

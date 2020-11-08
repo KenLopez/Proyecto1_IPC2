@@ -97,5 +97,10 @@ namespace Proyecto1_IPC2.Controllers
         {
             return View(torneo);
         }
+
+        public ActionResult Salir()
+        {
+            return RedirectToAction("Principal", "Menu", new usuarioViewModel { Id = torneo.Creador.Id, NombreUsuario = torneo.Creador.NombreUsuario });
+        }
     }
 }

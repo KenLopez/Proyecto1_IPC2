@@ -377,6 +377,7 @@
     <Content Include="Views\Torneo\Equipos.cshtml" />
     <Content Include="Views\Torneo\Llaves.cshtml" />
     <Content Include="Views\Torneo\_Cuatro.cshtml" />
+    <Content Include="Views\Torneo\_Ocho.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
