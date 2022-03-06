@@ -1,0 +1,122 @@
+﻿@model Proyecto1_IPC2.Models.ViewModels.Torneo
+@{
+    ViewBag.Title = "Definir Equipos";
+    ViewBag.Style = "~/css/torneo.css";
+    ViewBag.Bootstrap = true;
+}
+<header id="encabezado">
+    <img id="othelloLogo" src="~/img/Logo Othello-mini.jpg" />
+    <div class="tabla">
+        <p id="usuario">@Model.Nombre</p>
+    </div>
+    <div class="separador">
+
+    </div>
+</header>
+<body>
+    <br />
+    <div class="estado">
+        @if (Model.Equipos.Length == 4)
+        {
+            @Html.Partial("_Cuatro", Model);
+
+        }
+        else if (Model.Equipos.Length == 8)
+        {
+            @Html.Partial("_Ocho", Model);
+        }
+        else
+        {
+
+        }
+
+    </div>
+    <div class="container control">
+        @if (Model.Ganador == null)
+        {
+            using (Html.BeginForm("Continuar", "Torneo", FormMethod.Post))
+            {
+
+                <div class="row">
+                    <div class="col">
+                        <p class="tituloEquipo">@Model.getRondaActual().Equipo1.Nombre :</p>
+                        @if (Model.getRondaActual().Estado == 2)
+                        {
+                            <div class="form-group">
+                                <label for="jugador1">Elije un jugador:</label>
+                                <select class="form-control" id="jugador1" name="desempate1">
+                                    @for (int i = 0; i < 3; i++)
+                                    {
+                                        <option value=@i>@Model.getRondaActual().Equipo1.Integrantes[i].NombreUsuario</option>
+                                    }
+                                </select>
+                            </div>
+                        }
+                        else
+                        {
+                            <p class="tituloNombre">@Model.getRondaActual().getEncuentroActual().Jugador1.NombreUsuario</p>
+                        }
+
+                    </div>
+                    <div class="col container controlBotones">
+
+                        <button type="submit" class="btn btn-block btn-warning" value="1" name="opcion">Ganar @Model.getRondaActual().Equipo1.Nombre</button>
+                        <button type="submit" class="btn btn-block btn-danger" value="2" name="opcion">Empatar</button>
+                        <button type="submit" class="btn btn-block btn-warning" value="3" name="opcion">Ganar @Model.getRondaActual().Equipo2.Nombre</button>
+                        <button type="submit" class="btn btn-block btn-info" value="4" name="opcion">Jugar</button>
+                    </div>
+                    <div class="col">
+                        <p class="tituloEquipo">@Model.getRondaActual().Equipo2.Nombre :</p>
+                        @if (Model.getRondaActual().Estado == 2)
+                        {
+                            <div class="form-group">
+                                <label for="jugador2">Elije un jugador:</label>
+                                <select class="form-control" id="jugador2" name="desempate2">
+                                    @for (int i = 0; i < 3; i++)
+                                    {
+                                        <option value=@i>@Model.getRondaActual().Equipo2.Integrantes[i].NombreUsuario</option>
+                                    }
+                                </select>
+                            </div>
+                        }
+                        else
+                        {
+                            <p class="tituloNombre">@Model.getRondaActual().getEncuentroActual().Jugador2.NombreUsuario</p>
+                        }
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <br />
+            <h1 class="campeon">EL CAMPEÓN ES:</h1>
+            <br />
+            <h1 class="campeon">@Model.Ganador.Nombre</h1>
+        }
+
+    </div>
+    <div class="container">
+        <button class="salir col-12" data-target="#salirModal" data-toggle="modal">Salir</button>
+    </div>
+    <div class="modal fade" tabindex="-1" id="salirModal" data-backdrop="static" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">¿Terminar Torneo?</h2>
+                    <button class="close" data-dismiss="modal">X</button>
+                </div>
+
+                <div class="modal-footer">
+                    @using (Html.BeginForm("Salir", "Torneo", FormMethod.Post))
+                    {
+                        <div class="container">
+                            <button type="submit" class="btn btn-success btn-lg">Si</button>
+                            <button class="btn btn-danger btn-lg" data-dismiss="modal">No</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

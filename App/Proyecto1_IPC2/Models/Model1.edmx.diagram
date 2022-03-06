@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1cd7a56b69124e20a0f71bd93f15eb00" Name="Diagram1">
+        <EntityTypeShape EntityType="OTHELLOModel.Estado" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OTHELLOModel.Participante" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OTHELLOModel.Partida" Width="1.5" PointX="6" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="OTHELLOModel.TipoPartida" Width="1.5" PointX="3.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OTHELLOModel.Torneo" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="OTHELLOModel.Usuario" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="OTHELLOModel.FK__Partida__idEstad__40F9A68C" ManuallyRouted="false" />
+        <AssociationConnector Association="OTHELLOModel.FK__Participa__idUsu__1B9317B3" ManuallyRouted="false" />
+        <AssociationConnector Association="OTHELLOModel.FK__Partida__idAdver__3F115E1A" ManuallyRouted="false" />
+        <AssociationConnector Association="OTHELLOModel.FK__Partida__idTipoP__40058253" ManuallyRouted="false" />
+        <AssociationConnector Association="OTHELLOModel.FK__Partida__idUsuar__3E1D39E1" ManuallyRouted="false" />
+        <AssociationConnector Association="OTHELLOModel.FK__Torneo__idCreado__7849DB76" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

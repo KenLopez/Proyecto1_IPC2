@@ -1,0 +1,615 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: "Comic Sans MS";
+}
+
+body {
+    background-color: #B6D7A8;
+}
+
+.encabezado {
+    margin-top: 20px;
+}
+
+.separador {
+    height: 10px;
+    background-color: transparent;
+    width: 500px;
+}
+
+.logo {
+    margin-left: 15px;
+    background-image: url('../img/Logo Othello.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 500px;
+    height: 158px;
+}
+
+.tabla {
+    background-image: url('../img/tabla.jpg');
+    background-size: contain;
+    width: 500px;
+    height: 74px;
+}
+
+.tabla-lg {
+    background-image: url('../img/tabla.jpg');
+    background-size: contain;
+    width: 500px;
+    height: 158px;
+}
+
+.usuario {
+    line-height: 158px;
+    position: relative;
+    padding-left: 5px;
+    float: left;
+    font-family: 'Comic Sans MS';
+    font-size: 60px;
+    color: #ffffff;
+    background: none;
+}
+
+.usuarios {
+    line-height: 38px;
+    position: relative;
+    padding-left: 25px;
+    float: left;
+    font-family: 'Comic Sans MS';
+    font-size: 30px;
+    color: #ffffff;
+    background: none;
+}
+
+.boton-turno {
+    font-size: 50px;
+    margin-left: 25px;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+}
+
+.boton-turno-lg {
+    font-size: 60px;
+    margin-top: 30px;
+    margin-left: 25px;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+}
+
+.boton-color {
+    position: center;
+    border: none;
+    background-color: transparent;
+    height: 70px;
+    width: 70px;
+}
+
+.boton-color-lg {
+    position: center;
+    border: none;
+    background-color: transparent;
+    height: 80px;
+    width: 80px;
+}
+
+.turno {
+    color: #ffea00;
+}
+
+.input {
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 54px;
+    position: relative;
+    padding-left: 25px;
+    float: left;
+    width: 350px;
+    font-family: 'Comic Sans MS';
+    font-size: 40px;
+    color: #000000;
+    background: #ffffff;
+}
+
+.nameOk {
+    float: left;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    background-color: #9FC5F8;
+    border-color: #000000;
+    border-width: 3px;
+    line-height: 54px;
+    width: 64px;
+    cursor: pointer;
+}
+
+.opcion {
+    margin-top: 20px;
+    font-size: 20px;
+    background-color: #9FC5F8;
+    border-color: #000000;
+    border-width: 5px;
+    width: 250px;
+    height: 100px;
+    line-height: 100px;
+    cursor: pointer;
+}
+
+    .opcion:hover {
+        background-color: #2f43d6;
+        color: #ffffff;
+        border-color: #ffffff;
+        border-style: solid;
+    }
+
+.nameOk:hover {
+    background-color: #2f43d6;
+    color: #ffffff;
+    border-color: #ffffff;
+    border-style: solid;
+}
+
+.empezar {
+    margin-top: 20px;
+    font-size: 40px;
+    background-color: #24a61f;
+    border-color: #000000;
+    border-width: 5px;
+    width: 250px;
+    height: 100px;
+    line-height: 100px;
+    cursor: pointer;
+}
+
+    .empezar:hover {
+        background-color: #ffffff;
+        color: #24a61f;
+        border-color: #24a61f;
+        border-style: solid;
+    }
+
+.salir {
+    margin-top: 20px;
+    font-size: 40px;
+    background-color: #d92414;
+    border-color: #000000;
+    border-width: 5px;
+    width: 250px;
+    height: 100px;
+    line-height: 100px;
+    cursor: pointer;
+}
+
+    .salir:hover {
+        background-color: #ffffff;
+        color: #d92414;
+        border-color: #d92414;
+        border-style: solid;
+    }
+
+.tablero {
+    margin-top: 25px;
+    padding-left: 200px;
+    width: 650px;
+    height: 500px;
+}
+
+.casilla {
+    background-color: #24a61f;
+    margin: 0;
+    padding: 0;
+}
+
+.marco {
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    vertical-align: bottom;
+}
+
+.player-negro {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-image: url('../img/Coin.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 64px;
+}
+
+.player-blanco {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-image: url('../img/coin_wh.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 64px;
+}
+
+.player-azul {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-image: url('../img/coin_bl.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 64px;
+}
+
+.player-rojo {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-image: url('../img/coin_rd.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 64px;
+}
+
+.player-amarillo {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-image: url('../img/coin_yw.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 64px;
+}
+
+.player-naranja {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-image: url('../img/coin_og.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 64px;
+}
+
+.player-cafe {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-image: url('../img/coin_br.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 64px;
+}
+
+.player-morado {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-image: url('../img/coin_pp.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 64px;
+}
+
+.player-verde {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-image: url('../img/coin_gr.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 64px;
+}
+
+.player-rosado {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-image: url('../img/coin_rs.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 64px;
+}
+
+.player1-negro {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background-image: url('../img/Coin.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 80px;
+}
+
+.player1-blanco {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background-image: url('../img/coin_wh.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 80px;
+}
+
+.player1-azul {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background-image: url('../img/coin_bl.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 80px;
+}
+
+.player1-rojo {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background-image: url('../img/coin_rd.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 80px;
+}
+
+.player1-cafe {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background-image: url('../img/coin_br.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 80px;
+}
+
+.player1-amarillo {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background-image: url('../img/coin_yw.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 80px;
+}
+
+.player1-verde {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background-image: url('../img/coin_gr.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 80px;
+}
+
+.player1-rosado {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background-image: url('../img/coin_rs.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 80px;
+}
+
+.player1-morado {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background-image: url('../img/coin_pp.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 80px;
+}
+
+.player1-naranja {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    background-image: url('../img/coin_og.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 80px;
+}
+
+.negro-sm {
+    background-image: url('../img/Coin.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+}
+
+.blanco-sm {
+    background-image: url('../img/Coin_wh.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+}
+
+.azul-sm {
+    background-image: url('../img/Coin_bl.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+}
+
+.rojo-sm {
+    background-image: url('../img/Coin_rd.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+}
+
+.naranja-sm {
+    background-image: url('../img/Coin_og.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+}
+
+.verde-sm {
+    background-image: url('../img/Coin_gr.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+}
+
+.morado-sm {
+    background-image: url('../img/Coin_pp.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+}
+
+.rosado-sm {
+    background-image: url('../img/Coin_rs.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+}
+
+.cafe-sm {
+    background-image: url('../img/Coin_br.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+}
+
+.amarillo-sm {
+    background-image: url('../img/Coin_yw.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+}
+
+.negro {
+    background-image: url('../img/Coin.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+
+.blanco {
+    background-image: url('../img/coin_wh.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+
+.azul {
+    background-image: url('../img/coin_bl.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+
+.rojo {
+    background-image: url('../img/coin_rd.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+
+.verde {
+    background-image: url('../img/coin_gr.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+
+.naranja {
+    background-image: url('../img/coin_og.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+
+.cafe {
+    background-image: url('../img/coin_br.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+
+.morado {
+    background-image: url('../img/coin_pp.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+
+.rosado {
+    background-image: url('../img/coin_rs.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+
+.amarillo {
+    background-image: url('../img/coin_yw.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+
+.botones {
+    margin-top: 80px;
+    margin-left: -50px;
+}
+
+.casilla:focus, .blanco:focus, .negro:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.activo:hover {
+    background-color: #000000;
+    opacity: 0.7;
+}
+
+.activo {
+    background-color: #ffffff;
+    opacity: 0.4;
+}
+
+.fila {
+    margin: 0;
+    padding: 0;
+}
+
+#primero {
+    padding-top: 50px;
+}

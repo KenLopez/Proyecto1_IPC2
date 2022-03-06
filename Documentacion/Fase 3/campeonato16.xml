@@ -1,0 +1,102 @@
+<campeonato>
+    <nombre>Campeonato Mundial</nombre>
+    <equipo>       
+        <nombreEquipo>Guatemala</nombreEquipo>
+        <jugador>Juan Pablo Juarez</jugador>
+        <jugador>Mauro Herrera</jugador>
+        <jugador>Kevin Cruz</jugador>          
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Peru</nombreEquipo>
+        <jugador>Pedro Castillo</jugador>
+        <jugador>Maria Castro</jugador>
+        <jugador>Lorena Paz</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Honduras</nombreEquipo>
+        <jugador>Humberto Orozco</jugador>
+        <jugador>Nancy Lopez</jugador>
+        <jugador>Tatiana Perez</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Argentina</nombreEquipo>
+        <jugador>Gonzalo Martinez</jugador>
+        <jugador>Carla Cruz</jugador>
+        <jugador>Mariano Martinez</jugador>
+    </equipo>
+
+    <equipo>       
+        <nombreEquipo>España</nombreEquipo>
+        <jugador>Johnathan</jugador>
+        <jugador>Lidia</jugador>
+        <jugador>Carlos</jugador>          
+    </equipo>
+    <equipo>       
+        <nombreEquipo>México</nombreEquipo>
+        <jugador>Silvana</jugador>
+        <jugador>Ema</jugador>
+        <jugador>Luis</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Brasil</nombreEquipo>
+        <jugador>Rafael</jugador>
+        <jugador>Mery</jugador>
+        <jugador>Steven</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Italia</nombreEquipo>
+        <jugador>Fer</jugador>
+        <jugador>Randy</jugador>
+        <jugador>Kenneth</jugador>
+    </equipo>
+
+    <equipo>       
+        <nombreEquipo>China</nombreEquipo>
+        <jugador>Shawn</jugador>
+        <jugador>Michelle</jugador>
+        <jugador>Kevin</jugador>          
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Japón</nombreEquipo>
+        <jugador>Pablo</jugador>
+        <jugador>Mario</jugador>
+        <jugador>Ariel</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Egipto</nombreEquipo>
+        <jugador>Haroldo</jugador>
+        <jugador>Justin</jugador>
+        <jugador>Kimberly</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Angola</nombreEquipo>
+        <jugador>Sebas</jugador>
+        <jugador>Marian</jugador>
+        <jugador>Sofi</jugador>
+    </equipo>
+
+    <equipo>       
+        <nombreEquipo>Alemania</nombreEquipo>
+        <jugador>Javier</jugador>
+        <jugador>Mynor</jugador>
+        <jugador>Gerardo</jugador>          
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Colombia</nombreEquipo>
+        <jugador>Katy</jugador>
+        <jugador>Adriana</jugador>
+        <jugador>Alejandro</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Nicaragua</nombreEquipo>
+        <jugador>Paola</jugador>
+        <jugador>Adolfo</jugador>
+        <jugador>Marbeli</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Arabia Saudi</nombreEquipo>
+        <jugador>Jose</jugador>
+        <jugador>Rudy</jugador>
+        <jugador>Miguel</jugador>
+    </equipo>
+</campeonato>

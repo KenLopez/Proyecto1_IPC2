@@ -1,0 +1,100 @@
+﻿@model Proyecto1_IPC2.Models.ViewModels.Torneo
+@{
+    ViewBag.Title = "Definir Equipos";
+    ViewBag.Style = "~/css/torneo.css";
+    ViewBag.Bootstrap = true;
+}
+<header id="encabezado">
+    <img id="othelloLogo" src="~/img/Logo Othello-mini.jpg" />
+    <div class="tabla">
+        <p id="usuario">@Model.Nombre</p>
+    </div>
+    <div class="separador">
+
+    </div>
+</header>
+<body>
+    <br />
+    <br />
+    <br />
+    @using (Html.BeginForm("defEquipos", "Torneo", FormMethod.Post))
+    {
+        <div class="row">
+            @for (int i = 0; i < 4; i++)
+            {
+                <div class="container col-2 equipo">
+                    <div class="container col-12 encabezadoEquipo">
+                        <input class="form-control" type="text" placeholder=@("Equipo" + (i + 1) + "...") name="nombreEquipo" required />
+                    </div>
+                    <div class="container col-12 cuerpoEquipo">
+                        <input class="form-control" type="text" placeholder="Integrante 1..." name="jugador" required />
+                        <input class="form-control" type="text" placeholder="Integrante 2..." name="jugador" required />
+                        <input class="form-control" type="text" placeholder="Integrante 3..." name="jugador" required />
+                    </div>
+                </div>
+            }
+        </div>
+        <br />
+        if (Model.Equipos.Length > 4)
+        {
+            <div class="row">
+                @for (int i = 4; i < 8; i++)
+                {
+                    <div class="container col-2 equipo">
+                        <div class="container col-12 encabezadoEquipo">
+                            <input class="form-control" type="text" placeholder=@("Equipo" + (i + 1) + "...") name="nombreEquipo" required />
+                        </div>
+                        <div class="container col-12 cuerpoEquipo">
+                            <input class="form-control" type="text" placeholder="Integrante 1..." name="jugador" required />
+                            <input class="form-control" type="text" placeholder="Integrante 2..." name="jugador" required />
+                            <input class="form-control" type="text" placeholder="Integrante 3..." name="jugador" required />
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        <br />
+        if (Model.Equipos.Length > 16)
+        {
+            <div class="row">
+                @for (int i = 8; i < 12; i++)
+                {
+                    <div class="container col-2 equipo">
+                        <div class="container col-12 encabezadoEquipo">
+                            <input class="form-control" type="text" placeholder=@("Equipo" + (i + 1) + "...") name="nombreEquipo" required />
+                        </div>
+                        <div class="container col-12 cuerpoEquipo">
+                            <input class="form-control" type="text" placeholder="Integrante 1..." name="jugador" required />
+                            <input class="form-control" type="text" placeholder="Integrante 2..." name="jugador" required />
+                            <input class="form-control" type="text" placeholder="Integrante 3..." name="jugador" required />
+                        </div>
+                    </div>
+                }
+            </div>
+            <br />
+            <div class="row">
+                @for (int i = 12; i < 16; i++)
+                {
+                    <div class="container col-2 equipo">
+                        <div class="container col-12 encabezadoEquipo">
+                            <input class="form-control" type="text" placeholder=@("Equipo" + (i + 1) + "...") name="nombreEquipo" required />
+                        </div>
+                        <div class="container col-12 cuerpoEquipo">
+                            <input class="form-control" type="text" placeholder="Integrante 1..." name="jugador" required />
+                            <input class="form-control" type="text" placeholder="Integrante 2..." name="jugador" required />
+                            <input class="form-control" type="text" placeholder="Integrante 3..." name="jugador" required />
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        <br />
+        <br />
+        <div class="container col-12">
+            <button class="btn btn-lg btn-success col-12">Empezar</button>
+        </div>
+        <br />
+        <br />
+    }
+
+</body>

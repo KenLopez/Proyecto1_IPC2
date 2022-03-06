@@ -1,0 +1,87 @@
+﻿@model Proyecto1_IPC2.Models.ViewModels.Torneo
+
+<br />
+<br />
+<div class="container llave8">
+    <div class="row row8">
+        <div class="col container row row8">
+            <p class="col-3 equipoName8">@Model.Cuartos[0].Equipo1.Nombre</p>
+            <p class="col-1">@Model.Cuartos[0].Equipo1.Puntos</p>
+        </div>
+        <div class="col container row row8">
+            <p class="col-8"></p>
+            <p class="col-1 toRight">@Model.Cuartos[2].Equipo1.Puntos</p>
+            <p class="col-3 equipoName8 toRight">@Model.Cuartos[2].Equipo1.Nombre</p>
+        </div>
+    </div>
+    <div class="row row8">
+        <div class="col container row row8">
+            <p class="col-5"></p>
+            <p class="col-3 equipoName8">@Model.Semi[0].Equipo1.Nombre</p>
+            <p class="col-1">@Model.Semi[0].Equipo1.Puntos</p>
+        </div>
+        <div class="col container row row8">
+            <p class="col-3"></p>
+            <p class="col-1 toRight">@Model.Semi[1].Equipo1.Puntos</p>
+            <p class="col-3 equipoName8 toRight">@Model.Semi[1].Equipo1.Nombre</p>
+        </div>
+    </div>
+    <div class="row row8">
+        <div class="col container row row8">
+            <p class="col-3 equipoName8">@Model.Cuartos[0].Equipo2.Nombre</p>
+            <p class="col-1">@Model.Cuartos[0].Equipo2.Puntos</p>
+        </div>
+        <div class="col container row row8">
+            <p class="col-8"></p>
+            <p class="col-1 toRight">@Model.Cuartos[2].Equipo2.Puntos</p>
+            <p class="col-3 equipoName8 toRight">@Model.Cuartos[2].Equipo2.Nombre</p>
+        </div>
+    </div>
+    <div class="row row8">
+        <div class="col container row row8">
+            <p class="col-8"></p>
+            <p class="col-3 equipoName8">@Model.Final.Equipo1.Nombre</p>
+            <p class="col-1">@Model.Final.Equipo1.Puntos</p>
+        </div>
+        <div class="col container row row8">
+            <p class="col-1 toRight">@Model.Final.Equipo2.Puntos</p>
+            <p class="col-3 equipoName8 toRight">@Model.Final.Equipo2.Nombre</p>
+            <p class="col-8"></p>
+        </div>
+    </div>
+    <div class="row row8">
+        <div class="col container row row8">
+            <p class="col-3 equipoName8">@Model.Cuartos[1].Equipo1.Nombre</p>
+            <p class="col-1">@Model.Cuartos[1].Equipo1.Puntos</p>
+        </div>
+        <div class="col container row row8">
+            <p class="col-8"></p>
+            <p class="col-1 toRight">@Model.Cuartos[3].Equipo1.Puntos</p>
+            <p class="col-3 equipoName8 toRight">@Model.Cuartos[3].Equipo1.Nombre</p>
+        </div>
+    </div>
+    <div class="row row8">
+        <div class="col container row row8">
+            <p class="col-5"></p>
+            <p class="col-3 equipoName8">@Model.Semi[0].Equipo2.Nombre</p>
+            <p class="col-1">@Model.Semi[0].Equipo2.Puntos</p>
+        </div>
+        <div class="col container row row8">
+            <p class="col-3"></p>
+            <p class="col-1 toRight">@Model.Semi[1].Equipo2.Puntos</p>
+            <p class="col-3 equipoName8 toRight">@Model.Semi[1].Equipo2.Nombre</p>
+        </div>
+    </div>
+    <div class="row row8">
+        <div class="col container row row8">
+            <p class="col-3 equipoName8">@Model.Cuartos[1].Equipo2.Nombre</p>
+            <p class="col-1">@Model.Cuartos[1].Equipo2.Puntos</p>
+        </div>
+        <div class="col container row row8">
+            <p class="col-8"></p>
+            <p class="col-1 toRight">@Model.Cuartos[3].Equipo2.Puntos</p>
+            <p class="col-3 equipoName8 toRight">@Model.Cuartos[3].Equipo2.Nombre</p>
+        </div>
+    </div>
+</div>
+
