@@ -1,0 +1,99 @@
+<campeonato>
+    <nombre>Campeonato Calificacion</nombre>
+    <equipo>       
+        <nombreEquipo>Argentina</nombreEquipo>
+        <jugador>jpjuarez</jugador>
+		<jugador>leomessi</jugador>
+		<jugador>mgallardo</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>PSG</nombreEquipo>
+        <jugador>kmbappe</jugador>
+		<jugador>dimaria</jugador>
+		<jugador>kdbruyne</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Equipo 3</nombreEquipo>
+        <jugador>ccastrillo</jugador>
+		<jugador>jmcontreras</jugador>
+		<jugador>kbenzema</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Equipo Europa</nombreEquipo>
+        <jugador>cristiano</jugador>
+		<jugador>mats</jugador>
+		<jugador>davdismag</jugador>
+    </equipo>
+	<equipo>       
+        <nombreEquipo>Ganadores FC</nombreEquipo>
+        <jugador>dieegobg</jugador>
+		<jugador>juliocotzo</jugador>
+		<jugador>carloscordon</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Sale en vacas</nombreEquipo>
+        <jugador>fraaans</jugador>
+		<jugador>jposuna</jugador>
+		<jugador>ptrcech</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Sale en semestre</nombreEquipo>
+        <jugador>jcoloma</jugador>
+		<jugador>danlap</jugador>
+		<jugador>edwrick</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Campeones</nombreEquipo>
+        <jugador>gpique</jugador>
+		<jugador>sramos</jugador>
+		<jugador>mhummels</jugador>
+    </equipo>
+	<equipo>       
+        <nombreEquipo>Equipo de jdols</nombreEquipo>
+        <jugador>jdol8</jugador>
+		<jugador>jdol9</jugador>
+		<jugador>jdol10</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Equipo de players</nombreEquipo>
+        <jugador>player1</jugador>
+		<jugador>player2</jugador>
+		<jugador>player3</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Bayern Munich</nombreEquipo>
+        <jugador>jkimmich</jugador>
+		<jugador>rlewan</jugador>
+		<jugador>tmuller</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Manchester City</nombreEquipo>
+        <jugador>slakun10</jugador>
+		<jugador>gabjesus</jugador>
+		<jugador>rsterling</jugador>
+    </equipo>
+	<equipo>       
+        <nombreEquipo>Liverpool</nombreEquipo>
+        <jugador>msalah</jugador>
+		<jugador>smane</jugador>
+		<jugador>rfirmi</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>IPC 2 v1</nombreEquipo>
+        <jugador>angeles97</jugador>
+		<jugador>voupisfh</jugador>
+		<jugador>danncux</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>IPC 2 v2</nombreEquipo>
+        <jugador>khlopez</jugador>
+		<jugador>jpj007</jugador>
+		<jugador>ivantest</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>IPC 2 v3</nombreEquipo>
+        <jugador>rudygopal</jugador>
+		<jugador>sergcastro</jugador>
+		<jugador>alex856</jugador>
+    </equipo>
+</campeonato>

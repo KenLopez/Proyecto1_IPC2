@@ -1,0 +1,51 @@
+<campeonato>
+    <nombre>Campeonato Calificacion</nombre>
+    <equipo>       
+        <nombreEquipo>Argentina</nombreEquipo>
+        <jugador>jpjuarez</jugador>
+		<jugador>leomessi</jugador>
+		<jugador>mgallardo</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>PSG</nombreEquipo>
+        <jugador>kmbappe</jugador>
+		<jugador>dimaria</jugador>
+		<jugador>kdbruyne</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Equipo 3</nombreEquipo>
+        <jugador>ccastrillo</jugador>
+		<jugador>jmcontreras</jugador>
+		<jugador>kbenzema</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Equipo Europa</nombreEquipo>
+        <jugador>cristiano</jugador>
+		<jugador>mats</jugador>
+		<jugador>davdismag</jugador>
+    </equipo>
+	<equipo>       
+        <nombreEquipo>Ganadores FC</nombreEquipo>
+        <jugador>dieegobg</jugador>
+		<jugador>juliocotzo</jugador>
+		<jugador>carloscordon</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Sale en vacas</nombreEquipo>
+        <jugador>fraaans</jugador>
+		<jugador>jposuna</jugador>
+		<jugador>ptrcech</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Sale en semestre</nombreEquipo>
+        <jugador>jcoloma</jugador>
+		<jugador>danlap</jugador>
+		<jugador>edwrick</jugador>
+    </equipo>
+    <equipo>       
+        <nombreEquipo>Campeones</nombreEquipo>
+        <jugador>gpique</jugador>
+		<jugador>sramos</jugador>
+		<jugador>mhummels</jugador>
+    </equipo>
+</campeonato>

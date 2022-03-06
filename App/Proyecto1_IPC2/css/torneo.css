@@ -1,0 +1,165 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: "Comic Sans MS";
+}
+
+body {
+    background-color: #B6D7A8;
+}
+
+#encabezado {
+    position: relative;
+    margin: auto;
+    height: 158px;
+    width: auto;
+    text-align: center;
+    padding-top: 20px;
+}
+
+#othelloLogo {
+    float: left;
+    padding-left: 135px;
+    padding-right: 50px;
+    height: 158px;
+    width: 750px;
+}
+
+.tabla {
+    float: left;
+    position: relative;
+    background-image: url('../img/tabla.jpg');
+    width: 600px;
+    height: 158px;
+}
+
+#usuario {
+    line-height: 158px;
+    position: relative;
+    padding-left: 15px;
+    float: left;
+    font-family: 'Comic Sans MS';
+    font-size: 60px;
+    color: #ffffff;
+    background: none;
+}
+
+.llave4 {
+    height: 500px;
+    background-image: url('../img/Torneo4.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.llave8 {
+    height: 500px;
+    background-image: url('../img/Torneo8.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.encabezadoEquipo {
+    border-color: #000000;
+    border-bottom: solid;
+    border-bottom-width: 5px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.encabezadoEquipo input{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.cuerpoEquipo{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.cuerpoEquipo input{
+    margin-bottom: 10px;
+}
+
+.row4{
+    height: 183px;
+}
+
+.row8{
+    height: 56px;
+}
+
+
+.equipoName4{
+    line-height: 20px;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.equipoName8 {
+    line-height: 20px;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.control {
+    background-color: #3aab0a;
+    height: 200px;
+    border-style: solid;
+    border-width: 2px;
+    margin-bottom: 20px;
+}
+
+.toRight{
+    text-align: right;
+}
+
+.equipo {
+    border-style: solid;
+    border-color: #000000;
+    border-width: 5px;
+    background-color: #51b8e8;
+}
+
+.controlBotones{
+    margin-top: 10px;
+}
+
+.campeon{
+    text-align:center;
+    color: #ffffff;
+}
+
+.salir {
+    margin-top: 20px;
+    font-size: 40px;
+    background-color: #d92414;
+    border-color: #000000;
+    border-width: 5px;
+    width: 250px;
+    height: 100px;
+    line-height: 100px;
+    cursor: pointer;
+}
+
+    .salir:hover {
+        background-color: #ffffff;
+        color: #d92414;
+        border-color: #d92414;
+        border-style: solid;
+    }
+
+.tituloEquipo{
+    color: #ffffff;
+    line-height: 50px;
+    font-size: 50px;
+    text-align: center;
+    padding-top: 40px;
+}
+
+.tituloNombre {
+    color: #ffffff;
+    line-height: 30px;
+    font-size: 30px;
+    text-align: center;
+}
